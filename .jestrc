@@ -1,0 +1,13 @@
+{
+  "verbose": true,
+  "moduleDirectories": [
+    "node_modules"
+  ],
+  "testRegex": "\/test\/.+?\\.js$",
+  "moduleFileExtensions": [
+    "js",
+    "node"
+  ],
+  "timers": "real",
+  "notify": true
+}

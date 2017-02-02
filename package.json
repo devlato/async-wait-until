@@ -1,0 +1,48 @@
+{
+  "name": "waitUntil",
+  "version": "1.0.0",
+  "description": "Wait while predicate completes and resolve a Promise",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test jest -u --no-cache --config .jestrc",
+    "test:coverage": "NODE_ENV=test jest --coverage --no-cache --config .jestrc",
+    "lint": "eslint --config .eslintrc --ext .js ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devlato/waitUntil.git"
+  },
+  "keywords": [
+    "apply",
+    "when",
+    "lodash",
+    "async",
+    "then",
+    "promise",
+    "wait",
+    "timeout",
+    "interval",
+    "until",
+    "for",
+    "bluebird"
+  ],
+  "author": "devlato <npm@devlato.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devlato/waitUntil/issues"
+  },
+  "homepage": "https://github.com/devlato/waitUntil#readme",
+  "devDependencies": {
+    "eslint": "^3.14.1",
+    "eslint-config-airbnb-base": "^11.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "jest": "^18.1.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.7"
+  },
+  "engines": {
+    "node": ">= 4",
+    "npm": ">= 2"
+  }
+}
