@@ -1,6 +1,6 @@
 {
-  "name": "waitUntil",
-  "version": "1.0.0",
+  "name": "async-wait-until",
+  "version": "1.0.1",
   "description": "Wait while predicate completes and resolve a Promise",
   "main": "index.js",
   "scripts": {
