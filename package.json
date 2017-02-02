@@ -1,8 +1,8 @@
 {
   "name": "async-wait-until",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Wait while predicate completes and resolve a Promise",
-  "main": "index.js",
+  "main": "src/waitUntil.js",
   "scripts": {
     "test": "NODE_ENV=test jest -u --no-cache --config .jestrc",
     "test:coverage": "NODE_ENV=test jest --coverage --no-cache --config .jestrc",

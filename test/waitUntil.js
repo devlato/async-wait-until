@@ -4,20 +4,35 @@ var waitUntil = require('../src/waitUntil');
 describe('waitUntil', function() {
   it('Should apply callback and resolve result', function() {
     var initialTime = Date.now();
-    
+
     return waitUntil(function() {
       return (Date.now() - initialTime > 200);
     })
     .then(function (result) {
       expect(result)
-          .toEqual(undefined);
+          .toEqual(true);
+    });
+  });
+
+
+  it('Should apply callback and resolve non-boolean result', function() {
+    var initialTime = Date.now();
+
+    return waitUntil(function() {
+      return (Date.now() - initialTime > 200)
+          ? {a: 10, b: 20}
+          : false;
+    })
+    .then(function (result) {
+      expect(result)
+          .toEqual({a: 10, b: 20});
     });
   });
 
 
   it('Should reject with timeout error if timed out', function() {
     var initialTime = Date.now();
-    
+
     return waitUntil(function() {
       return (Date.now() - initialTime > 500);
     }, 100)
@@ -33,7 +48,7 @@ describe('waitUntil', function() {
 
   it('Should not do double reject on timeout', function() {
     var initialTime = Date.now();
-    
+
     return waitUntil(function() {
       return (Date.now() - initialTime > 200);
     }, 200)
@@ -49,7 +64,7 @@ describe('waitUntil', function() {
 
   it('Should not do double reject on timeout if error in predicate', function() {
     var initialTime = Date.now();
-    
+
     return waitUntil(function() {
       if (Date.now() - initialTime >= 190) {
         throw new Error('Nooo!');
@@ -67,7 +82,7 @@ describe('waitUntil', function() {
 
   it('Should reject result if error in predicate', function() {
     var initialTime = Date.now();
-    
+
     return waitUntil(function() {
       throw new Error('Crap!');
     })

@@ -33,10 +33,14 @@ module.exports = function waitUntil(
     };
 
     doStep = function doTimerStep() {
+      var result;
+
       try {
-        if (predicate()) {
+        result = predicate();
+
+        if (result) {
           clearTimers();
-          resolve();
+          resolve(result);
         } else {
           timer = setTimeout(doStep, timerInterval);
         }

@@ -26,10 +26,12 @@ waitUntil(() => {
           ? true
           : throw new Error('Async operation failed');
 }, 600)
-.then(() => {
-  console.log('Async operation succeeded');
+.then((result) => {
+  // Here are the operations to be done after predicate
+  console.log('Async operation succeeded, predicate result = ', result);
 })
 .catch((error) => {
+  // Here are the operations to be done if predicate didn't succeed in the timeout
   console.log('Async operation failed: ', error);
 });
 
@@ -47,7 +49,7 @@ const timeOfStart = Date.now();
 
 // Wait for some async operation to end
 try {
-  await waitUntil(() => {
+  const result = await waitUntil(() => {
     const timePassed = Date.now() - timeOfStart;
 
     return (timePassed < 500)
@@ -55,10 +57,28 @@ try {
             ? true
             : throw new Error('Async operation failed');
   }, 600)
-  console.log('Async operation succeeded');
+
+  // Here are the operations to be done after predicate
+  console.log('Async operation succeeded, predicate result = ', result);
 } catch (error) {
+  // Here are the operations to be done if predicate didn't succeed in the timeout
   console.log('Async operation failed: ', error);
 }
+```
+
+
+## Supported arguments
+
+```javascript
+/**
+ * Waits for predicate to be truthy and resolves a Promise
+ *
+ * @param  predicate  Function  Predicate that checks the condition
+ * @param  timeout  Number  Maximum wait interval, 5000ms by default
+ * @param  interval  Number  Wait interval, 50ms by default
+ * @return  Promise  Promise to return a callback result
+ */
+function waitUntil(predicate: Function, timeout: Number = 5000, interval: Number = 50): Promise;
 ```
 
 
