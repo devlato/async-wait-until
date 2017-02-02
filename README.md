@@ -6,14 +6,14 @@ Waits for predicate to be truthy and resolves a Promise
 ## Installation
 
 ```sh
-$ npm install waitUntil
+$ npm install async-wait-until
 ```
 
 
 ## Usage
 
 ```javascript
-const waitUntil = require('waitUntil');
+const waitUntil = require('async-wait-until');
 const timeOfStart = Date.now();
 
 
@@ -21,7 +21,7 @@ const timeOfStart = Date.now();
 waitUntil(() => {
   const timePassed = Date.now() - timeOfStart;
 
-  return (timePassed < 500) 
+  return (timePassed < 500)
       && (timePassed % 2 === 0)  // Some random stuff
           ? true
           : throw new Error('Async operation failed');
@@ -41,7 +41,7 @@ waitUntil(() => {
 The library is async/await compatible because it uses Promises/A+ compatible Promises, so the example above could be rewritten:
 
 ```javascript
-const waitUntil = require('waitUntil');
+const waitUntil = require('async-wait-until');
 const timeOfStart = Date.now();
 
 
@@ -50,7 +50,7 @@ try {
   await waitUntil(() => {
     const timePassed = Date.now() - timeOfStart;
 
-    return (timePassed < 500) 
+    return (timePassed < 500)
         && (timePassed % 2 === 0)  // Some random stuff
             ? true
             : throw new Error('Async operation failed');
@@ -61,6 +61,66 @@ try {
 }
 ```
 
+
 ## Test coverage
 
+Library has 100% test coverage:
 
+```sh
+$ npm run test:coverage
+> async-wait-until@1.0.1 test:coverage /Users/denis.tokarev/git/experiments/apply-when
+> NODE_ENV=test jest --coverage --no-cache --config .jestrc
+
+ PASS  test/waitUntil.js
+  waitUntil
+    ✓ Should apply callback and resolve result (219ms)
+    ✓ Should reject with timeout error if timed out (106ms)
+    ✓ Should not do double reject on timeout (206ms)
+    ✓ Should not do double reject on timeout if error in predicate (204ms)
+    ✓ Should reject result if error in predicate (52ms)
+
+--------------|----------|----------|----------|----------|----------------|
+File          |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
+--------------|----------|----------|----------|----------|----------------|
+All files     |      100 |      100 |      100 |      100 |                |
+ waitUntil.js |      100 |      100 |      100 |      100 |                |
+--------------|----------|----------|----------|----------|----------------|
+Test Suites: 1 passed, 1 total
+Tests:       5 passed, 5 total
+Snapshots:   0 total
+Time:        1.954s
+Ran all test suites.
+```
+
+
+## Test coverage
+
+Library is 100% compatible with [airbnb-base](https://www.npmjs.com/package/eslint-config-airbnb-base) for ES5.
+
+
+## Available commands
+
+Library has the following commands available:
+
+* Run the tests:
+
+  ```
+  $ npm test
+  ```
+
+* Run the tests and display test coverage:
+
+  ```
+  $ npm run test:coverage
+  ```
+
+* Run the linter:
+
+  ```
+  $ npm run lint
+  ```
+
+
+## Contributing
+
+Feel free to contribute but don't forget to test everything properly.
