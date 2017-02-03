@@ -10,3 +10,6 @@ engines:
     config:
       languages:
       - javascript
+ratings:
+   paths:
+   - "src/**/*"
