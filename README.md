@@ -159,3 +159,5 @@ Library is shipped "as is" under MIT License.
 ## Contributing
 
 Feel free to contribute but don't forget to test everything properly.
+
+[![NPM](https://nodei.co/npm/async-wait-until.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/async-wait-until/)
