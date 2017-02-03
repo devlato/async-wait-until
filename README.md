@@ -40,7 +40,7 @@ waitUntil(() => {
 
 ## async/await
 
-The library is async/await compatible because it uses Promises/A+ compatible Promises, so the example above could be rewritten:
+The library is async/await compatible because it uses Promises/A+, so the example above could be rewritten:
 
 ```javascript
 const waitUntil = require('async-wait-until');
@@ -74,8 +74,8 @@ try {
  * Waits for predicate to be truthy and resolves a Promise
  *
  * @param  predicate  Function  Predicate that checks the condition
- * @param  timeout  Number  Maximum wait interval, 5000ms by default
- * @param  interval  Number  Wait interval, 50ms by default
+ * @param  timeout  Number  Maximum wait interval, optional, 5000ms by default
+ * @param  interval  Number  Wait interval, optional, 50ms by default
  * @return  Promise  Promise to return a callback result
  */
 function waitUntil(predicate: Function, timeout: Number = 5000, interval: Number = 50): Promise;
@@ -88,7 +88,7 @@ Library has 100% test coverage:
 
 ```sh
 $ npm run test:coverage
-> async-wait-until@1.0.1 test:coverage /Users/denis.tokarev/git/experiments/apply-when
+> async-wait-until@1.0.1 test:coverage ~/projects/apply-when
 > NODE_ENV=test jest --coverage --no-cache --config .jestrc
 
  PASS  test/waitUntil.js
@@ -113,7 +113,7 @@ Ran all test suites.
 ```
 
 
-## Test coverage
+## Code style
 
 Library is 100% compatible with [airbnb-base](https://www.npmjs.com/package/eslint-config-airbnb-base) for ES5.
 
@@ -139,6 +139,15 @@ Library has the following commands available:
   ```
   $ npm run lint
   ```
+
+## Build
+
+No building required, library is implemented with ES5 for better compatibility and shipped as is.
+
+
+## License
+
+Library is shipped "as is" under MIT License.
 
 
 ## Contributing

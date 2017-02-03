@@ -1,13 +1,14 @@
 {
   "name": "async-wait-until",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Wait while predicate completes and resolve a Promise",
   "main": "src/waitUntil.js",
   "scripts": {
     "test": "NODE_ENV=test jest -u --no-cache --config .jestrc",
     "test:coverage": "NODE_ENV=test jest --coverage --no-cache --config .jestrc",
     "lint": "eslint --config .eslintrc --ext .js .",
-    "prepush": "npm run lint && npm run test:coverage"
+    "validate": "npm run lint && npm run test:coverage",
+    "prepush": "npm run validate"
   },
   "repository": {
     "type": "git",
@@ -27,21 +28,28 @@
     "for",
     "bluebird"
   ],
-  "author": "devlato <npm@devlato.com>",
+  "author": "devlato <npm@devlato.com> (http://devlato.com/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/devlato/waitUntil/issues"
   },
   "homepage": "https://github.com/devlato/waitUntil#readme",
+  "files": [
+    "package.json",
+    "README.md",
+    ".gitignore",
+    ".editorconfig",
+    "src"
+  ],
   "devDependencies": {
-    "eslint": "^3.14.1",
-    "eslint-config-airbnb-base": "^11.0.1",
-    "eslint-plugin-import": "^2.2.0",
-    "husky": "^0.13.1",
-    "jest": "^18.1.0"
+    "eslint": "3.14.1",
+    "eslint-config-airbnb-base": "11.0.1",
+    "eslint-plugin-import": "2.2.0",
+    "husky": "0.13.1",
+    "jest": "18.1.0"
   },
   "dependencies": {
-    "bluebird": "^3.4.7"
+    "bluebird": "3.4.7"
   },
   "engines": {
     "node": ">= 4",
