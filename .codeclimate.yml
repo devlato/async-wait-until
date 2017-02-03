@@ -8,4 +8,5 @@ engines:
   duplication:
     enabled: true
     config:
-    - javascript
+      languages:
+      - javascript
