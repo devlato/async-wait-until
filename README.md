@@ -3,6 +3,12 @@
 Waits for predicate to be truthy and resolves a Promise
 
 
+[![Build Status](https://travis-ci.org/devlato/waitUntil.svg?branch=master)](https://travis-ci.org/devlato/waitUntil)
+[![Coverage Status](https://coveralls.io/repos/github/devlato/waitUntil/badge.svg?branch=master)](https://coveralls.io/github/devlato/waitUntil?branch=master)
+[![Code Climate](https://codeclimate.com/github/devlato/waitUntil/badges/gpa.svg)](https://codeclimate.com/github/devlato/waitUntil)
+[![npm version](https://badge.fury.io/js/async-wait-until.svg)](https://badge.fury.io/js/async-wait-until)
+
+
 ## Installation
 
 ```sh

@@ -7,6 +7,9 @@
     "test": "NODE_ENV=test jest -u --no-cache --config .jestrc",
     "test:coverage": "NODE_ENV=test jest --coverage --no-cache --config .jestrc",
     "lint": "eslint --config .eslintrc --ext .js .",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "codeclimate": "cat ./coverage/lcov.info | codeclimate-test-reporter",
+    "test:report": "npm run coveralls && npm run codeclimate",
     "validate": "npm run lint && npm run test:coverage",
     "prepush": "npm run validate"
   },
@@ -42,6 +45,8 @@
     "src"
   ],
   "devDependencies": {
+    "codeclimate-test-reporter": "0.4.0",
+    "coveralls": "2.11.15",
     "eslint": "3.14.1",
     "eslint-config-airbnb-base": "11.0.1",
     "eslint-plugin-import": "2.2.0",
