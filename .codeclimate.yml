@@ -1,6 +1,11 @@
-eslint:
-  enabled: true
-  channel: 'eslint-3'
-  config:
-    extensions:
-    - .js
+engines:
+  eslint:
+    enabled: true
+    channel: 'eslint-3'
+    config:
+      extensions:
+      - .js
+  duplication:
+    enabled: true
+    config:
+    - javascript
