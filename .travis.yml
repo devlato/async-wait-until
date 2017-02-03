@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+- '7'
+- '6'
+- '5'
+- '4'
+install:
+- NODE_ENV=development npm install
+before_script:
+- npm run lint
+script:
+- npm run test:coverage
+deploy:
+  provider: npm
+  email: npm@devlato.com
+  api_key:
+    secure: Lf+A87nu5Rc3KwQz0f9JJuFVASSPO36dGMCCWq6o5FequVGcFh6p3UUMYDMhKbGtftgVYHANi3ch9jMS5YxS78Pw4RjLtHPAVpuiJZUA5hpJjc7uan0LMO8NsFd8m2+K5Oiai5EzR5bfAopLUEVJKtl52LgtZVZIEAJaZQvz2Cs06LWWzAJNlJbWq/AslXc61UH2BEi4CDFIsXcl+oSOBowb8zt28/QkknXARjEGorFtyH3NiY6HJ/lOI7JXBshjEh7g3MMu7sV5lwlyF1FW7zZ8GkOb7+Cs51dXp4QN4LYDFNwhMv9nV+i7Kp/othu61ZNpzb8a1U0qZ6n0evapA8aLt/7T9zVVPWNQjnc566W/Ogq717Xr9jXFjQHnfAQf3y3IlHCseB3Zz7xyBuL3Os3YAlmiR7vdvNFbpvD2+AUnGhhX6N0oKHSz4q0xAUm7hSjgUTCo+7rvZ5aY5AhMDoz5FV/sdLbXMIS0/TO79u+cfJh6ymz+i4jnyvw6HMWunhrcfTEhOvfAOw2CDxVFxbrv4jOOkhkqp3rT76GbfituFF3FxArBnkaeJZhNbxQ9Fn90na6MG9ppQ0cq9Gk/9hZYVfcYFO9r4whUO4Irp665FShTVt6aF9MHpzVuBNPo97gyYvqOW+ZbyC8owZCU3I9XAqnQod6wFwsiVC3OBms=
+  on:
+    tags: true
+    repo: devlato/waitUntil
