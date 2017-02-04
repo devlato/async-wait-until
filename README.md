@@ -84,7 +84,11 @@ try {
  * @param  interval  Number  Wait interval, optional, 50ms by default
  * @return  Promise  Promise to return a callback result
  */
-function waitUntil(predicate: Function, timeout: Number = 5000, interval: Number = 50): Promise;
+function waitUntil(
+    predicate: Function,
+    timeout: Number = 5000,
+    interval: Number = 50
+): Promise;
 ```
 
 
@@ -159,5 +163,6 @@ Library is shipped "as is" under MIT License.
 ## Contributing
 
 Feel free to contribute but don't forget to test everything properly.
+
 
 [![NPM](https://nodei.co/npm/async-wait-until.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/async-wait-until/)

@@ -5,28 +5,6 @@ engines:
     config:
       extensions:
       - .js
-  fixme:
-    enabled: true
-    config:
-      strings:
-      - FIXME
-      - BUG
-      - TODO
-      - SHIT
-      - CRAP
-      - ХУЙНЯ
-      paths:
-      - "README.md"
-      - "src/**/*"
-  markdownlint:
-    enabled: true
-  duplication:
-    enabled: true
-    config:
-      languages:
-      - javascript
-      paths:
-      - "src/**/*"
 ratings:
    paths:
    - "src/**/*"
