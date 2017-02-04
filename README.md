@@ -99,16 +99,18 @@ Library has 100% test coverage:
 
 ```sh
 $ npm run test:coverage
-> async-wait-until@1.0.1 test:coverage ~/projects/apply-when
+
+> async-wait-until@1.1.4 test:coverage ~/projects/waitUntil
 > NODE_ENV=test jest --coverage --no-cache --config .jestrc
 
  PASS  test/waitUntil.js
   waitUntil
     ✓ Should apply callback and resolve result (219ms)
-    ✓ Should reject with timeout error if timed out (106ms)
-    ✓ Should not do double reject on timeout (206ms)
-    ✓ Should not do double reject on timeout if error in predicate (204ms)
-    ✓ Should reject result if error in predicate (52ms)
+    ✓ Should apply callback and resolve non-boolean result (209ms)
+    ✓ Should reject with timeout error if timed out (108ms)
+    ✓ Should not do double reject on timeout (205ms)
+    ✓ Should not do double reject on timeout if error in predicate (213ms)
+    ✓ Should reject result if error in predicate (55ms)
 
 --------------|----------|----------|----------|----------|----------------|
 File          |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
@@ -117,9 +119,9 @@ All files     |      100 |      100 |      100 |      100 |                |
  waitUntil.js |      100 |      100 |      100 |      100 |                |
 --------------|----------|----------|----------|----------|----------------|
 Test Suites: 1 passed, 1 total
-Tests:       5 passed, 5 total
+Tests:       6 passed, 6 total
 Snapshots:   0 total
-Time:        1.954s
+Time:        1.984s
 Ran all test suites.
 ```
 
