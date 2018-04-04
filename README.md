@@ -1,6 +1,6 @@
 # waitUntil
 
-Waits for predicate to be truthy and resolves a Promise
+Waits for predicate to be truthy and resolves a Promise. No dependencies needed. Please be sure that your environment has Promise support (or has a polyfill).
 
 
 [![Build Status](https://travis-ci.org/devlato/waitUntil.svg?branch=master)](https://travis-ci.org/devlato/waitUntil)
@@ -165,7 +165,7 @@ Library is shipped "as is" under MIT License.
 
 ## Contributing
 
-Feel free to contribute but don't forget to test everything properly.
+Feel free to contribute. Just raise ann issue, create a pull request covering it and don't forget to test everything properly.
 
 
 [![NPM](https://nodei.co/npm/async-wait-until.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/async-wait-until/)

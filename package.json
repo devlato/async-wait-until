@@ -31,7 +31,7 @@
     "for",
     "bluebird"
   ],
-  "author": "devlato <npm@devlato.com> (http://devlato.com/)",
+  "author": "devlato <npm@devlato.com> (https://devlato.com/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/devlato/waitUntil/issues"
@@ -52,9 +52,6 @@
     "eslint-plugin-import": "2.2.0",
     "husky": "0.13.1",
     "jest": "18.1.0"
-  },
-  "dependencies": {
-    "bluebird": "3.4.7"
   },
   "engines": {
     "node": ">= 4",

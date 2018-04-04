@@ -1,6 +1,3 @@
-var Promise = require('bluebird');
-
-
 var DEFAULT_INTERVAL = 50;
 var DEFAULT_TIMEOUT = 5000;
 
