@@ -19,8 +19,11 @@ $ npm install async-wait-until
 
 ## Usage
 
+The simple use case is described below:
+
 ```javascript
 const waitUntil = require('async-wait-until');
+
 const timeOfStart = Date.now();
 
 
@@ -41,7 +44,6 @@ waitUntil(() => {
   // Here are the operations to be done if predicate didn't succeed in the timeout
   console.log('Async operation failed: ', error);
 });
-
 ```
 
 
@@ -51,6 +53,7 @@ The library is async/await compatible because it uses Promises/A+, so the exampl
 
 ```javascript
 const waitUntil = require('async-wait-until');
+
 const timeOfStart = Date.now();
 
 
@@ -63,7 +66,7 @@ try {
         && (timePassed % 2 === 0)  // Some random stuff
             ? true
             : throw new Error('Async operation failed');
-  }, 600)
+  }, 600);
 
   // Here are the operations to be done after predicate
   console.log('Async operation succeeded, predicate result = ', result);
@@ -90,6 +93,36 @@ function waitUntil(
     timeout: Number = 5000,
     interval: Number = 50
 ): Promise;
+```
+
+
+## TypeScript
+
+The library exports type definitions for TypeScript. As far as the library ships the code with `commonJS` module support only, you have to use `import * as` syntax to use it:
+
+```typescript
+import * as waitUntil from 'async-wait-until';
+
+const timeOfStart = Date.now();
+
+
+// Wait for some async operation to end
+try {
+  const result = await waitUntil(() => {
+    const timePassed = Date.now() - timeOfStart;
+
+    return (timePassed < 500)
+        && (timePassed % 2 === 0)  // Some random stuff
+            ? true
+            : throw new Error('Async operation failed');
+  }, 600);
+
+  // Here are the operations to be done after predicate
+  console.log('Async operation succeeded, predicate result = ', result);
+} catch (error) {
+  // Here are the operations to be done if predicate didn't succeed in the timeout
+  console.log('Async operation failed: ', error);
+}
 ```
 
 
