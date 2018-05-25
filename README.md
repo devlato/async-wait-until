@@ -1,6 +1,6 @@
 # waitUntil
 
-Waits for predicate to be truthy and resolves a Promise. No dependencies needed. Please be sure that your environment has Promise support (or has a polyfill).
+Waits for predicate to be truthy and resolves a Promise. The library provides TypeScript definitions. No dependencies needed. Please be sure that your environment has Promise support (or has a polyfill).
 
 
 [![Build Status](https://travis-ci.org/devlato/waitUntil.svg?branch=master)](https://travis-ci.org/devlato/waitUntil)
