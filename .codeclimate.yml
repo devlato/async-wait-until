@@ -9,3 +9,13 @@ ratings:
    paths:
    - "src/**/*"
    - "**.md"
+checks:
+  method-lines:
+    config:
+      threshold: 80
+  method-complexity:
+    config:
+      threshold: 16
+  complex-logic:
+    config:
+      threshold: 6
