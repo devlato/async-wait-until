@@ -4,7 +4,6 @@ Waits for predicate to be truthy and resolves a Promise. The library provides Ty
 
 
 [![Build Status](https://travis-ci.org/devlato/async-wait-until.svg?branch=master)](https://travis-ci.org/devlato/async-wait-until)
-[![Coverage Status](https://coveralls.io/repos/github/devlato/async-wait-until/badge.svg?branch=master)](https://coveralls.io/github/devlato/async-wait-until?branch=master)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/2a967399786c0d306247/test_coverage)](https://codeclimate.com/github/devlato/async-wait-until/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/2a967399786c0d306247/maintainability)](https://codeclimate.com/github/devlato/async-wait-until/maintainability)
 [![npm version](https://badge.fury.io/js/async-wait-until.svg)](https://badge.fury.io/js/async-wait-until)
