@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/devlato/waitUntil.git"
+    "url": "git+https://github.com/devlato/async-wait-until.git"
   },
   "keywords": [
     "apply",
@@ -35,9 +35,9 @@
   "author": "devlato <npm@devlato.com> (https://devlato.com/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/devlato/waitUntil/issues"
+    "url": "https://github.com/devlato/async-wait-until/issues"
   },
-  "homepage": "https://github.com/devlato/waitUntil#readme",
+  "homepage": "https://github.com/devlato/async-wait-until#readme",
   "files": [
     "package.json",
     "README.md",
