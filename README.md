@@ -3,10 +3,10 @@
 Waits for predicate to be truthy and resolves a Promise. The library provides TypeScript definitions. No dependencies needed. Please be sure that your environment has Promise support (or has a polyfill).
 
 
-[![Build Status](https://travis-ci.org/devlato/waitUntil.svg?branch=master)](https://travis-ci.org/devlato/waitUntil)
-[![Coverage Status](https://coveralls.io/repos/github/devlato/waitUntil/badge.svg?branch=master)](https://coveralls.io/github/devlato/waitUntil?branch=master)
-[![Code Climate](https://codeclimate.com/github/devlato/waitUntil/badges/gpa.svg)](https://codeclimate.com/github/devlato/waitUntil)
-[![Issue Count](https://codeclimate.com/github/devlato/waitUntil/badges/issue_count.svg)](https://codeclimate.com/github/devlato/waitUntil)
+[![Build Status](https://travis-ci.org/devlato/async-wait-until.svg?branch=master)](https://travis-ci.org/devlato/async-wait-until)
+[![Coverage Status](https://coveralls.io/repos/github/devlato/async-wait-until/badge.svg?branch=master)](https://coveralls.io/github/devlato/async-wait-until?branch=master)
+[![Code Climate](https://codeclimate.com/github/devlato/async-wait-until/badges/gpa.svg)](https://codeclimate.com/github/devlato/async-wait-until)
+[![Issue Count](https://codeclimate.com/github/devlato/async-wait-until/badges/issue_count.svg)](https://codeclimate.com/github/devlato/async-wait-until)
 [![npm version](https://badge.fury.io/js/async-wait-until.svg)](https://badge.fury.io/js/async-wait-until)
 
 
