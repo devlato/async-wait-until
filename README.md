@@ -13,7 +13,7 @@ Waits for predicate to be truthy and resolves a Promise. The library provides Ty
 ## Installation
 
 ```sh
-$ npm install async-wait-until
+$ npm install --save async-wait-until
 ```
 
 
@@ -90,8 +90,8 @@ try {
  */
 function waitUntil(
     predicate: Function,
-    timeout: Number = 5000,
-    interval: Number = 50
+    timeout: number = 5000,
+    interval: number = 50
 ): Promise;
 ```
 
