@@ -4,9 +4,8 @@
 //                 Mike Coakley <mcoakley@acmeframework.com>
 
 declare module 'async-wait-until' {
-  type WaitPredicateResult = any;
-  type WaitPredicate = () => WaitPredicateResult;
-  type WaitUntil = (fn: WaitPredicate, timeout?: number, interval?: number) => Promise<WaitPredicateResult>;
+  type WaitPredicate<T> = () => T | null | undefined | false | '' | 0;
+  type WaitUntil = <T>(fn: WaitPredicate<T>, timeout?: number, interval?: number) => Promise<T>;
 
   const waitUntil: WaitUntil;
 
