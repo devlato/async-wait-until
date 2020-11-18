@@ -1,5 +1,13 @@
 var waitUntil = require('../src/waitUntil');
 
+function sleep(ms) {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      resolve();
+    }, ms)
+  })
+}
+
 
 describe('waitUntil', function() {
   it('Should apply callback and resolve result', function() {
@@ -127,6 +135,26 @@ describe('waitUntil', function() {
         expect(result.toString())
           .toEqual('Error: Crap!');
       });
+  });
+
+  it('Should not async resolve on timeout', function () {
+    return waitUntil(function fnResolveOkAfter100ms() {
+      return sleep(100)
+        .then(function () {
+          return 'Ok'
+        });
+    }, 50, 10)
+      .catch(function fnRelayErrorAfter120ms(err) {
+        return sleep(120)
+          .then(function () {
+            throw err;
+          });
+      })
+      .catch(function (err) {
+        expect(err.toString())
+          .toEqual('Error: Timed out after waiting for 50ms');
+      });
+
   });
 
 });

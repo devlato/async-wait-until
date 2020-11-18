@@ -137,14 +137,15 @@ $ npm run test:coverage
 
  PASS  test/waitUntil.js
   waitUntil
-    ✓ Should apply callback and resolve result (216ms)
-    ✓ Should apply async callback and resolve result (208ms)
-    ✓ Should apply callback and resolve non-boolean result (207ms)
-    ✓ Should reject with timeout error if timed out (103ms)
-    ✓ Should not do double reject on timeout (206ms)
-    ✓ Should not do double reject on timeout if error in predicate (201ms)
-    ✓ Should reject result if error in predicate (51ms)
-    ✓ Should reject result if error in async predicate (103ms)
+    ✓ Should apply callback and resolve result (213ms)
+    ✓ Should apply async callback and resolve result (213ms)
+    ✓ Should apply callback and resolve non-boolean result (217ms)
+    ✓ Should reject with timeout error if timed out (105ms)
+    ✓ Should not do double reject on timeout (201ms)
+    ✓ Should not do double reject on timeout if error in predicate (206ms)
+    ✓ Should reject result if error in predicate (55ms)
+    ✓ Should reject result if error in async predicate (101ms)
+    ✓ Should not async resolve on timeout (177ms)
 
 --------------|----------|----------|----------|----------|-------------------|
 File          |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
@@ -153,9 +154,9 @@ All files     |      100 |      100 |      100 |      100 |                   |
  waitUntil.js |      100 |      100 |      100 |      100 |                   |
 --------------|----------|----------|----------|----------|-------------------|
 Test Suites: 1 passed, 1 total
-Tests:       8 passed, 8 total
+Tests:       9 passed, 9 total
 Snapshots:   0 total
-Time:        2.217s
+Time:        2.162s
 Ran all test suites.
 ```
 
