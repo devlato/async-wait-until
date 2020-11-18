@@ -30,21 +30,22 @@ module.exports = function waitUntil(
     };
 
     doStep = function doTimerStep() {
-      var result;
-
-      try {
-        result = predicate();
-
-        if (result) {
+      Promise.resolve(null)
+        .then(function wrapPredicate() {
+          return predicate();
+        })
+        .then(function onResolved(result) {
+          if (result) {
+            clearTimers();
+            resolve(result);
+          } else {
+            timer = setTimeout(doStep, timerInterval);
+          }
+        })
+        .catch(function onRejected(e) {
           clearTimers();
-          resolve(result);
-        } else {
-          timer = setTimeout(doStep, timerInterval);
-        }
-      } catch (e) {
-        clearTimers();
-        reject(e);
-      }
+          reject(e);
+        });
     };
 
     timer = setTimeout(doStep, timerInterval);

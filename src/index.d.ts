@@ -3,11 +3,12 @@
 // Definitions by: devlato <https://github.com/devlato>
 //                 Mike Coakley <mcoakley@acmeframework.com>
 
-declare module 'async-wait-until' {
-  type WaitPredicate<T> = () => T | null | undefined | false | '' | 0;
-  type WaitUntil = <T>(fn: WaitPredicate<T>, timeout?: number, interval?: number) => Promise<T>;
+type Promisable<T> = T | Promise<T>;
+type Falsy = false | 0 | '' | null | undefined
 
-  const waitUntil: WaitUntil;
+declare module 'async-wait-until' {
+  type WaitPredicate<T> = () => Promisable<T>;
+  function waitUntil<T extends any>(fn: WaitPredicate<T>, timeout?: number, interval?: number): Promise<Exclude<T, Falsy>>;
 
   export = waitUntil;
 }

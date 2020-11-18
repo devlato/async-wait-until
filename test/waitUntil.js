@@ -8,10 +8,26 @@ describe('waitUntil', function() {
     return waitUntil(function() {
       return (Date.now() - initialTime > 200);
     })
-    .then(function (result) {
-      expect(result)
+      .then(function (result) {
+        expect(result)
           .toEqual(true);
-    });
+      });
+  });
+
+  it('Should apply async callback and resolve result', function() {
+    var initialTime = Date.now();
+
+    return waitUntil(function() {
+      return new Promise(function (resolve) {
+        setTimeout(function () {
+          resolve(Date.now() - initialTime > 200)
+        }, 50)
+      })
+    })
+      .then(function (result) {
+        expect(result)
+          .toEqual(true);
+      });
   });
 
 
@@ -36,13 +52,13 @@ describe('waitUntil', function() {
     return waitUntil(function() {
       return (Date.now() - initialTime > 500);
     }, 100)
-    .catch(function (result) {
-      expect(result)
+      .catch(function (result) {
+        expect(result)
           .toBeInstanceOf(Error);
 
-      expect(result.toString())
+        expect(result.toString())
           .toEqual('Error: Timed out after waiting for 100ms');
-    });
+      });
   });
 
 
@@ -86,12 +102,31 @@ describe('waitUntil', function() {
     return waitUntil(function() {
       throw new Error('Crap!');
     })
-    .catch(function (result) {
-      expect(result)
+      .catch(function (result) {
+        expect(result)
           .toBeInstanceOf(Error);
 
-      expect(result.toString())
+        expect(result.toString())
           .toEqual('Error: Crap!');
-    });
+      });
   });
+
+
+  it('Should reject result if error in async predicate', function() {
+    return waitUntil(function() {
+      return new Promise(function (resolve, reject) {
+        setTimeout(function () {
+          reject(new Error('Crap!'));
+        }, 50)
+      })
+    })
+      .catch(function (result) {
+        expect(result)
+          .toBeInstanceOf(Error);
+
+        expect(result.toString())
+          .toEqual('Error: Crap!');
+      });
+  });
+
 });

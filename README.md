@@ -87,20 +87,20 @@ try {
  * @param  interval  Number  Wait interval, optional, 50ms by default
  * @return  Promise  Promise to return a callback result
  */
-function waitUntil(
-    predicate: Function,
+function waitUntil<T>(
+    predicate: () => T | Promise<T>,
     timeout: number = 5000,
-    interval: number = 50
-): Promise;
+    interval: number = 50,
+): Promise<Exclude<T, Falsy>>;
 ```
 
 
 ## TypeScript
 
-The library exports type definitions for TypeScript. As far as the library ships the code with `commonJS` module support only, you have to use `import * as` syntax to use it:
+The library exports type definitions for TypeScript. As far as the library ships the code with `commonJS` module support only, you have to use `import waitUtil = require()` syntax to use it:
 
 ```typescript
-import * as waitUntil from 'async-wait-until';
+import waitUntil = require('async-wait-until');
 
 const timeOfStart = Date.now();
 
@@ -137,23 +137,25 @@ $ npm run test:coverage
 
  PASS  test/waitUntil.js
   waitUntil
-    ✓ Should apply callback and resolve result (219ms)
-    ✓ Should apply callback and resolve non-boolean result (209ms)
-    ✓ Should reject with timeout error if timed out (108ms)
-    ✓ Should not do double reject on timeout (205ms)
-    ✓ Should not do double reject on timeout if error in predicate (213ms)
-    ✓ Should reject result if error in predicate (55ms)
+    ✓ Should apply callback and resolve result (216ms)
+    ✓ Should apply async callback and resolve result (208ms)
+    ✓ Should apply callback and resolve non-boolean result (207ms)
+    ✓ Should reject with timeout error if timed out (103ms)
+    ✓ Should not do double reject on timeout (206ms)
+    ✓ Should not do double reject on timeout if error in predicate (201ms)
+    ✓ Should reject result if error in predicate (51ms)
+    ✓ Should reject result if error in async predicate (103ms)
 
---------------|----------|----------|----------|----------|----------------|
-File          |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
---------------|----------|----------|----------|----------|----------------|
-All files     |      100 |      100 |      100 |      100 |                |
- waitUntil.js |      100 |      100 |      100 |      100 |                |
---------------|----------|----------|----------|----------|----------------|
+--------------|----------|----------|----------|----------|-------------------|
+File          |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
+--------------|----------|----------|----------|----------|-------------------|
+All files     |      100 |      100 |      100 |      100 |                   |
+ waitUntil.js |      100 |      100 |      100 |      100 |                   |
+--------------|----------|----------|----------|----------|-------------------|
 Test Suites: 1 passed, 1 total
-Tests:       6 passed, 6 total
+Tests:       8 passed, 8 total
 Snapshots:   0 total
-Time:        1.984s
+Time:        2.217s
 Ran all test suites.
 ```
 
