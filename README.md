@@ -78,7 +78,7 @@ try {
 
 ## Supported arguments
 
-```javascript
+```typescript
 /**
  * Waits for predicate to be truthy and resolves a Promise
  *
@@ -97,7 +97,7 @@ function waitUntil<T>(
 
 ## TypeScript
 
-The library exports type definitions for TypeScript. As far as the library ships the code with `commonJS` module support only, you have to use `import waitUtil = require()` syntax to use it:
+The library exports type definitions for TypeScript. As far as the library ships the code with `commonJS` module support only, you have to use `import waitUntil = require()` syntax to use it:
 
 ```typescript
 import waitUntil = require('async-wait-until');
