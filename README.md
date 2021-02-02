@@ -1,12 +1,14 @@
 # async-wait-until
 
-Waits for predicate to be truthy and resolves a Promise. The library provides TypeScript definitions. No dependencies needed. Please be sure that your environment has Promise support (or has a polyfill).
+Waits for predicate to be truthy and resolves a Promise. The library provides TypeScript definitions. No dependencies needed. Please be sure that your environment ships with Promise support (or has a Promises/A+ polyfill).
 
 
 [![Build Status](https://travis-ci.org/devlato/async-wait-until.svg?branch=master)](https://travis-ci.org/devlato/async-wait-until)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/2a967399786c0d306247/test_coverage)](https://codeclimate.com/github/devlato/async-wait-until/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/2a967399786c0d306247/maintainability)](https://codeclimate.com/github/devlato/async-wait-until/maintainability)
 [![npm version](https://badge.fury.io/js/async-wait-until.svg)](https://badge.fury.io/js/async-wait-until)
+
+[<img alt="Download Stats" src="https://nodei.co/npm/async-wait-until.png?downloads=true&downloadRank=true&stars=true" width="196" />](https://nodei.co/npm/async-wait-until/)
 
 
 ## Installation
@@ -18,7 +20,23 @@ $ npm install --save async-wait-until
 
 ## Usage
 
-The simple use case is described below:
+```javascript
+/**
+ * Waits for predicate to be truthy and resolves a Promise
+ *
+ * @param  predicate  Function  Predicate that checks the condition
+ * @param  timeout  number  Maximum wait interval, optional, 5000ms by default
+ * @param  cooldownInterval  number  Interval to wait for between attempts, optional, 50ms by default
+ * @return  Promise  Promise to return a callback result
+ */
+function waitUntil(
+    predicate: Function,
+    timeout: number = 5000,
+    cooldownInterval: number = 50
+): Promise {}
+```
+
+The simplest use case is illustrated below:
 
 ```javascript
 const waitUntil = require('async-wait-until');
@@ -34,7 +52,7 @@ waitUntil(() => {
       && (timePassed % 2 === 0)  // Some random stuff
           ? true
           : throw new Error('Async operation failed');
-}, 600)
+}, 600, 100)
 .then((result) => {
   // Here are the operations to be done after predicate
   console.log('Async operation succeeded, predicate result = ', result);
@@ -44,6 +62,16 @@ waitUntil(() => {
   console.log('Async operation failed: ', error);
 });
 ```
+
+Here, the predicate function provided as a callback, gets called every 100 ms (while a default cooldown interval is 50 ms). Depending on the outcome of the predicate, the following can happen:
+
+1. *The predicate returns any truthy value*. In this case, the returned Promise will resolve with the value last returned from the predicate.
+2. *The predicate returns any falsy value*. If there's been no more than 600 ms (while the default timeout is 5000 ms), another attempt will happen after the cooldown interval. Otherwise, the Promise will reject withh a timeout error.
+3. *The predicate throws an exception*. In this scenario, the Promise will reject with the thrown exception.
+
+At any time, if the specified timeout has passed and no truthy value has been ever returned from the predicate, the Promise will reject with a timeout error.
+
+The Predicate can also be an async function.
 
 
 ## async/await
@@ -73,25 +101,6 @@ try {
   // Here are the operations to be done if predicate didn't succeed in the timeout
   console.log('Async operation failed: ', error);
 }
-```
-
-
-## Supported arguments
-
-```javascript
-/**
- * Waits for predicate to be truthy and resolves a Promise
- *
- * @param  predicate  Function  Predicate that checks the condition
- * @param  timeout  Number  Maximum wait interval, optional, 5000ms by default
- * @param  interval  Number  Wait interval, optional, 50ms by default
- * @return  Promise  Promise to return a callback result
- */
-function waitUntil(
-    predicate: Function,
-    timeout: number = 5000,
-    interval: number = 50
-): Promise;
 ```
 
 
@@ -125,45 +134,22 @@ try {
 ```
 
 
-## Test coverage
+## License
 
-Library has 100% test coverage:
-
-```sh
-$ npm run test:coverage
-
-> async-wait-until@1.1.4 test:coverage ~/projects/waitUntil
-> NODE_ENV=test jest --coverage --no-cache --config .jestrc
-
- PASS  test/waitUntil.js
-  waitUntil
-    ✓ Should apply callback and resolve result (219ms)
-    ✓ Should apply callback and resolve non-boolean result (209ms)
-    ✓ Should reject with timeout error if timed out (108ms)
-    ✓ Should not do double reject on timeout (205ms)
-    ✓ Should not do double reject on timeout if error in predicate (213ms)
-    ✓ Should reject result if error in predicate (55ms)
-
---------------|----------|----------|----------|----------|----------------|
-File          |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
---------------|----------|----------|----------|----------|----------------|
-All files     |      100 |      100 |      100 |      100 |                |
- waitUntil.js |      100 |      100 |      100 |      100 |                |
---------------|----------|----------|----------|----------|----------------|
-Test Suites: 1 passed, 1 total
-Tests:       6 passed, 6 total
-Snapshots:   0 total
-Time:        1.984s
-Ran all test suites.
-```
+Library is shipped "as is" under the MIT License.
 
 
-## Code style
+## Contributing
+
+Feel free to contribute. Just raise ann issue, create a pull request covering it and don't forget to unit test everything properly.
+
+
+### Code style
 
 Library is 100% compatible with [airbnb-base](https://www.npmjs.com/package/eslint-config-airbnb-base) for ES5.
 
 
-## Available commands
+### Available commands
 
 Library has the following commands available:
 
@@ -185,19 +171,6 @@ Library has the following commands available:
   $ npm run lint
   ```
 
-## Build
+### Build
 
-No building required, library is implemented with ES5 for better compatibility and shipped as is.
-
-
-## License
-
-Library is shipped "as is" under MIT License.
-
-
-## Contributing
-
-Feel free to contribute. Just raise ann issue, create a pull request covering it and don't forget to test everything properly.
-
-
-[![NPM](https://nodei.co/npm/async-wait-until.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/async-wait-until/)
+No building is required, library is implemented in ES5 for better compatibility and is shipped "as is".

@@ -1,5 +1,10 @@
-coverage
-node_modules
-test
+.idea/
+coverage/
+dist/
+node_modules/
 *.log
-*.md
+.editorconfig
+package-lock.json
+CODEOWNERS
+**/.DS_Store
+.npmrc
