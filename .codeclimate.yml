@@ -22,6 +22,7 @@ checks:
       threshold: 25
 exclude_patterns:
   - 'src/tests'
+  - 'dist/'
   - 'node_modules/'
 plugins:
   eslint:
