@@ -1,22 +1,49 @@
 /**
- * Timeout error
+ * This module implements a function that waits for a given predicate to be truthy.
+ * Relies on Promises and supports async/await.
+ * @packageDocumentation
+ * @module async-wait-until
+ */
+
+/**
+ * @type Error JavaScript's generic Error type
  * @public
- * @param  message  string  Error message
+ */
+
+/**
+ * Timeout error, which is thrown when timeout passes but the predicate
+ * doesn't resolve with a truthy value
+ * @public
+ * @class
+ * @exception
+ * @category Exceptions
  */
 export class TimeoutError extends Error {
-  constructor(timeout?: number) {
-    super(timeout != null ? `Timed out after waiting for ${timeout} ms` : 'Timed out');
+  /**
+   * Creates a TimeoutError instance
+   * @public
+   * @param timeoutInMs Expected timeout, in milliseconds
+   */
+  constructor(timeoutInMs?: number) {
+    super(timeoutInMs != null ? `Timed out after waiting for ${timeoutInMs} ms` : 'Timed out');
 
     Object.setPrototypeOf(this, TimeoutError.prototype);
   }
 }
 
 /**
- * Unsupported platform error
+ * Unsupported platform error, which is thrown when the module is used
+ * neither from a web browser nor from Node.js
  * @public
- * @param  message  string  Error message
+ * @class
+ * @exception
+ * @category Exceptions
  */
 export class UnsupportedPlatformError extends Error {
+  /**
+   * Creates an UnsupportedPlatformError instance
+   * @public
+   */
   constructor() {
     super('Unsupported platform');
 
@@ -27,8 +54,10 @@ export class UnsupportedPlatformError extends Error {
 /**
  * A utility function for cross-platform type-safe scheduling
  * @private
- * @returns Scheduler
- * @throws UnsupportedPlatformError
+ * @returns Returns a proper scheduler instance depending on the current environment
+ * @throws [[UnsupportedPlatformError]] If the current environment is not supported, e.g. it's neither a web browser nor Node.js
+ * @throws Error
+ * @category Utilities
  */
 const getScheduler = (): Scheduler => {
   if (
@@ -68,14 +97,15 @@ const getScheduler = (): Scheduler => {
 };
 
 /**
- * Delays the execution by interval ms
+ * Delays the execution by the given interval, in milliseconds
  * @private
- * @param  scheduler  Scheduler  Scheduler
- * @param  interval  number  Interval to wait for, in milliseconds
- * @return Promise
+ * @param scheduler A scheduler instance
+ * @param interval An interval to wait for before resolving the Promise, in milliseconds
+ * @returns A Promise that gets resolved once the given interval passes
  * @throws Error
+ * @category Utilities
  */
-const delay = (scheduler: Scheduler, interval: number) =>
+const delay = (scheduler: Scheduler, interval: number): Promise<void> =>
   new Promise((resolve, reject) => {
     try {
       scheduler.schedule(resolve, interval);
@@ -87,31 +117,39 @@ const delay = (scheduler: Scheduler, interval: number) =>
 /**
  * Default interval between attempts, in milliseconds
  * @private
+ * @category Defaults
  */
 const DEFAULT_INTERVAL_BETWEEN_ATTEMPTS_IN_MS = 50;
 /**
  * Default timeout, in milliseconds
  * @private
+ * @category Defaults
  */
 const DEFAULT_TIMEOUT_IN_MS = 5000;
 /**
  * Platform-specific scheduler
  * @private
+ * @category Defaults
  */
-const scheduler: Scheduler = getScheduler();
+const SCHEDULER: Scheduler = getScheduler();
 
 /**
  * Waits for predicate to be truthy and resolves a Promise
  * @public
- * @param  predicate  WaitPredicate<T>  Predicate that checks the condition
- * @param  options  WaitOptions|number|undefined  Maximum wait interval, 5000ms by default
- * @param  intervalBetweenAttempts  number|undefined  Deprecated (use options property instead). Interval to wait for between attempts, optional, 50ms by default
- * @return  Promise<T>  A promise to return a callback result
- * @throws  TimeoutError|Error
+ * @param predicate A predicate function that checks the condition, it should return either a truthy value or a falsy value
+ * @param options Options object (or *(deprecated)*: a maximum wait interval, *5000 ms* by default)
+ * @param intervalBetweenAttempts *(deprecated)* Interval to wait for between attempts, optional, *50 ms* by default
+ * @returns A promise to return the given predicate's result, once it resolves with a truthy value
+ * @template T Result type for the truthy value returned by the predicate
+ * @throws [[TimeoutError]] An exception throws when the specified timeout interval passes but the predicate doesn't return a truthy value
+ * @throws Error
+ * @see [[TruthyValue]]
+ * @see [[FalsyValue]]
+ * @see [[Options]]
  */
-export const waitUntil = <T>(
-  predicate: WaitPredicate<T>,
-  options?: number | WaitOptions,
+export const waitUntil = <T extends PredicateReturnValue>(
+  predicate: Predicate<T>,
+  options?: number | Options,
   intervalBetweenAttempts?: number,
 ): Promise<T> => {
   const timerTimeout = (typeof options === 'number' ? options : options?.timeout) ?? DEFAULT_TIMEOUT_IN_MS;
@@ -119,7 +157,7 @@ export const waitUntil = <T>(
     (typeof options === 'number' ? intervalBetweenAttempts : options?.intervalBetweenAttempts) ??
     DEFAULT_INTERVAL_BETWEEN_ATTEMPTS_IN_MS;
 
-  const runPredicate = (): Promise<ReturnType<WaitPredicate<T>>> =>
+  const runPredicate = (): Promise<ReturnType<Predicate<T>>> =>
     new Promise((resolve, reject) => {
       try {
         resolve(predicate());
@@ -138,7 +176,7 @@ export const waitUntil = <T>(
               return;
             }
 
-            delay(scheduler, timerIntervalBetweenAttempts).then(iteration).catch(reject);
+            delay(SCHEDULER, timerIntervalBetweenAttempts).then(iteration).catch(reject);
           })
           .catch(reject);
       };
@@ -147,7 +185,7 @@ export const waitUntil = <T>(
     });
 
   const timeoutPromise = () =>
-    delay(scheduler, timerTimeout).then(() => {
+    delay(SCHEDULER, timerTimeout).then(() => {
       throw new TimeoutError(timerTimeout);
     });
 
@@ -155,30 +193,93 @@ export const waitUntil = <T>(
 };
 
 /**
- * The predicate callback type
+ * The predicate type
+ * @private
+ * @template T Returned value type, either a truthy value or a falsy value
+ * @throws Error
+ * @category Common Types
+ * @see [[TruthyValue]]
+ * @see [[FalsyValue]]
  */
-type WaitPredicate<T> = () => T | Promise<T> | null | undefined | false | '' | 0 | void;
+export type Predicate<T extends PredicateReturnValue> = () => T | Promise<T>;
 /**
- * Options for the wait algorithm
+ * A type that represents a falsy value
+ * @private
+ * @category Common Types
  */
-export type WaitOptions = {
+export type FalsyValue = null | undefined | false | '' | 0 | void;
+/**
+ * A type that represents a truthy value
+ * @private
+ * @category Common Types
+ */
+export type TruthyValue =
+  | Record<string, unknown>
+  | unknown[]
+  | symbol
+  | ((...args: unknown[]) => unknown)
+  | Exclude<number, 0>
+  | Exclude<string, ''>
+  | true;
+/**
+ * A type that represents a Predicate's return value
+ * @private
+ * @category Common Types
+ */
+export type PredicateReturnValue = TruthyValue | FalsyValue;
+/**
+ * Options that allow to specify timeout or time interval between consecutive attempts
+ * @public
+ * @category Common Types
+ */
+export type Options = {
   /**
-   * @property  timeout  WaitOptions|number|undefined  Maximum wait interval, 5000ms by default
+   * @property Maximum wait interval, *5000 ms* by default
    */
   timeout?: number;
   /**
-   * @property  intervalBetweenAttempts  number|undefined  Interval to wait for between attempts, optional, 50ms by default
+   * @property Interval to wait for between attempts, optional, *50 ms* by default
    */
   intervalBetweenAttempts?: number;
 };
 /**
- * Scheduler types
+ * A function that schedules a given callback to run in given number of milliseconds
+ * @private
+ * @param callback A callback to execute
+ * @param interval A time interval to wait before executing the callback
+ * @returns An instance of ScheduleCanceler that allows to cancel the scheduled callback's execution
+ * @template T The callback params' type
+ * @throws Error
+ * @category Common Types
  */
-type ScheduleFn = <T>(fn: (...args: T[]) => void, interval: number) => CancelScheduledFn;
-type CancelScheduledFn = {
-  cancel: () => void;
+type ScheduleFn = <T>(callback: (...args: T[]) => void, interval: number) => ScheduleCanceler;
+/**
+ * A function that cancels the previously scheduled callback's execution
+ * @private
+ * @throws Error
+ * @category Common Types
+ */
+type CancelScheduledFn = () => void;
+/**
+ * A stateful abstraction over Node.js & web browser timers, that cancels the scheduled task
+ * @private
+ * @category Common Types
+ */
+type ScheduleCanceler = {
+  /**
+   * @property A function that cancels the previously scheduled callback's execution
+   */
+  cancel: CancelScheduledFn;
 };
+/**
+ * A stateful abstraction over Node.js & web browser timers, that schedules a task
+ * @private
+ * @category Common Types
+ */
 type Scheduler = {
+  /**
+   * @property A function that schedules a given callback to run in given number of milliseconds
+   */
   schedule: ScheduleFn;
 };
 

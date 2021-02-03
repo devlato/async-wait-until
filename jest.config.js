@@ -12,6 +12,6 @@ module.exports = {
   maxConcurrency: os.cpus().length,
   testURL: 'http://localhost',
   moduleDirectories: ['node_modules', 'src'],
-  testPathIgnorePatterns: ['dist', 'node_modules', '.cache', 'coverage'],
+  testPathIgnorePatterns: ['.cache', 'coverage', 'dist', 'docs', '.git', '.github', '.idea', 'node_modules'],
   testRegex: '.*\\.tests\\.ts$',
 };

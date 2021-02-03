@@ -15,10 +15,6 @@ module.exports = {
   printWidth: 120,
   overrides: [
     {
-      files: 'prettier.config.js',
-      options: { parser: 'babel' },
-    },
-    {
       files: '*.json',
       options: { parser: 'json' },
     },

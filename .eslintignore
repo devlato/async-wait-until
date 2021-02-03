@@ -1,10 +1,12 @@
+# Folders
+.git/
 .idea/
 coverage/
 dist/
+docs/
 node_modules/
+
+# Garbage
+*.DS_Store
+*.lock
 *.log
-.editorconfig
-package-lock.json
-CODEOWNERS
-**/.DS_Store
-.npmrc

@@ -21,7 +21,8 @@ checks:
     config:
       threshold: 25
 exclude_patterns:
-  - 'src/tests'
+  - 'src/tests/'
+  - 'docs/'
   - 'dist/'
   - 'node_modules/'
 plugins:

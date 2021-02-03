@@ -1,8 +1,11 @@
+# Folders
 .idea/
 coverage/
 dist/
+docs/
 node_modules/
+
+# Garbage
+*.DS_Store
+*.lock
 *.log
-yarn.lock
-**/.DS_Store
-.npmrc

@@ -1,19 +1,28 @@
-.idea/
-.jest/
+# Folders
+.git/
 .github/
+.idea/
 coverage/
+docs/
 node_modules/
 src/
-*.log
+
+# Configuration files
 .codeclimate.yml
-.eslintrc
-.eslintignore
-.gitignore
-jest.config.js
-.travis.yml
 .editorconfig
+.eslintignore
+.eslintrc.js
+.gitignore
+.npmignore
+CODEOWNERS
+jest.config.js
 package-lock.json
 prettier.config.js
-CODEOWNERS
-**/.DS_Store
-.npmrc
+rollup.config.js
+tsconfig.json
+typedoc.js
+
+# Garbage
+*.DS_Store
+*.lock
+*.log

@@ -6,12 +6,12 @@ import pckg from './package.json';
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 const OUTPUT_CONFIG = {
   banner: [
-    `/**`,
+    '/**',
     ` * ${pckg.name} ${pckg.version}`,
     ` * ${pckg.description}`,
     ` * ${pckg.homepage}`,
     ` * (c) ${pckg.author}, under the ${pckg.license} license`,
-    ` */`,
+    ' */',
   ].join('\n'),
   compact: true,
   sourcemap: true,
