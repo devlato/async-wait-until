@@ -29,28 +29,28 @@ export default {
     },
     {
       ...OUTPUT_CONFIG,
-      file: 'dist/index.amd.js',
+      file: 'dist/amd.js',
       format: 'amd',
     },
     {
       ...OUTPUT_CONFIG,
-      file: 'dist/index.commonjs.js',
+      file: 'dist/commonjs.js',
       format: 'cjs',
     },
     {
       ...OUTPUT_CONFIG,
-      file: 'dist/index.es.js',
+      file: 'dist/es.js',
       format: 'es',
     },
     {
       ...OUTPUT_CONFIG,
-      file: 'dist/index.iife.js',
+      file: 'dist/iife.js',
       format: 'iife',
       name: 'asyncWaitUntil',
     },
     {
       ...OUTPUT_CONFIG,
-      file: 'dist/index.system.js',
+      file: 'dist/systemjs.js',
       format: 'system',
     },
   ],
