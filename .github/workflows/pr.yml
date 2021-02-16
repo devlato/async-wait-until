@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v1
       - name: Generate changelog
         run: |
           echo "pr_body=$(git log --oneline master..${{ github.sha }})" >> $GITHUB_ENV
