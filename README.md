@@ -222,12 +222,12 @@ Parameter | Type | Required | Default | Description
 If you aren't sure how long with a process take, you can use `waitUntil.Forever` (which is a shortcut for [Number.POSITIVE_INFINITY](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/POSITIVE_INFINITY)) as the timeout value:
 
 ```ts
-import { waitUntil } from 'async-wait-until';
+import { waitUntil, WAIT_FOREVER } from 'async-wait-until';
 
 // ...
 
 const result = waitUntil(() => Date.now() >= new Date('Jan 13, 2022 11:35 am'), {
-  timeout: waitUntil.WAIT_FOREVER, // === Number.POSITIVE_INFINITY
+  timeout: WAIT_FOREVER, // === Number.POSITIVE_INFINITY
 });
 ```
 
