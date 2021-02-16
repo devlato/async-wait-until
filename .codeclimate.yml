@@ -11,7 +11,7 @@ checks:
   method-complexity:
     enabled: true
     config:
-      threshold: 5
+      threshold: 16
   method-count:
     enabled: true
     config:
@@ -19,7 +19,7 @@ checks:
   method-lines:
     enabled: true
     config:
-      threshold: 25
+      threshold: 64
 exclude_patterns:
   - '.git/'
   - '.github/'

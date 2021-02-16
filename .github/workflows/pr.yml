@@ -22,6 +22,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.4
+      - name: Generate changelog
+        run: |
+          echo "pr_body=$(git log --oneline master..${{ github.ref }})" >> $GITHUB_ENV
+          echo "PR:\n${pr_body}"
       - name: Create a PR
         id: cpr
         uses: repo-sync/pull-request@v2
@@ -29,16 +33,14 @@ jobs:
           source_branch: ''
           destination_branch: 'master'
           pr_title: 'Pulling ${{ github.ref }} into master'
+          pr_body: '${{ env.pr_body }}'
           pr_reviewer: devlato
           pr_assignee: devlato
           pr_label: '2.0.0'
           pr_milestone: '2.0.0'
           github_token: '${{ secrets.GITHUB_TOKEN }}'
-      - name: Generate changelog
-        run: |
-          echo "::set-env name=pr_body::$(git log --oneline master..${{ github.ref }})"
-          echo "PR:\n${pr_body}"
       - name: Update pull request
         uses: kt3k/update-pr-description@v1.0.0
         with:
+          pr_body: '${{ env.pr_body }}'
           github_token: '${{ secrets.GITHUB_TOKEN }}'
