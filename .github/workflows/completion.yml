@@ -1,0 +1,37 @@
+name: Completion
+
+on:
+  pull_request:
+    types:
+      - labeled
+      - unlabeled
+      - synchronize
+      - opened
+      - edited
+      - ready_for_review
+      - reopened
+      - unlocked
+  pull_request_review:
+    types:
+      - submitted
+  check_suite:
+    types:
+      - completed
+  status: {}
+
+jobs:
+  maybe_merge:
+    name: Merge
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.0.0
+      - name: automerge
+        uses: 'pascalgn/automerge-action@v0.13.1'
+        env:
+          GITHUB_TOKEN: '${{ secrets.GH_PAT }}'
+          MERGE_LABELS: Ready to merge
+          MERGE_METHOD: rebase
+          MERGE_COMMIT_MESSAGE: 'Merge ${{ github.ref }} into master'
+          MERGE_RETRIES: 10
+          MERGE_RETRY_SLEEP: 30000

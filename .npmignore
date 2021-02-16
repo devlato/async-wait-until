@@ -1,8 +1,29 @@
-coverage
-node_modules
-test
-*.log
-.eslintrc
+# Folders
+.git/
+.github/
+.idea/
+coverage/
+docs/
+lint/
+node_modules/
+src/
+
+# Configuration files
+.codeclimate.yml
+.editorconfig
 .eslintignore
-.jestrc
-.travis.yml
+.eslintrc.js
+.gitignore
+.npmignore
+CODEOWNERS
+jest.config.js
+package-lock.json
+prettier.config.js
+rollup.config.js
+tsconfig.json
+typedoc.js
+
+# Garbage
+*.DS_Store
+*.lock
+*.log

@@ -1,5 +1,14 @@
-coverage
-node_modules
-test
+# Folders
+.git/
+.github/
+.idea/
+coverage/
+dist/
+docs/
+lint/
+node_modules/
+
+# Garbage
+*.DS_Store
+*.lock
 *.log
-*.md

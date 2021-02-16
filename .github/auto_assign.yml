@@ -1,0 +1,15 @@
+addReviewers: true
+addAssignees: true
+
+reviewers:
+  - devlato
+
+numberOfReviewers: 0
+
+assignees:
+  - devlato
+
+numberOfAssignees: 0
+
+skipKeywords:
+  - WIP

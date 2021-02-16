@@ -1,0 +1,38 @@
+name: PR
+
+on:
+  push:
+    branches-ignore:
+      - master
+      - gh-pages
+    tags-ignore:
+      - '*'
+
+jobs:
+  create_pull_request:
+    name: Create or update a PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+      - name: Generate changelog
+        run: |
+          echo "pr_body=$(git log --oneline master..${{ github.sha }})" >> $GITHUB_ENV
+          echo "PR:\n${pr_body}"
+      - name: Create a PR
+        uses: repo-sync/pull-request@v2.5
+        with:
+          source_branch: ''
+          destination_branch: 'master'
+          pr_title: 'Pulling ${{ github.ref }} into master'
+          pr_body: '${{ env.pr_body }}'
+          pr_reviewer: devlato
+          pr_assignee: devlato
+          pr_label: '2.0.0'
+          pr_milestone: '2.0.0'
+          github_token: '${{ secrets.GITHUB_TOKEN }}'
+      - name: Update pull request
+        uses: kt3k/update-pr-description@v1.0.0
+        with:
+          pr_body: '${{ env.pr_body }}'
+          github_token: '${{ secrets.GITHUB_TOKEN }}'

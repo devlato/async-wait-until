@@ -1,5 +1,12 @@
-coverage
-node_modules
-npm-debug.log
-package-lock.json
-yarn.lock
+# Folders
+.idea/
+coverage/
+dist/
+docs/
+lint/
+node_modules/
+
+# Garbage
+*.DS_Store
+*.lock
+*.log
