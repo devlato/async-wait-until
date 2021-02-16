@@ -1,9 +1,11 @@
 # Folders
 .git/
+.github/
 .idea/
 coverage/
 dist/
 docs/
+lint/
 node_modules/
 
 # Garbage

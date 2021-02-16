@@ -4,6 +4,7 @@
 .idea/
 coverage/
 docs/
+lint/
 node_modules/
 src/
 

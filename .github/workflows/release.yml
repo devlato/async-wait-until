@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.3.4
       - name: Install dependencies
         run: npm ci
       - name: Scan for secrets
@@ -21,23 +21,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.3.4
       - name: Install dependencies
         run: npm ci
       - name: Lint the codebase
-        run: npm run lint
+        run: npm run lint:ci
   test_and_report_coverage:
     name: Coverage
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.3.4
       - name: Install dependencies
         run: npm ci
       - name: Run tests
         run: npm run test:ci
       - name: Run and upload coverage
-        uses: paambaati/codeclimate-action@v2.5.6
+        uses: paambaati/codeclimate-action@v2.7.5
         env:
           CC_TEST_REPORTER_ID: '${{ secrets.CC_TEST_REPORTER_ID }}'
         with:
@@ -53,38 +53,38 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.3.4
       - name: Install dependencies
         run: npm ci
       - name: Build code
-        run: npm run build
+        run: npm run build:ci
       - name: Upload the dist folder
         uses: actions/upload-artifact@v1
         with:
           name: dist
           path: dist
-  build_storybook:
-    name: Storybook Build
+  build_docs:
+    name: Build Docs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.3.4
       - name: Install dependencies
         run: npm ci
       - name: Build storybook
-        run: npm run storybook:build
-      - name: Upload the storybook
+        run: npm run docs:ci
+      - name: Upload the docs
         uses: actions/upload-artifact@v1
         with:
-          name: storybook
+          name: docs
           path: docs
   maybe_tag:
     name: Maybe tag the release
     runs-on: ubuntu-latest
-    needs: [secrets, lint, test_and_report_coverage, build_code, build_storybook]
+    needs: [secrets, lint, test_and_report_coverage, build_code, build_docs]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.3.4
       - name: Install dependencies
         run: npm ci
       - name: Maybe generate tag

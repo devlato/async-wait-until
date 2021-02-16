@@ -21,10 +21,14 @@ checks:
     config:
       threshold: 25
 exclude_patterns:
-  - 'src/tests/'
-  - 'docs/'
+  - '.git/'
+  - '.github/'
+  - '.idea/'
+  - 'coverage/'
   - 'dist/'
+  - 'docs/'
   - 'node_modules/'
+  - 'src/tests/'
 plugins:
   eslint:
     enabled: false

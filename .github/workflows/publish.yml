@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.3.4
       - name: Install dependencies
         run: npm ci
       - name: Scan for secrets
@@ -21,17 +21,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.3.4
       - name: Install dependencies
         run: npm ci
       - name: Lint the codebase
-        run: npm run lint
+        run: npm run lint:ci
   test:
     name: Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.3.4
       - name: Install dependencies
         run: npm ci
       - name: Run tests
@@ -41,53 +41,68 @@ jobs:
         with:
           name: test_coverage
           path: coverage
-  build_storybook:
-    name: Storybook Build
+  build_code:
+    name: Build code
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.3.4
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm run build:ci
+      - name: Upload dist
+        uses: actions/upload-artifact@v1
+        with:
+          name: dist
+          path: dist
+  build_docs:
+    name: Build Docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
       - name: Install dependencies
         run: npm ci
       - name: Build storybook
-        run: npm run storybook:build
+        run: npm run docs:ci
       - name: Upload the storybook
         uses: actions/upload-artifact@v1
         with:
-          name: storybook
+          name: docs
           path: docs
   docs:
-    needs: build_storybook
+    needs: build_docs
     name: Docs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.3.4
       - name: Install dependencies
         run: npm ci
       - name: Download storybook
         uses: actions/download-artifact@v1
         with:
-          name: storybook
+          name: docs
           path: docs
-      - name: Deploy Storybook to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v1
+      - name: Deploy Docs to GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v2.2.0
         with:
           target_branch: 'gh-pages'
           build_dir: docs
           committer_name: 'GitHub Action'
           committer_email: 'github@devlato.com'
-          commit_message: 'Update the Storybook on GitHub Pages'
+          commit_message: 'Update the Docs on GitHub Pages'
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           GITHUB_PAT: '${{ secrets.GH_PAT }}'
   publish:
-    needs: [secrets, lint, test, build_storybook]
+    needs: [secrets, lint, test, build_code, build_docs]
     name: Publish to npm
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.3.4
       - name: Install dependencies
         run: npm ci
       - name: Publish
@@ -103,7 +118,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.3.4
         with:
           fetch-depth: 0
       - name: Generate changelog

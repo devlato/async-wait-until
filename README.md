@@ -1,6 +1,6 @@
 # async-wait-until
 
-A tiny yet convenient and fast zero-dependency library that makes it possible to write an asynchronous code that awaits some event to happen. It works on any JavaScript runtime that supports [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) either natively or with a polyfill (i.e. [this one](https://www.npmjs.com/package/promise-polyfill)).
+A tiny yet convenient and fast zero-dependency library that makes it possible to write an asynchronous code that awaits some event to happen. It works on any JavaScript runtime that supports [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) either natively or with a polyfill (i.e. [this one](https://www.npmjs.com/package/promise-polyfill)), including old Node.js versions and old web browsers.
 
 ![npm version](https://img.shields.io/npm/v/async-wait-until)
 [![npm downloads, weekly](https://img.shields.io/npm/dw/async-wait-until)](https://npmjs.org/package/async-wait-until)
@@ -20,7 +20,17 @@ The package is available on [npm](https://npmjs.org/package/async-wait-until):
 $ npm install --save async-wait-until
 ```
 
-It ships with a [UMD](https://github.com/umdjs/umd) bundle by default (which works well as-is on Node.js and web browsers), but other bundles are also available in the package's `dist/` folder:
+It ships with a [UMD](https://github.com/umdjs/umd) bundle by default (which works well as-is on Node.js and web browsers), but bundles for other module systems are also available in the package's `dist/` folder.
+
+```ts
+import { waitUntil } from 'async-wait-until';
+
+// ...
+await waitUntil(() => Date.now() >= document.querySelector('#hey') != null);
+```
+
+<details>
+<summary>Click to see examples for other module systems</summary>
 
 * [CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1):
   ```js
@@ -73,6 +83,7 @@ It ships with a [UMD](https://github.com/umdjs/umd) bundle by default (which wor
         });
   </script>
   ```
+</details>
 
 
 ## 👨‍💻👩‍💻 Use
@@ -161,7 +172,7 @@ From the above code, it's clear that our `'predicate'` function (or simply `'pre
 import { doTheDivThing } from './a-sneaky-module.js';
 import { waitUntil, TimeoutError } from './async-wait-until';
 
-const doOutThing = async () => {
+const doOurThing = async () => {
   // ...
   
   doTheDivThing();
@@ -189,20 +200,50 @@ So, summing up the above, the predicate will run again and again within the give
 
 ### API
 
-Lets' start with the `waitUntil` function. It takes up to three parameters, and returns a Promise that will be resolved with the first non-falsy value returned by the predicate.
+Lets' start with the `waitUntil` function. It takes up to two parameters (**deprecated**: up to three), and returns a Promise that will be resolved with the first non-falsy value returned by the predicate.
 
-Parameter | Type | Required | Description
------------- | -------------
-`predicate` | Function | Yes | A function that is expected to return a non-falsy (aka a `'truthy'`) value, or a Promise to return such a value. Hence, *both sync and async functions are supported*.
-`options` | Options object | No; default = 500 ms | Options for the wait algorithm implemented by `waitUntil`, see its properties on the below table. *Deprecated*: timeout in milliseconds.
-`intervalBetweenAttempts` | number | No; default = 50 ms | Deprecated: number of milliseconds between retry attempts. Please use options instead. 
+Parameter | Type | Required | Default | Description
+------------ | ------------- | ------------- | ------------- | -------------
+`predicate` | Function | ✅ Yes | - | A function that is expected to return a non-falsy (aka a `'truthy'`) value, or a Promise to return such a value. Hence, *both sync and async functions are supported*.
+`options` | Options object | 🚫 No | 500 ms | Options for the wait algorithm implemented by `waitUntil`, see its properties on the below table. **Deprecated**: timeout in milliseconds.
+~~intervalBetweenAttempts~~ | number | 🚫 No | 50 ms | **Deprecated parameter**: number of milliseconds between retry attempts. Please use options instead. 
 
-Above, you could see the options param. Here are the available options:
+Above, you could see the options param. Here are the available **options**:
 
-Parameter | Type | Required | Description
------------- | -------------
-`timeout` | number | No; default = 500 ms | Timeout in milliseconds.
-`intervalBetweenAttempts` | number | No; default = 50 ms | Number of milliseconds between retry attempts.
+Parameter | Type | Required | Default | Description
+------------ | ------------- | ------------- | ------------- | -------------
+`timeout` | number | 🚫 No | 500 ms | Timeout in milliseconds.
+`intervalBetweenAttempts` | number | 🚫 No | 50 ms | Number of milliseconds between retry attempts.
+
+### Recipes
+
+#### Waiting for something forever
+
+If you aren't sure how long with a process take, you can use `waitUntil.Forever` (which is a shortcut for [Number.POSITIVE_INFINITY](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/POSITIVE_INFINITY)) as the timeout value:
+
+```ts
+import { waitUntil } from 'async-wait-until';
+
+// ...
+
+const result = waitUntil(() => Date.now() >= new Date('Jan 13, 2022 11:35 am'), {
+  timeout: waitUntil.WAIT_FOREVER, // === Number.POSITIVE_INFINITY
+});
+```
+
+#### Customizing the interval between retries
+
+In addition to the `timeout` option, you can customize the interval between retries:
+
+```ts
+import { waitUntil } from 'async-wait-until';
+
+// ...
+
+const result = waitUntil(() => Date.now() >= new Date('Jan 13, 2022 11:35 am'), {
+  intervalBetweenAttempts: 1000, // Retry every second instead of 50 milliseconds
+});
+```
 
 
 ## 👨‍⚖️👩‍⚖️ License
@@ -213,6 +254,9 @@ Library is shipped "as is" under the MIT License.
 ## 👷‍♂️👷‍♀️ Contributing
 
 Contributions (issues, bug and feature requests, and PRs) are welcome! Please follow the contribution guidelines.
+
+<details>
+<summary>Click for additional information on development dependencies and available commands</summary>
 
 ### Development dependencies
 
@@ -249,5 +293,6 @@ $ npm run build
 #### Generate docs
 
 ```sh
-$ npm run doc
+$ npm run docs
 ```
+</details>

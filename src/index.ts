@@ -115,23 +115,30 @@ const delay = (scheduler: Scheduler, interval: number): Promise<void> =>
   });
 
 /**
- * Default interval between attempts, in milliseconds
- * @private
- * @category Defaults
- */
-const DEFAULT_INTERVAL_BETWEEN_ATTEMPTS_IN_MS = 50;
-/**
- * Default timeout, in milliseconds
- * @private
- * @category Defaults
- */
-const DEFAULT_TIMEOUT_IN_MS = 5000;
-/**
  * Platform-specific scheduler
  * @private
  * @category Defaults
  */
 const SCHEDULER: Scheduler = getScheduler();
+
+/**
+ * Default interval between attempts, in milliseconds
+ * @public
+ * @category Defaults
+ */
+export const DEFAULT_INTERVAL_BETWEEN_ATTEMPTS_IN_MS = 50;
+/**
+ * Default timeout, in milliseconds
+ * @public
+ * @category Defaults
+ */
+export const DEFAULT_TIMEOUT_IN_MS = 5000;
+/**
+ * Timeout that represents infinite wait time
+ * @public
+ * @category Defaults
+ */
+export const WAIT_FOREVER = Number.POSITIVE_INFINITY;
 
 /**
  * Waits for predicate to be truthy and resolves a Promise
@@ -184,12 +191,15 @@ export const waitUntil = <T extends PredicateReturnValue>(
       iteration();
     });
 
-  const timeoutPromise = () =>
-    delay(SCHEDULER, timerTimeout).then(() => {
-      throw new TimeoutError(timerTimeout);
-    });
+  const timeoutPromise =
+    timerTimeout !== WAIT_FOREVER
+      ? () =>
+          delay(SCHEDULER, timerTimeout).then(() => {
+            throw new TimeoutError(timerTimeout);
+          })
+      : undefined;
 
-  return Promise.race([predicatePromise(), timeoutPromise()]);
+  return timeoutPromise != null ? Promise.race([predicatePromise(), timeoutPromise()]) : predicatePromise();
 };
 
 /**
