@@ -6,7 +6,7 @@ coverage/
 docs/
 lint/
 node_modules/
-src/
+src/*
 
 # Configuration files
 .codeclimate.yml
