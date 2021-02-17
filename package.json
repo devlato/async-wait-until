@@ -1,6 +1,6 @@
 {
   "name": "async-wait-until",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Waits for a given predicate callback to return a truthy value and resolves",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -61,7 +61,7 @@
     "url": "https://github.com/devlato/async-wait-until/issues"
   },
   "homepage": "https://github.com/devlato/async-wait-until#readme",
-  "files": ["package.json", "README.md", ".gitignore", ".editorconfig", "src"],
+  "files": ["package.json", "README.md", "LICENSE", "dist/*.js", "dist/*.d.ts"],
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
