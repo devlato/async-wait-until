@@ -76,7 +76,7 @@ const getScheduler = (): Scheduler => {
 
       const cleanUp = (timer: number | NodeJS.Timeout | undefined) => {
         if (timer != null) {
-          typeof timer === 'number' ? window.clearTimeout(timer) : global.clearTimeout(timer);
+          (window != null ? window : global).clearTimeout(timer as number);
         }
 
         scheduledTimer = undefined;
