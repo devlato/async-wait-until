@@ -32,69 +32,36 @@ export class TimeoutError extends Error {
 }
 
 /**
- * Unsupported platform error, which is thrown when the module is used
- * neither from a web browser nor from Node.js
- * @public
- * @class
- * @exception
- * @category Exceptions
- */
-export class UnsupportedPlatformError extends Error {
-  /**
-   * Creates an UnsupportedPlatformError instance
-   * @public
-   */
-  constructor() {
-    super('Unsupported platform');
-
-    Object.setPrototypeOf(this, UnsupportedPlatformError.prototype);
-  }
-}
-
-/**
  * A utility function for cross-platform type-safe scheduling
  * @private
  * @returns Returns a proper scheduler instance depending on the current environment
- * @throws [[UnsupportedPlatformError]] If the current environment is not supported, e.g. it's neither a web browser nor Node.js
  * @throws Error
  * @category Utilities
  */
-const getScheduler = (): Scheduler => {
-  if (
-    // Not a web browser
-    window == null ||
-    // Not Node.js
-    module == null ||
-    global == null
-  ) {
-    throw new UnsupportedPlatformError();
-  }
+const getScheduler = (): Scheduler => ({
+  schedule: (fn, interval) => {
+    let scheduledTimer: number | NodeJS.Timeout | undefined = undefined;
 
-  return {
-    schedule: (fn, interval) => {
-      let scheduledTimer: number | NodeJS.Timeout | undefined = undefined;
+    const cleanUp = (timer: number | NodeJS.Timeout | undefined) => {
+      if (timer != null) {
+        clearTimeout(timer as number);
+      }
 
-      const cleanUp = (timer: number | NodeJS.Timeout | undefined) => {
-        if (timer != null) {
-          (window != null ? window : global).clearTimeout(timer as number);
-        }
+      scheduledTimer = undefined;
+    };
 
-        scheduledTimer = undefined;
-      };
+    const iteration = () => {
+      cleanUp(scheduledTimer);
+      fn();
+    };
 
-      const iteration = () => {
-        cleanUp(scheduledTimer);
-        fn();
-      };
+    scheduledTimer = setTimeout(iteration, interval);
 
-      scheduledTimer = (window != null ? window : global).setTimeout(iteration, interval);
-
-      return {
-        cancel: () => cleanUp(scheduledTimer),
-      };
-    },
-  };
-};
+    return {
+      cancel: () => cleanUp(scheduledTimer),
+    };
+  },
+});
 
 /**
  * Delays the execution by the given interval, in milliseconds
