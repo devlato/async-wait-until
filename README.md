@@ -26,7 +26,7 @@ It ships with a [UMD](https://github.com/umdjs/umd) bundle by default (which wor
 import { waitUntil } from 'async-wait-until';
 
 // ...
-await waitUntil(() => Date.now() >= document.querySelector('#hey') != null);
+await waitUntil(() => document.querySelector('#hey') != null);
 ```
 
 <details>
