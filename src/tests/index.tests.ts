@@ -1,5 +1,10 @@
 import { waitUntil, TimeoutError, DEFAULT_INTERVAL_BETWEEN_ATTEMPTS_IN_MS, WAIT_FOREVER } from '../';
 
+const sleep = <T>(delayInMs: number): Promise<T> =>
+  new Promise<T>((resolve) => {
+    setTimeout(resolve, delayInMs);
+  });
+
 describe('waitUntil', () => {
   describe('> New behaviour', () => {
     it('Calls the predicate and resolves with a truthy result', async () => {
@@ -48,6 +53,24 @@ describe('waitUntil', () => {
 
       expect(predicate).toHaveBeenCalled();
       expect(result).toEqual({ a: 10, b: 20 });
+    });
+
+    it('Stops executing the predicate after timing out', async () => {
+      expect.assertions(5);
+
+      const initialTime = Date.now();
+      const predicate = jest.fn(() => Date.now() - initialTime > 200);
+      expect(predicate).not.toHaveBeenCalled();
+      try {
+        await waitUntil(predicate, { timeout: 200 });
+      } catch (e) {
+        expect(predicate).toHaveBeenCalled();
+        const callNumber = predicate.mock.calls.length;
+        expect(e).toBeInstanceOf(TimeoutError);
+        expect(e.toString()).toEqual('Error: Timed out after waiting for 200 ms');
+        await sleep(400);
+        expect(predicate).toHaveBeenCalledTimes(callNumber);
+      }
     });
 
     it('Rejects with a timeout error when timed out', async () => {
@@ -179,6 +202,24 @@ describe('waitUntil', () => {
       } catch (e) {
         expect(e).toBeInstanceOf(TimeoutError);
         expect(e.toString()).toEqual('Error: Timed out after waiting for 200 ms');
+      }
+    });
+
+    it('Stops executing the predicate after timing out', async () => {
+      expect.assertions(5);
+
+      const initialTime = Date.now();
+      const predicate = jest.fn(() => Date.now() - initialTime > 200);
+      expect(predicate).not.toHaveBeenCalled();
+      try {
+        await waitUntil(predicate, 200);
+      } catch (e) {
+        expect(predicate).toHaveBeenCalled();
+        const callNumber = predicate.mock.calls.length;
+        expect(e).toBeInstanceOf(TimeoutError);
+        expect(e.toString()).toEqual('Error: Timed out after waiting for 200 ms');
+        await sleep(400);
+        expect(predicate).toHaveBeenCalledTimes(callNumber);
       }
     });
 

@@ -140,9 +140,15 @@ export const waitUntil = <T extends PredicateReturnValue>(
       }
     });
 
+  let isTimedOut = false;
+
   const predicatePromise = (): Promise<T> =>
     new Promise<T>((resolve, reject) => {
       const iteration = () => {
+        if (isTimedOut) {
+          return;
+        }
+
         runPredicate()
           .then((result) => {
             if (result) {
@@ -162,6 +168,7 @@ export const waitUntil = <T extends PredicateReturnValue>(
     timerTimeout !== WAIT_FOREVER
       ? () =>
           delay(SCHEDULER, timerTimeout).then(() => {
+            isTimedOut = true;
             throw new TimeoutError(timerTimeout);
           })
       : undefined;
