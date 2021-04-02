@@ -160,7 +160,7 @@ const doOutThing = async () => {
     { timeout: 10000 },
   );
   // A colour of triumph
-  divNode.style.backgroundColor = 'rgba(ff, 0, 0, 0.5)';
+  divNode.style.backgroundColor = 'rgba(255, 0, 0, 0.5)';
 };
 ```
 
@@ -181,7 +181,7 @@ const doOurThing = async () => {
     const predicate = () => window.document.body.querySelector('div.spooky-spooky-skeleton');
     const divNode = await waitUntil(predicate, { timeout: 10000 });
     
-    divNode.style.backgroundColor = 'rgba(ff, 0, 0, 0.5)';
+    divNode.style.backgroundColor = 'rgba(255, 0, 0, 0.5)';
   } catch (e) {
     if (e instanceof TimeoutError) {
       // Unfortunately, 10 seconds have passed but we haven't detected the `<div />`
