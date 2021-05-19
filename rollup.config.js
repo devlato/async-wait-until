@@ -39,7 +39,7 @@ export default {
     },
     {
       ...OUTPUT_CONFIG,
-      file: 'dist/es.js',
+      file: 'dist/index.esm.js',
       format: 'es',
     },
     {
