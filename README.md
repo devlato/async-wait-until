@@ -39,7 +39,12 @@ await waitUntil(() => document.querySelector('#hey') != null);
   ```
 * [ES Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#introducing_an_example):
   ```js
-  import { waitUntil } from 'async-wait-until/dist/es.js';
+  import { waitUntil } from 'async-wait-until';
+  // ...
+  ```
+  or
+  ```js
+  import { waitUntil } from 'async-wait-until/dist/index.esm.js';
   // ...
   ```
 * [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD):
