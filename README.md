@@ -210,14 +210,14 @@ Lets' start with the `waitUntil` function. It takes up to two parameters (**depr
 Parameter | Type | Required | Default | Description
 ------------ | ------------- | ------------- | ------------- | -------------
 `predicate` | Function | ✅ Yes | - | A function that is expected to return a non-falsy (aka a `'truthy'`) value, or a Promise to return such a value. Hence, *both sync and async functions are supported*.
-`options` | Options object | 🚫 No | 500 ms | Options for the wait algorithm implemented by `waitUntil`, see its properties on the below table. **Deprecated**: timeout in milliseconds.
+`options` | Options object | 🚫 No | 5000 ms | Options for the wait algorithm implemented by `waitUntil`, see its properties on the below table. **Deprecated**: timeout in milliseconds.
 ~~intervalBetweenAttempts~~ | number | 🚫 No | 50 ms | **Deprecated parameter**: number of milliseconds between retry attempts. Please use options instead. 
 
 Above, you could see the options param. Here are the available **options**:
 
 Parameter | Type | Required | Default | Description
 ------------ | ------------- | ------------- | ------------- | -------------
-`timeout` | number | 🚫 No | 500 ms | Timeout in milliseconds.
+`timeout` | number | 🚫 No | 5000 ms | Timeout in milliseconds.
 `intervalBetweenAttempts` | number | 🚫 No | 50 ms | Number of milliseconds between retry attempts.
 
 ### Recipes
