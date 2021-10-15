@@ -29,7 +29,7 @@ jobs:
       - name: automerge
         uses: 'pascalgn/automerge-action@v0.14.3'
         env:
-          GITHUB_TOKEN: '${{ secrets.GH_PAT }}'
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           MERGE_LABELS: 'Ready to merge'
           MERGE_METHOD: rebase
           MERGE_COMMIT_MESSAGE: 'Merge ${{ github.ref }} into master'
