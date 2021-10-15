@@ -115,7 +115,7 @@ export const WAIT_FOREVER = Number.POSITIVE_INFINITY;
  * @param intervalBetweenAttempts *(deprecated)* Interval to wait for between attempts, optional, *50 ms* by default
  * @returns A promise to return the given predicate's result, once it resolves with a truthy value
  * @template T Result type for the truthy value returned by the predicate
- * @throws [[TimeoutError]] An exception throws when the specified timeout interval passes but the predicate doesn't return a truthy value
+ * @throws [[TimeoutError]] An exception thrown when the specified timeout interval passes but the predicate doesn't return a truthy value
  * @throws Error
  * @see [[TruthyValue]]
  * @see [[FalsyValue]]
@@ -245,7 +245,7 @@ type ScheduleFn = <T>(callback: (...args: T[]) => void, interval: number) => Sch
  */
 type CancelScheduledFn = () => void;
 /**
- * A stateful abstraction over Node.js & web browser timers, that cancels the scheduled task
+ * A stateful abstraction over Node.js & web browser timers that cancels the scheduled task
  * @private
  * @category Common Types
  */
@@ -256,7 +256,7 @@ type ScheduleCanceler = {
   cancel: CancelScheduledFn;
 };
 /**
- * A stateful abstraction over Node.js & web browser timers, that schedules a task
+ * A stateful abstraction over Node.js & web browser timers that schedules a task
  * @private
  * @category Common Types
  */

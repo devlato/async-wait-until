@@ -20,7 +20,7 @@ The package is available on [npm](https://npmjs.org/package/async-wait-until):
 $ npm install --save async-wait-until
 ```
 
-It ships with a [UMD](https://github.com/umdjs/umd) bundle by default (which works well as-is on Node.js and web browsers), but bundles for other module systems are also available in the package's `dist/` folder.
+It ships with an [UMD](https://github.com/umdjs/umd) bundle by default (which works well as-is on Node.js and web browsers), but bundles for other module systems are also available in the package's `dist/` folder.
 
 ```ts
 import { waitUntil } from 'async-wait-until';
@@ -158,7 +158,7 @@ const doOutThing = async () => {
   // Yup! Easy right?
   const divNode = await waitUntil(
     // Here, we specify a function that will be repeatedly called from time to time
-    // Let's call this kind of functions a `predicate`
+    // Let's call this kind of function a `predicate`
     () => window.document.body.querySelector('div.spooky-spooky-skeleton'),
     // Here, we can specify a timeout in milliseconds. Once it passes, 
     // we'll stop waiting and throw an exception
@@ -171,7 +171,7 @@ const doOutThing = async () => {
 
 However, we aren't 100% sure that the `<div />` will be added within 10 seconds. What will happen if 10 seconds have passed and the `<div />` node still isn't there?
 
-From the above code, it's clear that our `'predicate'` function (or simply `'preddcate'`) won't return the DOM node. So what `waitUntil` will do in that case is it will throw a `TimeoutException` (also exported from the library so you can handle it).
+From the above code, it's clear that our `'predicate'` function (or simply `'predicate'`) won't return the DOM node. So what `waitUntil` will do in that case is it will throw a `TimeoutException` (also exported from the library so you can handle it).
 
 ```js
 import { doTheDivThing } from './a-sneaky-module.js';
@@ -190,10 +190,10 @@ const doOurThing = async () => {
   } catch (e) {
     if (e instanceof TimeoutError) {
       // Unfortunately, 10 seconds have passed but we haven't detected the `<div />`
-      // If we had a UI, we could show an error there or allow user to retry
+      // If we had a UI, we could show an error there or allow the user to retry
       alert('No <div /> have been detected unfortunately');
     } else {
-      // Some another error, most likely thrown from the predicate function.
+      // Some other error, most likely thrown from the predicate function.
       alert('Unknown error occurred');
       console.error(e);
     }    
@@ -205,7 +205,7 @@ So, summing up the above, the predicate will run again and again within the give
 
 ### API
 
-Lets' start with the `waitUntil` function. It takes up to two parameters (**deprecated**: up to three), and returns a Promise that will be resolved with the first non-falsy value returned by the predicate.
+Let's start with the `waitUntil` function. It takes up to two parameters (**deprecated**: up to three), and returns a Promise that will be resolved with the first non-falsy value returned by the predicate.
 
 Parameter | Type | Required | Default | Description
 ------------ | ------------- | ------------- | ------------- | -------------
@@ -213,7 +213,7 @@ Parameter | Type | Required | Default | Description
 `options` | Options object | 🚫 No | 5000 ms | Options for the wait algorithm implemented by `waitUntil`, see its properties on the below table. **Deprecated**: timeout in milliseconds.
 ~~intervalBetweenAttempts~~ | number | 🚫 No | 50 ms | **Deprecated parameter**: number of milliseconds between retry attempts. Please use options instead. 
 
-Above, you could see the options param. Here are the available **options**:
+Above, you can see the options param. Here are the available **options**:
 
 Parameter | Type | Required | Default | Description
 ------------ | ------------- | ------------- | ------------- | -------------
@@ -224,7 +224,7 @@ Parameter | Type | Required | Default | Description
 
 #### Waiting for something forever
 
-If you aren't sure how long with a process take, you can use `waitUntil.Forever` (which is a shortcut for [Number.POSITIVE_INFINITY](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/POSITIVE_INFINITY)) as the timeout value:
+If you aren't sure how long a process will take, you can use `waitUntil.Forever` (which is a shortcut for [Number.POSITIVE_INFINITY](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/POSITIVE_INFINITY)) as the timeout value:
 
 ```ts
 import { waitUntil, WAIT_FOREVER } from 'async-wait-until';
