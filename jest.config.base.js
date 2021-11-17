@@ -7,7 +7,7 @@ module.exports = {
   clearMocks: true,
   resetMocks: true,
   resetModules: true,
-  collectCoverage: true,
+  collectCoverage: false,
   displayName: 'async-wait-until',
   maxConcurrency: os.cpus().length,
   testURL: 'http://localhost',

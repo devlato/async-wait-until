@@ -7,11 +7,14 @@ module.exports = {
   excludeInternal: false,
   excludePrivate: false,
   excludeProtected: false,
-  highlightTheme: 'github-light',
   name: `Documentation for ${pckg.name} v${pckg.version}`,
   categorizeByGroup: false,
   defaultCategory: pckg.name,
   categoryOrder: [pckg.name, 'Defaults', 'Exceptions', 'Common Types', 'Utilities'],
   gitRevision: pckg.version,
-  listInvalidSymbolLinks: true,
+  validation: {
+    invalidLink: true,
+  },
+  gaID: process.env.GA_ID,
+  gaSite: process.env.GA_SITE || 'auto',
 };

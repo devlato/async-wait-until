@@ -201,7 +201,7 @@ export type TruthyValue =
   | Record<string, unknown>
   | unknown[]
   | symbol
-  | ((...args: unknown[]) => unknown)
+  | ((...args: unknown[]) => unknown) // eslint-disable-line no-unused-vars
   | Exclude<number, 0>
   | Exclude<string, ''>
   | true;
@@ -236,7 +236,7 @@ export type Options = {
  * @throws Error
  * @category Common Types
  */
-type ScheduleFn = <T>(callback: (...args: T[]) => void, interval: number) => ScheduleCanceler;
+type ScheduleFn = <T>(callback: (...args: T[]) => void, interval: number) => ScheduleCanceler; // eslint-disable-line no-unused-vars
 /**
  * A function that cancels the previously scheduled callback's execution
  * @private

@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.4.0
       - name: Install dependencies
         run: npm ci --ignore-scripts
       - name: Lint the codebase
@@ -21,20 +21,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.4.0
       - name: Install dependencies
         run: npm ci --ignore-scripts
       - name: Run tests
         run: npm run test:ci
       - name: Run and upload coverage
-        uses: paambaati/codeclimate-action@v2.7.5
+        uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: '${{ secrets.CC_TEST_REPORTER_ID }}'
         with:
           coverageCommand: npm run test:ci
           debug: true
       - name: Upload coverage
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2.2.4
         with:
           name: test_coverage
           path: coverage
@@ -43,28 +43,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.4.0
       - name: Install dependencies
         run: npm ci --ignore-scripts
       - name: Build code
         run: npm run build:ci
       - name: Upload the dist folder
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2.2.4
         with:
           name: dist
           path: dist
+  integration_tests:
+    name: Run integration tests
+    runs-on: ubuntu-latest
+    needs: build_code
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.4.0
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+      - name: Run integration tests
+        run: npm run test:integration:ci
   build_docs:
     name: Build Docs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.4.0
       - name: Install dependencies
         run: npm ci --ignore-scripts
       - name: Build storybook
         run: npm run docs:ci
       - name: Upload the docs
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2.2.4
         with:
           name: docs
           path: docs
@@ -74,7 +85,7 @@ jobs:
     needs: [lint, test_and_report_coverage, build_code, build_docs]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.4.0
       - name: Install dependencies
         run: npm ci --ignore-scripts
       - name: Maybe generate tag

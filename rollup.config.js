@@ -1,4 +1,4 @@
-import typescript from 'rollup-plugin-typescript2';
+import typescript from '@rollup/plugin-typescript';
 import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 import pckg from './package.json';
@@ -29,35 +29,39 @@ export default {
     },
     {
       ...OUTPUT_CONFIG,
+      exports: 'named',
       file: 'dist/amd.js',
       format: 'amd',
     },
     {
       ...OUTPUT_CONFIG,
+      exports: 'named',
       file: 'dist/commonjs.js',
       format: 'cjs',
     },
     {
       ...OUTPUT_CONFIG,
+      exports: 'named',
       file: 'dist/index.esm.js',
       format: 'es',
     },
     {
       ...OUTPUT_CONFIG,
+      exports: 'named',
       file: 'dist/iife.js',
       format: 'iife',
       name: 'asyncWaitUntil',
     },
     {
       ...OUTPUT_CONFIG,
+      exports: 'named',
       file: 'dist/systemjs.js',
       format: 'system',
     },
   ],
   plugins: [
     typescript({
-      clean: true,
-      rollupCommonJSResolveHack: true,
+      tsconfig: './tsconfig.json',
     }),
     commonjs({ extensions: ['.js', '.ts'] }),
     ...(IS_PRODUCTION ? [terser()] : []),
