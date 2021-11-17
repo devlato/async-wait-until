@@ -20,8 +20,6 @@ checks:
     enabled: true
     config:
       threshold: 64
-  similar-code:
-    enabled: false
 exclude_patterns:
   - '.git/'
   - '.github/'
@@ -31,6 +29,7 @@ exclude_patterns:
   - 'docs/'
   - 'node_modules/'
   - 'src/tests/'
+  - 'src/utils/create_tests.ts'
 plugins:
   eslint:
     enabled: false
