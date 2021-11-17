@@ -20,6 +20,8 @@ checks:
     enabled: true
     config:
       threshold: 64
+  similar-code:
+    enabled: false
 exclude_patterns:
   - '.git/'
   - '.github/'
