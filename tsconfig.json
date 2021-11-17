@@ -13,7 +13,7 @@
     "noUnusedParameters": true,
     "outDir": "dist",
     "declaration": true,
-    "declarationDir": "dist",
+    "declarationDir": ".",
     "preserveConstEnums": false,
     "pretty": true,
     "removeComments": true,

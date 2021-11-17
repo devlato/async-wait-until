@@ -14,13 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.4.0
       - name: Generate changelog
         run: |
           echo "pr_body=$(git log --oneline master..${{ github.sha }})" >> $GITHUB_ENV
           echo "PR:\n${pr_body}"
       - name: Create a PR
-        uses: repo-sync/pull-request@v2.5
+        uses: repo-sync/pull-request@v2.6.1
         with:
           source_branch: ''
           destination_branch: 'master'

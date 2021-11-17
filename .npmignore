@@ -16,7 +16,7 @@ src/*
 .gitignore
 .npmignore
 CODEOWNERS
-jest.config.js
+jest.config.unit.js
 package-lock.json
 prettier.config.js
 rollup.config.js
