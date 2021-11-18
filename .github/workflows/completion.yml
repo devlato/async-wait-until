@@ -6,11 +6,6 @@ on:
       - labeled
       - unlabeled
       - synchronize
-      - opened
-      - edited
-      - ready_for_review
-      - reopened
-      - unlocked
   pull_request_review:
     types:
       - submitted
@@ -18,6 +13,11 @@ on:
     types:
       - completed
   status: {}
+  workflow_run:
+    workflows:
+      - Label Approved
+    types:
+      - completed
 
 jobs:
   maybe_merge:
@@ -27,7 +27,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.4.0
       - name: automerge
-        uses: 'pascalgn/automerge-action@v0.14.3'
+        uses: pascalgn/automerge-action@v0.14.3
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           MERGE_LABELS: '${{ secrets.NEW_PR_AUTOMERGE_LABEL }}'
