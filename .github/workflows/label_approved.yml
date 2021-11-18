@@ -10,6 +10,6 @@ jobs:
       - name: Label when approved
         uses: pullreminders/label-when-approved-action@1.0.5
         env:
-          APPROVALS: '1'
+          APPROVALS: 1
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-          ADD_LABEL: 'Ready to merge'
+          ADD_LABEL: '${{ secrets.NEW_PR_AUTOMERGE_LABEL }}'

@@ -10,29 +10,47 @@ on:
 
 jobs:
   create_pull_request:
-    name: Create or update a PR
+    name: Create or update a pull request
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2.4.0
+        with:
+          fetch-depth: 0
       - name: Generate changelog
+        id: generate-changelog
         run: |
-          echo "pr_body=$(git log --oneline master..${{ github.sha }})" >> $GITHUB_ENV
-          echo "PR:\n${pr_body}"
-      - name: Create a PR
+          CURRENT_BRANCH="${GITHUB_SHA}"
+          pr_title="$( git log --reverse --format='%s' "origin/${MAIN_BRANCH}".."${CURRENT_BRANCH}" | head -n 1 )"
+          pr_changelog="$( git log --reverse --format='* (%h) %s (%an)' "origin/${MAIN_BRANCH}".."${CURRENT_BRANCH}" )"
+          pr_description=$( echo "## ${pr_title}"; echo; echo; echo "### Changelog"; echo; echo "${pr_changelog}" )
+
+          echo "PR_TITLE<<EOF" >> ${GITHUB_ENV}
+          echo "${pr_title}" >> ${GITHUB_ENV}
+          echo 'EOF' >> ${GITHUB_ENV}
+
+          echo "PR_DESCRIPTION<<EOF" >> ${GITHUB_ENV}
+          echo "${pr_description}" >> ${GITHUB_ENV}
+          echo 'EOF' >> ${GITHUB_ENV}
+        env:
+          MAIN_BRANCH: '${{ secrets.NEW_PR_DEFAULT_DESTINATION_BRANCH }}'
+      - name: Create a pull request
         uses: repo-sync/pull-request@v2.6.1
         with:
           source_branch: ''
-          destination_branch: 'master'
-          pr_title: 'Pulling ${{ github.ref }} into master'
-          pr_body: '${{ env.pr_body }}'
-          pr_reviewer: devlato
-          pr_assignee: devlato
-          pr_label: '2.0.0'
-          pr_milestone: '2.0.0'
+          destination_branch: '${{ secrets.NEW_PR_DEFAULT_DESTINATION_BRANCH }}'
+          pr_title: '${{ env.PR_TITLE }}'
+          pr_body: '${{ env.PR_DESCRIPTION }}'
+          pr_reviewer: '${{ secrets.NEW_PR_DEFAULT_REVIEWERS }}'
+          pr_assignee: '${{ secrets.NEW_PR_DEFAULT_ASSIGNEES }}'
+          pr_label: '${{ secrets.NEW_PR_DEFAULT_LABELS }}'
+          pr_milestone: '${{ secrets.NEW_PR_DEFAULT_MILESTONE }}'
           github_token: '${{ secrets.GITHUB_TOKEN }}'
       - name: Update pull request
-        uses: kt3k/update-pr-description@v1.0.0
+        # TODO kt3k/update-pr-description@v1.0.4 when it's released
+        #  https://github.com/kt3k/update-pr-description/pull/7
+        uses: devlato/update-pr-description@patch-3
         with:
-          pr_body: '${{ env.pr_body }}'
+          pr_title: '${{ env.PR_TITLE }}'
+          pr_body: '${{ env.PR_DESCRIPTION }}'
           github_token: '${{ secrets.GITHUB_TOKEN }}'
