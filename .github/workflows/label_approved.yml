@@ -1,6 +1,17 @@
 name: Label Approved
 
-on: pull_request_review
+on:
+  pull_request_review: {}
+  pull_request:
+    types:
+      - ready_for_review
+      - synchronize
+  push:
+    branches-ignore:
+      - master
+      - gh-pages
+    tags-ignore:
+      - '*'
 
 jobs:
   label_when_approved:
