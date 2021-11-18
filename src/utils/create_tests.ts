@@ -5,13 +5,14 @@ const sleep = <T>(delayInMs: number): Promise<T> =>
     setTimeout(resolve, delayInMs);
   });
 
-jest.setTimeout(30_000);
+const DEFAULT_TEST_TIMEOUT = 10_000;
 
 export const createTests = ({
   waitUntil,
   TimeoutError,
   WAIT_FOREVER,
   DEFAULT_INTERVAL_BETWEEN_ATTEMPTS_IN_MS,
+  TEST_TIMEOUT = DEFAULT_TEST_TIMEOUT,
 }: {
   /* eslint-disable no-unused-vars */
   waitUntil: <T extends PredicateReturnValue>(
@@ -24,8 +25,11 @@ export const createTests = ({
   };
   WAIT_FOREVER: number;
   DEFAULT_INTERVAL_BETWEEN_ATTEMPTS_IN_MS: number;
+  TEST_TIMEOUT?: number;
   /* eslint-enable no-unused-vars */
 }) => {
+  jest.setTimeout(TEST_TIMEOUT);
+
   describe('waitUntil', () => {
     describe('> New behaviour', () => {
       it('Calls the predicate and resolves with a truthy result', async () => {
