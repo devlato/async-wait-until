@@ -110,7 +110,7 @@ jobs:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           GITHUB_PAT: '${{ secrets.GH_PAT }}'
   publish:
-    needs: [lint, test, build_code, build_docs]
+    needs: [lint, test, build_code, build_docs, integration_tests]
     name: Publish to npm
     runs-on: ubuntu-latest
     steps:
