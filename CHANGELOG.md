@@ -1,7 +1,9 @@
 ## v2.0.10
 * (668b957) Create codeql-analysis.yml (#25) (Denis Tokarev)
 * (8b06c25) Update CI to publish only when integration tests has passed (#26) (github-actions[bot])
-* (5db0cad) Bump version to 2.0.10 (Denis Tokarev)
+* (af4e364) Bump version to 2.0.10 (Denis Tokarev)
+* (ac4486b) Update the project changelog (github-actions[bot])
+* (27ef151) Fix tests (Denis Tokarev)
 
 ## v2.0.9
 * (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
@@ -42,7 +44,37 @@
 * (38ebf94) Further get rid of global variables (#11) (Denis Tokarev)
 
 ## v2.0.2
+
+## v2.0.10
 * (8aa1f79) Fix issue w/wrong setTimeout call (#10) (github-actions[bot])
+* (a1cc16f) Further get rid of global variables (Denis Tokarev)
+* (38ebf94) Further get rid of global variables (#11) (Denis Tokarev)
+* (16cbe84) Update README -> 2.0.4 (#12) (github-actions[bot])
+* (0ae085e) Disable secret scan (#13) (github-actions[bot])
+* (bfea826) Fix #14 (Denis Tokarev)
+* (f6397ea) Increase allowed complexity (Denis Tokarev)
+* (2ef43fa) Fix #16: add 'module' to package.json, manually fix dependabot alerts (#17) (github-actions[bot])
+* (43d46df) Update README (#18) (github-actions[bot])
+* (dbf7cdf) Aaa (Denis Tokarev)
+* (2a51437) Fix timeout default value in README (#20) (Simon Smith)
+* (7c72d54) Upgrade automerge action (Denis Tokarev)
+* (5b1fa8f) Fix workflows (Denis Tokarev)
+* (ef0219c) GH_PAT -> GITHUB_TOKEN (Denis Tokarev)
+* (7e7178d) Adjust spelling in readme and index (#21) (Lukasz Kokot)
+* (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
+* (7763e70) Update scripts (Denis Tokarev)
+* (d151065) Fix (Denis Tokarev)
+* (87d3f35) Update codeclimate config (Denis Tokarev)
+* (208bd20) Update codeclimate config (Denis Tokarev)
+* (71f8658) Update the CI configuration to properly set PR bodies (Denis Tokarev)
+* (154f35e) Set test timeout to 10s (Denis Tokarev)
+* (d47ce0c) Update auto-labeling (Denis Tokarev)
+* (8641a51) Add re-labeling (Denis Tokarev)
+* (4d3d2cc) Auto-release and auto-publish daily when possible (#24) (github-actions[bot])
+* (668b957) Create codeql-analysis.yml (#25) (Denis Tokarev)
+* (8b06c25) Update CI to publish only when integration tests has passed (#26) (github-actions[bot])
+* (af4e364) Bump version to 2.0.10 (Denis Tokarev)
+* (ac4486b) Update the project changelog (github-actions[bot])
 
 ## v2.0.1
 * (b03c05c) Set theme jekyll-theme-slate (Denis Tokarev)
