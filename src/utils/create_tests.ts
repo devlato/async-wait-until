@@ -183,7 +183,7 @@ export const createTests = ({
         const initialTime = Date.now();
         const predicate = jest.fn(() => (Date.now() - initialTime > 1000 ? { a: 10, b: 20 } : false));
         expect(predicate).not.toHaveBeenCalled();
-        const result = await waitUntil(predicate, 1500, 500);
+        const result = await waitUntil(predicate, 2000, 500);
 
         expect(predicate.mock.calls.length < Math.floor(1500 / DEFAULT_INTERVAL_BETWEEN_ATTEMPTS_IN_MS) - 1).toBe(true);
         expect(result).toEqual({ a: 10, b: 20 });
