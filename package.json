@@ -1,6 +1,6 @@
 {
   "name": "async-wait-until",
-  "version": "2.0.10",
+  "version": "2.0.12",
   "description": "Waits for a given predicate callback to return a truthy value and resolves",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -27,7 +27,7 @@
     "format": "cross-env NODE_ENV=production eslint -c .eslintrc.js --fix .",
     "clean": "npm run lint:clean & npm run test:clean & npm run build:clean & npm run docs:clean & wait",
     "release": "npm run lint:ci && npm run test:ci && npm run build:ci && npm run test:integration && npm run docs:ci",
-    "prepublish": "npm run clean && npm run release"
+    "prepublishOnly": "npm run clean && npm run release"
   },
   "repository": {
     "type": "git",

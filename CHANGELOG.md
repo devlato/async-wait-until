@@ -1,9 +1,11 @@
-## v2.0.10
+## v2.0.12
 * (668b957) Create codeql-analysis.yml (#25) (Denis Tokarev)
 * (8b06c25) Update CI to publish only when integration tests has passed (#26) (github-actions[bot])
 * (af4e364) Bump version to 2.0.10 (Denis Tokarev)
 * (ac4486b) Update the project changelog (github-actions[bot])
-* (27ef151) Fix tests (Denis Tokarev)
+* (9d6f73d) Fix tests (#28) (github-actions[bot])
+* (e9ec45b) Fix #29 (Denis Tokarev)
+* (5b8ba34) Bump to 2.0.12 (Denis Tokarev)
 
 ## v2.0.9
 * (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
