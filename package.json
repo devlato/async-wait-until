@@ -12,7 +12,7 @@
     "lint": "cross-env NODE_ENV=production eslint -c .eslintrc.js .",
     "lint:clean": "cross-env NODE_ENV=production rimraf lint",
     "test": "cross-env NODE_ENV=test jest --config=jest.config.unit.js",
-    "test:integration": "cross-env NODE_ENV=test jest --config=jest.config.integration.js",
+    "test:integration": "cross-env NODE_ENV=test jest --config=jest.config.integration.js --runInBand",
     "test:clean": "cross-env NODE_ENV=production rimraf coverage",
     "build": "cross-env NODE_ENV=production rollup -c rollup.config.js",
     "build:clean": "cross-env NODE_ENV=production rimraf dist",
