@@ -8,6 +8,7 @@
 * (02e2209) Update the project changelog (github-actions[bot])
 * (2de3448) feat/fix: Fix failing test cases in example.test.j (sweep-ai[bot])
 * (c88971c) feat: Updated package.json (sweep-ai[bot])
+* (ae995ae) Update the project changelog (github-actions[bot])
 
 ## v2.0.9
 * (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
