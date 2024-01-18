@@ -11,7 +11,7 @@
     "spellcheck": "cross-env NODE_ENV=production write-good *.md",
     "lint": "cross-env NODE_ENV=production eslint -c .eslintrc.js .",
     "lint:clean": "cross-env NODE_ENV=production rimraf lint",
-    "test": "cross-env NODE_ENV=test jest --config=jest.config.unit.js",
+    "test": "cross-env NODE_ENV=test jest",
     "test:integration": "cross-env NODE_ENV=test jest --config=jest.config.integration.js",
     "test:clean": "cross-env NODE_ENV=production rimraf coverage",
     "build": "cross-env NODE_ENV=production rollup -c rollup.config.js",
@@ -20,14 +20,14 @@
     "docs:view": "npm run docs && serve -p 3000 docs",
     "docs:clean": "cross-env NODE_ENV=production rimraf docs",
     "lint:ci": "npm run lint:clean && cross-env NODE_ENV=production eslint -c .eslintrc.js -o lint/report.log .",
-    "test:ci": "npm run test:clean && npm run test",
+    "test-ci": "npm run test:clean && npm run test",
     "test:integration:ci": "npm run test:clean && npm run test:integration",
     "build:ci": "npm run build:clean && npm run build",
     "docs:ci": "npm run docs:clean && npm run docs",
     "format": "cross-env NODE_ENV=production eslint -c .eslintrc.js --fix .",
     "clean": "npm run lint:clean & npm run test:clean & npm run build:clean & npm run docs:clean & wait",
-    "release": "npm run lint:ci && npm run test:ci && npm run build:ci && npm run test:integration && npm run docs:ci",
-    "prepublishOnly": "npm run clean && npm run release"
+    "build-ci": "npm run lint:ci && npm run test:ci && npm run build:ci && npm run test:integration && npm run docs:ci",
+    "prepublishOnly": "npm run build-ci"
   },
   "repository": {
     "type": "git",
