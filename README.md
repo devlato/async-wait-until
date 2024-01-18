@@ -275,6 +275,8 @@ Contributions (issues, bug and feature requests, and PRs) are welcome! Please fo
 
 ```sh
 $ npm test
+
+- $ npm install
 ```
 
 #### Lint:
