@@ -5,6 +5,8 @@
 * (ac4486b) Update the project changelog (github-actions[bot])
 * (9d6f73d) Fix tests (#28) (github-actions[bot])
 * (83482cc) Fix #29 (#30) (github-actions[bot])
+* (0a3f2dd) Update the project changelog (github-actions[bot])
+* (678c508) feat: Updated package.json (sweep-ai[bot])
 
 ## v2.0.9
 * (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
