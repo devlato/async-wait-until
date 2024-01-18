@@ -1,12 +1,22 @@
 ## v2.0.12
+* (9d6f73d) Fix tests (#28) (github-actions[bot])
+* (83482cc) Fix #29 (#30) (github-actions[bot])
+* (9d6f73d) Fix tests (#28) (github-actions[bot])
+* (83482cc) Fix #29 (#30) (github-actions[bot])
+* (9d6f73d) Fix tests (#28) (github-actions[bot])
+* (83482cc) Fix #29 (#30) (github-actions[bot])
+* (9d6f73d) Fix tests (#28) (github-actions[bot])
+* (83482cc) Fix #29 (#30) (github-actions[bot])
+* (9d6f73d) Fix tests (#28) (github-actions[bot])
+* (83482cc) Fix #29 (#30) (github-actions[bot])
+* (9d6f73d) Fix tests (#28) (github-actions[bot])
+* (83482cc) Fix #29 (#30) (github-actions[bot])
 * (668b957) Create codeql-analysis.yml (#25) (Denis Tokarev)
 * (8b06c25) Update CI to publish only when integration tests has passed (#26) (github-actions[bot])
 * (af4e364) Bump version to 2.0.10 (Denis Tokarev)
 * (ac4486b) Update the project changelog (github-actions[bot])
 * (9d6f73d) Fix tests (#28) (github-actions[bot])
 * (83482cc) Fix #29 (#30) (github-actions[bot])
-* (0a3f2dd) Update the project changelog (github-actions[bot])
-* (678c508) feat: Updated package.json (sweep-ai[bot])
 
 ## v2.0.9
 * (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
@@ -158,6 +168,6 @@
 * (c0ab7df) [*] Update README (devlato)
 
 ## v1.0.1
-* (95c3bab) [*] Fix package name (devlato)
-
-## v1.0.0
+## v2.0.12
+* (9d6f73d) Fix tests (#28) (github-actions[bot])
+* (83482cc) Fix #29 (#30) (github-actions[bot])
