@@ -9,6 +9,8 @@
 * (50d35b1) feat: Updated package.json (sweep-ai[bot])
 * (5e7cadb) Update the project changelog (github-actions[bot])
 * (cb81d3b) feat: Updated CHANGELOG.md (sweep-ai[bot])
+* (80cc5d0) Update the project changelog (github-actions[bot])
+* (6d3d513) feat: Updated README.md (sweep-ai[bot])
 
 ## v2.0.9
 * (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
