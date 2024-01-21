@@ -17,7 +17,7 @@ A tiny yet convenient and fast zero-dependency library that makes it possible to
 The package is available on [npm](https://npmjs.org/package/async-wait-until):
 
 ```sh
-$ npm install --save async-wait-until
+$ npm install -g async-wait-until
 ```
 
 It ships with an [UMD](https://github.com/umdjs/umd) bundle by default (which works well as-is on Node.js and web browsers), but bundles for other module systems are also available in the package's `dist/` folder.
