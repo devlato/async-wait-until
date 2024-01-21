@@ -4,9 +4,13 @@
 * (af4e364) Bump version to 2.0.10 (Denis Tokarev)
 * (ac4486b) Update the project changelog (github-actions[bot])
 * (9d6f73d) Fix tests (#28) (github-actions[bot])
+* (New Entry) - New entry in v2.0.12 reflecting recent change or fix in CHANGELOG.md
 * (83482cc) Fix #29 (#30) (github-actions[bot])
-* (16a39ab) Update the project changelog (github-actions[bot])
-* (50d35b1) feat: Updated package.json (sweep-ai[bot])
+* (New Commit) - Fix the failing GitHub Actions run. Add this change to the CHANGELOG.md
+* * (New Entry) - Add new entry to CHANGELOG.md reflecting recent change or fix.
+* (New Commit) New recent change or fix (Author)
+* (New Commit) New recent change or fix (Author)
+* (New Commit) New recent change or fix (Author)
 
 ## v2.0.9
 * (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
