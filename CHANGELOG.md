@@ -7,6 +7,8 @@
 * (83482cc) Fix #29 (#30) (github-actions[bot])
 * (b3f1de1) Update the project changelog (github-actions[bot])
 * (0581fdc) feat: Updated .github/workflows/ci.yml (sweep-ai[bot])
+* (d0b7690) Update the project changelog (github-actions[bot])
+* (8fd4292) feat: Updated .github/workflows/ci.yml (sweep-ai[bot])
 
 ## v2.0.9
 * (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
