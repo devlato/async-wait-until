@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: npm ci --ignore-scripts
       - name: Lint the codebase
-        run: npm run lint:ci
+        run: npm run lint:ci -- --max-warnings 0
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -43,7 +43,7 @@ jobs:
       - name: Install dependencies
         run: npm ci --ignore-scripts
       - name: Build code
-        run: npm run build:ci
+        run: npm run build:ci -- --silent
       - name: Upload the dist folder
         uses: actions/upload-artifact@v2.2.4
         with:
@@ -64,7 +64,7 @@ jobs:
           name: dist
           path: dist
       - name: Run integration tests
-        run: npm run test:integration:ci
+        run: npm run test:integration:ci -- --coverage --runInBand
   build_storybook:
     name: Build docs
     runs-on: ubuntu-latest

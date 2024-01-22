@@ -4,8 +4,15 @@
 * (af4e364) Bump version to 2.0.10 (Denis Tokarev)
 * (ac4486b) Update the project changelog (github-actions[bot])
 * (9d6f73d) Fix tests (#28) (github-actions[bot])
-* (e9ec45b) Fix #29 (Denis Tokarev)
-* (5b8ba34) Bump to 2.0.12 (Denis Tokarev)
+* (83482cc) Fix #29 (#30) (github-actions[bot])
+* (b3f1de1) Update the project changelog (github-actions[bot])
+* (0581fdc) feat: Updated .github/workflows/ci.yml (sweep-ai[bot])
+* (d0b7690) Update the project changelog (github-actions[bot])
+* (8fd4292) feat: Updated .github/workflows/ci.yml (sweep-ai[bot])
+* (4c1079e) Update the project changelog (github-actions[bot])
+* (03b9f38) feat: Updated .github/workflows/ci.yml (sweep-ai[bot])
+* (4991940) Update the project changelog (github-actions[bot])
+* (b8f3996) feat: Updated .github/workflows/ci.yml (sweep-ai[bot])
 
 ## v2.0.9
 * (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
@@ -46,6 +53,10 @@
 * (38ebf94) Further get rid of global variables (#11) (Denis Tokarev)
 
 ## v2.0.2
+
+## v2.0.12
+* (9d6f73d) Fix tests (#28) (github-actions[bot])
+* (83482cc) Fix #29 (#30) (github-actions[bot])
 
 ## v2.0.10
 * (8aa1f79) Fix issue w/wrong setTimeout call (#10) (github-actions[bot])
