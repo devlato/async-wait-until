@@ -64,7 +64,7 @@ jobs:
           name: dist
           path: dist
       - name: Run integration tests
-        run: npm run test:integration:ci
+        run: npm run test:integration:ci -- --coverage
   build_storybook:
     name: Build docs
     runs-on: ubuntu-latest
