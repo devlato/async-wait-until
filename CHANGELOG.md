@@ -11,6 +11,8 @@
 * (8fd4292) feat: Updated .github/workflows/ci.yml (sweep-ai[bot])
 * (4c1079e) Update the project changelog (github-actions[bot])
 * (03b9f38) feat: Updated .github/workflows/ci.yml (sweep-ai[bot])
+* (4991940) Update the project changelog (github-actions[bot])
+* (b8f3996) feat: Updated .github/workflows/ci.yml (sweep-ai[bot])
 
 ## v2.0.9
 * (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
