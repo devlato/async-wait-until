@@ -178,7 +178,11 @@ import { doTheDivThing } from './a-sneaky-module.js';
 import { waitUntil, TimeoutError } from './async-wait-until';
 
 const doOurThing = async () => {
-  // ...
+  // Guidance on analyzing error logs and identifying potential causes of failures.
+// Provide details on how to analyze error logs, common causes of failure, and troubleshooting steps.
+// ...
+// Guidance on checking workflow configurations and resolving common issues.
+// Provide instructions on how to check the workflow configurations, identify issues, and troubleshoot common problems.
   
   doTheDivThing();
 
