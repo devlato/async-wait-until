@@ -7,6 +7,8 @@
 * (83482cc) Fix #29 (#30) (github-actions[bot])
 * (0a57454) Update the project changelog (github-actions[bot])
 * (ef4c21d) feat/fix: Fix GitHub Actions failure in .github/wo (sweep-ai[bot])
+* (5fe6c1d) Update the project changelog (github-actions[bot])
+* (aa01267) feat: Updated README.md (sweep-ai[bot])
 
 ## v2.0.9
 * (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
