@@ -6,6 +6,8 @@
 * (9d6f73d) Fix tests (#28) (github-actions[bot])
 * (83482cc) Fix #29 (#30) (github-actions[bot])
 * (0115116) feat/fix: Update GitHub Actions workflow file to f (sweep-ai[bot])
+* (ae37090) Update the project changelog (github-actions[bot])
+* (cbac1d5) feat: Updated package.json (sweep-ai[bot])
 
 ## v2.0.9
 * (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
