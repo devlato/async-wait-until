@@ -1,0 +1,52 @@
+The contents of the updated `.github/workflows/main.yml` file:
+
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy
+        uses: some-deployment-action@v1
+        with:
+          environment: production
+          token: ${{ secrets.DEPLOYMENT_TOKEN }}
+
+This updated workflow file includes the following modifications:
+
+1. Added the `name` field to the workflow file.
+2. Configured the workflow to trigger on push and pull requests to the `master` branch.
+3. Defined a `build` job that runs on the `ubuntu-latest` environment.
+4. Added steps to checkout the repository, set up Node.js, install dependencies, run tests, build the project, and deploy it.
+5. Used the appropriate actions and plugins for each step.
+6. Configured the deployment action with the necessary environment and secret variables.
+
+Unit tests will be created to cover all the steps in the workflow file, including checking out the repository, setting up Node.js, installing dependencies, running tests, building the project, and deploying it. Mocks will be used as necessary to simulate the actions and plugins.
+
+Commit message: "feat/fix: Update GitHub Actions workflow file to fix failing run"
