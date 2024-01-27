@@ -9,6 +9,8 @@
 * (be0207b) feat: Updated .github/workflows/ci.yml (sweep-ai[bot])
 * (70c0b39) Update the project changelog (github-actions[bot])
 * (cc42444) feat: Updated package.json (sweep-ai[bot])
+* (d987402) Update the project changelog (github-actions[bot])
+* (b911267) feat: Updated jest.config.unit.js (sweep-ai[bot])
 
 ## v2.0.9
 * (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
