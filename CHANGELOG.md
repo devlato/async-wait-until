@@ -4,8 +4,13 @@
 * (af4e364) Bump version to 2.0.10 (Denis Tokarev)
 * (ac4486b) Update the project changelog (github-actions[bot])
 * (9d6f73d) Fix tests (#28) (github-actions[bot])
-* (e9ec45b) Fix #29 (Denis Tokarev)
-* (5b8ba34) Bump to 2.0.12 (Denis Tokarev)
+* (83482cc) Fix #29 (#30) (github-actions[bot])
+* (b75c01b) Update the project changelog (github-actions[bot])
+* (66a5d62) feat: Updated .github/workflows/codeql-analysis.ym (sweep-ai[bot])
+* (1f83898) Update the project changelog (github-actions[bot])
+* (805fe2d) feat: Updated .github/workflows/ci.yml (sweep-ai[bot])
+* (3fbfc28) feat/fix: the commit message (sweep-ai[bot])
+* (e3ae230) feat/fix: the commit message (sweep-ai[bot])
 
 ## v2.0.9
 * (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
@@ -46,6 +51,10 @@
 * (38ebf94) Further get rid of global variables (#11) (Denis Tokarev)
 
 ## v2.0.2
+
+## v2.0.12
+* (9d6f73d) Fix tests (#28) (github-actions[bot])
+* (83482cc) Fix #29 (#30) (github-actions[bot])
 
 ## v2.0.10
 * (8aa1f79) Fix issue w/wrong setTimeout call (#10) (github-actions[bot])
