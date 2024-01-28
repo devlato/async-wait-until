@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - master
+      - 83482cc
   schedule:
     - cron: '0 10 * * *'
 
@@ -31,5 +32,5 @@ jobs:
       uses: github/codeql-action/init@v1
       with:
         languages: ${{ matrix.language }}
-    - name: Perform CodeQL Analysis
+    - name: Perform CodeQL Analysis and Review Error Logs
       uses: github/codeql-action/analyze@v1
