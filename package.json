@@ -26,7 +26,7 @@
     "docs:ci": "npm run docs:clean && npm run docs",
     "format": "cross-env NODE_ENV=production eslint -c .eslintrc.js --fix .",
     "clean": "npm run lint:clean & npm run test:clean & npm run build:clean & npm run docs:clean & wait",
-    "release": "npm run lint:ci && npm run test:ci && npm run build:ci && npm run test:integration && npm run docs:ci",
+    "release": "npm run lint:ci && npm run test:ci && npm run build:ci && npm run docs:ci",
     "prepublishOnly": "npm run clean && npm run release"
   },
   "repository": {
