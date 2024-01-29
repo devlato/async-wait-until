@@ -7,6 +7,7 @@
 * (83482cc) Fix #29 (#30) (github-actions[bot])
 * (bb4bf87) Update the project changelog (github-actions[bot])
 * (a673929) feat: Updated package.json (sweep-ai[bot])
+* (514346e) Update the project changelog (github-actions[bot])
 
 ## v2.0.9
 * (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
