@@ -253,7 +253,7 @@ const result = waitUntil(() => Date.now() >= new Date('Jan 13, 2022 11:35 am'), 
 
 ## 👨‍⚖️👩‍⚖️ License
 
-Library is shipped "as is" under the MIT License.
+This library uses Parcel for bundling, ESLint and Prettier for code style, and Jest for running unit tests.
 
 
 ## 👷‍♂️👷‍♀️ Contributing
@@ -269,7 +269,7 @@ Contributions (issues, bug and feature requests, and PRs) are welcome! Please fo
 2. Code style is powered by [ESLint](https://eslint.org) and [Prettier](https://prettier.io) with a custom config.
 3. We use [jest](http://jestjs.io/) for running unit tests.
 
-### Available commands
+## Installation
 
 #### Test:
 
@@ -283,7 +283,7 @@ $ npm test
 $ npm run lint
 ```
 
-#### Reformat:
+## Installation
 
 ```sh
 $ npm run format
