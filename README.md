@@ -24,6 +24,7 @@ It ships with an [UMD](https://github.com/umdjs/umd) bundle by default (which wo
 
 ```ts
 import { waitUntil } from 'async-wait-until';
+import { WAIT_FOREVER } from 'async-wait-until';
 
 // ...
 await waitUntil(() => document.querySelector('#hey') != null);
