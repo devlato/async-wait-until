@@ -6,6 +6,8 @@
 * (9d6f73d) Fix tests (#28) (github-actions[bot])
 * (83482cc) Fix #29 (#30) (github-actions[bot])
 * (3299ce1) feat/fix: Update CI configuration to fix failing G (sweep-ai[bot])
+* (c640e62) Update the project changelog (github-actions[bot])
+* (b381f99) feat/fix: Fix failing integration tests (sweep-ai[bot])
 
 ## v2.0.9
 * (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
