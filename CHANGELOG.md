@@ -1,8 +1,4 @@
-## v2.0.13
-* (83482cc) Fix the failing integration tests (#31) (github-actions[bot])
-* (new_commit_hash) Add entry for fix to failing GitHub Actions (#31) (github-actions[bot])
-* (9d6f73d) Fix tests (#28) (github-actions[bot])
-* (83482cc) Fix #29 (#30) (github-actions[bot)
+## v2.0.12
 * (668b957) Create codeql-analysis.yml (#25) (Denis Tokarev)
 * (8b06c25) Update CI to publish only when integration tests has passed (#26) (github-actions[bot])
 * (af4e364) Bump version to 2.0.10 (Denis Tokarev)
@@ -12,6 +8,10 @@
 * (3299ce1) feat/fix: Update CI configuration to fix failing G (sweep-ai[bot])
 * (c640e62) Update the project changelog (github-actions[bot])
 * (b381f99) feat/fix: Fix failing integration tests (sweep-ai[bot])
+* (a6fc173) Update the project changelog (github-actions[bot])
+* (003b145) feat: Updated package.json (sweep-ai[bot])
+* (2f1cf73) Update the project changelog (github-actions[bot])
+* (50e2d2e) feat: Updated CHANGELOG.md (sweep-ai[bot])
 
 ## v2.0.9
 * (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
