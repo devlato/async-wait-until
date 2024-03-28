@@ -1,0 +1,205 @@
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Documentation for async-wait-until v2.0.12</title><meta name="description" content="Documentation for Documentation for async-wait-until v2.0.12"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">Documentation for async-wait-until v2.0.12</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>Documentation for async-wait-until v2.0.12</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#async-wait-until" id="async-wait-until" style="color: inherit; text-decoration: none;">
+  <h1>async-wait-until</h1>
+</a>
+<p>A tiny yet convenient and fast zero-dependency library that makes it possible to write an asynchronous code that awaits some event to happen. It works on any JavaScript runtime that supports <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promises</a> either natively or with a polyfill (i.e. <a href="https://www.npmjs.com/package/promise-polyfill">this one</a>), including old Node.js versions and old web browsers.</p>
+<p><img src="https://img.shields.io/npm/v/async-wait-until" alt="npm version">
+<a href="https://npmjs.org/package/async-wait-until"><img src="https://img.shields.io/npm/dw/async-wait-until" alt="npm downloads, weekly"></a>
+<a href="https://devlato.github.io/async-wait-until/"><img src="https://img.shields.io/badge/%F0%9F%93%96-Documentation-informational" alt="online documentation"></a>
+<img src="https://github.com/devlato/async-wait-until/workflows/CI/badge.svg" alt="build status">
+<img src="https://img.shields.io/codeclimate/maintainability/devlato/async-wait-until" alt="maintainability">
+<img src="https://img.shields.io/codeclimate/coverage/devlato/async-wait-until" alt="code coverage">
+<img src="https://img.shields.io/bundlephobia/minzip/async-wait-until" alt="minzipped bundle size">
+<img src="https://img.shields.io/npm/l/async-wait-until" alt="license"></p>
+
+<a href="#⚙️-installation" id="⚙️-installation" style="color: inherit; text-decoration: none;">
+  <h2>⚙️ Installation</h2>
+</a>
+<p>The package is available on <a href="https://npmjs.org/package/async-wait-until">npm</a>:</p>
+<pre><code class="language-sh"><span class="hl-0">$ npm install --save async-wait-until</span>
+</code></pre>
+<p>It ships with an <a href="https://github.com/umdjs/umd">UMD</a> bundle by default (which works well as-is on Node.js and web browsers), but bundles for other module systems are also available in the package&#39;s <code>dist/</code> folder.</p>
+<pre><code class="language-ts"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">waitUntil</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&#39;async-wait-until&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-4">// ...</span><br/><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-5">waitUntil</span><span class="hl-0">(() </span><span class="hl-6">=&gt;</span><span class="hl-0"> </span><span class="hl-2">document</span><span class="hl-0">.</span><span class="hl-5">querySelector</span><span class="hl-0">(</span><span class="hl-3">&#39;#hey&#39;</span><span class="hl-0">) != </span><span class="hl-6">null</span><span class="hl-0">);</span>
+</code></pre>
+<details>
+<summary>Click to see examples for other module systems</summary>
+
+<ul>
+<li><a href="http://wiki.commonjs.org/wiki/Modules/1.1">CommonJS</a>:<pre><code class="language-js"><span class="hl-6">const</span><span class="hl-0"> { </span><span class="hl-7">waitUntil</span><span class="hl-0"> } = </span><span class="hl-5">require</span><span class="hl-0">(</span><span class="hl-3">&#39;async-wait-until/dist/commonjs&#39;</span><span class="hl-0">);</span><br/><span class="hl-4">// ...</span>
+</code></pre>
+</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#introducing_an_example">ES Modules</a>:<pre><code class="language-js"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">waitUntil</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&#39;async-wait-until&#39;</span><span class="hl-0">;</span><br/><span class="hl-4">// ...</span>
+</code></pre>
+or<pre><code class="language-js"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">waitUntil</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&#39;async-wait-until/dist/index.esm.js&#39;</span><span class="hl-0">;</span><br/><span class="hl-4">// ...</span>
+</code></pre>
+</li>
+<li><a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD</a>:<pre><code class="language-html"><span class="hl-8">&lt;</span><span class="hl-9">script</span><span class="hl-10"> </span><span class="hl-11">type</span><span class="hl-10">=</span><span class="hl-12">&quot;text/javascript&quot;</span><span class="hl-10"> </span><span class="hl-11">src</span><span class="hl-10">=</span><span class="hl-12">&quot;scripts/require.js&quot;</span><span class="hl-8">&gt;&lt;/</span><span class="hl-9">script</span><span class="hl-8">&gt;</span><br/><span class="hl-8">&lt;</span><span class="hl-9">script</span><span class="hl-10"> </span><span class="hl-11">type</span><span class="hl-10">=</span><span class="hl-12">&quot;text/javascript&quot;</span><span class="hl-8">&gt;</span><br/><span class="hl-10">  </span><span class="hl-2">requirejs</span><span class="hl-10">.</span><span class="hl-5">config</span><span class="hl-10">({</span><br/><span class="hl-10">    </span><span class="hl-2">baseUrl:</span><span class="hl-10"> </span><span class="hl-3">&#39;scripts/node_modules&#39;</span><span class="hl-10">,</span><br/><span class="hl-10">    </span><span class="hl-2">paths:</span><span class="hl-10"> {</span><br/><span class="hl-10">      </span><span class="hl-3">&#39;async-wait-until&#39;</span><span class="hl-2">:</span><span class="hl-10"> </span><span class="hl-3">&#39;async-wait-until/dist/amd.js&#39;</span><span class="hl-10">,</span><br/><span class="hl-10">    },</span><br/><span class="hl-10">  });</span><br/><span class="hl-10">  </span><span class="hl-5">define</span><span class="hl-10">([</span><span class="hl-3">&#39;async-wait-until&#39;</span><span class="hl-10">], ({ </span><span class="hl-2">waitUntil</span><span class="hl-10"> }) </span><span class="hl-6">=&gt;</span><span class="hl-10"> {</span><br/><span class="hl-10">    </span><span class="hl-4">// ...</span><br/><span class="hl-10">  });</span><br/><span class="hl-8">&lt;/</span><span class="hl-9">script</span><span class="hl-8">&gt;</span>
+</code></pre>
+</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Glossary/IIFE">IIFE</a>:<pre><code class="language-html"><span class="hl-8">&lt;</span><span class="hl-9">script</span><span class="hl-10"> </span><span class="hl-11">type</span><span class="hl-10">=</span><span class="hl-12">&quot;text/javascript&quot;</span><span class="hl-10"> </span><span class="hl-11">src</span><span class="hl-10">=</span><span class="hl-12">&quot;async-wait-until/dist/iife.js&quot;</span><span class="hl-8">&gt;&lt;/</span><span class="hl-9">script</span><span class="hl-8">&gt;</span><br/><span class="hl-8">&lt;</span><span class="hl-9">script</span><span class="hl-10"> </span><span class="hl-11">type</span><span class="hl-10">=</span><span class="hl-12">&quot;text/javascript&quot;</span><span class="hl-8">&gt;</span><br/><span class="hl-10">  </span><span class="hl-6">const</span><span class="hl-10"> { </span><span class="hl-7">waitUntil</span><span class="hl-10"> } </span><span class="hl-0">=</span><span class="hl-10"> </span><span class="hl-2">asyncWaitUntil</span><span class="hl-10">;</span><br/><span class="hl-10">  </span><span class="hl-4">// ...    </span><br/><span class="hl-8">&lt;/</span><span class="hl-9">script</span><span class="hl-8">&gt;</span>
+</code></pre>
+</li>
+<li><a href="https://github.com/systemjs/systemjs">SystemJS</a>:<pre><code class="language-html"><span class="hl-8">&lt;</span><span class="hl-9">script</span><span class="hl-10"> </span><span class="hl-11">src</span><span class="hl-10">=</span><span class="hl-12">&quot;scripts/system.js&quot;</span><span class="hl-8">&gt;&lt;/</span><span class="hl-9">script</span><span class="hl-8">&gt;</span><br/><span class="hl-8">&lt;</span><span class="hl-9">script</span><span class="hl-10"> </span><span class="hl-11">type</span><span class="hl-10">=</span><span class="hl-12">&quot;systemjs-importmap&quot;</span><span class="hl-8">&gt;</span><br/><span class="hl-10">  {</span><br/><span class="hl-10">    imports: {</span><br/><span class="hl-10">      &#39;async-wait-until&#39;: &#39;./scripts/node_modules/async-wait-until/dist/systemjs.js&#39;,</span><br/><span class="hl-10">    }</span><br/><span class="hl-10">  }</span><br/><span class="hl-8">&lt;/</span><span class="hl-9">script</span><span class="hl-8">&gt;</span><br/><span class="hl-8">&lt;</span><span class="hl-9">script</span><span class="hl-10"> </span><span class="hl-11">type</span><span class="hl-10">=</span><span class="hl-12">&quot;systemjs-module&quot;</span><span class="hl-8">&gt;</span><br/><span class="hl-10">  System</span><br/><span class="hl-10">      .import(&#39;async-wait-until&#39;)</span><br/><span class="hl-10">      .then(({ waitUntil }) =&gt; {</span><br/><span class="hl-10">        // ...</span><br/><span class="hl-10">      });</span><br/><span class="hl-8">&lt;/</span><span class="hl-9">script</span><span class="hl-8">&gt;</span>
+</code></pre>
+</details></li>
+</ul>
+
+<a href="#👨💻👩💻-use" id="👨💻👩💻-use" style="color: inherit; text-decoration: none;">
+  <h2>👨‍💻👩‍💻 Use</h2>
+</a>
+<p>Let&#39;s assume we have a piece of code that asynchronously appends a new <code>&lt;div /&gt;</code> node to the page body, and we want to wait for it to happen and then do something with that node.
+Let&#39;s also assume that for some unknown reason, we can neither use <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver">MutationObserver</a> nor modify the code that adds the node 🤷‍♂️. How bizarre!</p>
+<p>However, we know that optimistically, on a fast enough computer, this will happen within let&#39;s say 10 seconds (but it&#39;s not guaranteed). The following code snippet mimics this behaviour:</p>
+<pre><code class="language-js"><span class="hl-4">// @file a-sneaky-module.js</span><br/><br/><span class="hl-4">// Aha! Sometimes, it can take more than 10 seconds, and this is how we emulate it</span><br/><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">MAX_IDLE_INTERVAL_MILLISECONDS_BEFORE_ADDING_A_DIV_IN</span><span class="hl-0"> = </span><span class="hl-13">11</span><span class="hl-0"> * </span><span class="hl-13">1000</span><span class="hl-0">;</span><br/><br/><span class="hl-4">// Some utility functions, it&#39;s safe to ignore them </span><br/><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-5">randomIntegerInRange</span><span class="hl-0"> = ({ </span><span class="hl-2">min</span><span class="hl-0"> = </span><span class="hl-13">0</span><span class="hl-0">, </span><span class="hl-2">max</span><span class="hl-0"> }) </span><span class="hl-6">=&gt;</span><span class="hl-0"> </span><br/><span class="hl-0">  </span><span class="hl-2">min</span><span class="hl-0"> + </span><span class="hl-14">Math</span><span class="hl-0">.</span><span class="hl-5">floor</span><span class="hl-0">(</span><span class="hl-14">Math</span><span class="hl-0">.</span><span class="hl-5">random</span><span class="hl-0">() * (</span><span class="hl-2">max</span><span class="hl-0"> - </span><span class="hl-2">min</span><span class="hl-0">));</span><br/><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-5">randomTimeInterval</span><span class="hl-0"> = () </span><span class="hl-6">=&gt;</span><span class="hl-0"> </span><span class="hl-5">randomIntegerInRange</span><span class="hl-0">({ </span><br/><span class="hl-0">  </span><span class="hl-2">max:</span><span class="hl-0"> </span><span class="hl-7">MAX_IDLE_INTERVAL_MILLISECONDS_BEFORE_ADDING_A_DIV_IN</span><span class="hl-0">,</span><br/><span class="hl-0">});</span><br/><br/><span class="hl-4">// Adds a &lt;div /&gt; to the document body</span><br/><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-5">appendADivToTheDocumentBody</span><span class="hl-0"> = () </span><span class="hl-6">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">node</span><span class="hl-0"> = </span><span class="hl-2">document</span><span class="hl-0">.</span><span class="hl-5">createElement</span><span class="hl-0">(</span><span class="hl-3">&#39;div&#39;</span><span class="hl-0">);</span><br/><span class="hl-0">  </span><span class="hl-2">node</span><span class="hl-0">.</span><span class="hl-2">className</span><span class="hl-0"> = </span><span class="hl-3">&#39;spooky-spooky-skeleton&#39;</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-2">window</span><span class="hl-0">.</span><span class="hl-2">document</span><span class="hl-0">.</span><span class="hl-2">body</span><span class="hl-0">.</span><span class="hl-5">appendChild</span><span class="hl-0">(</span><span class="hl-2">node</span><span class="hl-0">);</span><br/><span class="hl-0">};</span><br/><br/><span class="hl-4">// A sneaky function that schedules adding a &lt;div /&gt; to the document body </span><br/><span class="hl-4">// at some time within 11 seconds</span><br/><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-5">appendADivToTheDocumentBodySomeAtTimeWithinAGivenTimeInterval</span><span class="hl-0"> = () </span><span class="hl-6">=&gt;</span><span class="hl-0"> </span><br/><span class="hl-0">  </span><span class="hl-5">setTimeout</span><span class="hl-0">(</span><br/><span class="hl-0">    </span><span class="hl-2">appendADivToTheDocumentBody</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-5">randomTimeInterval</span><span class="hl-0">(),</span><br/><span class="hl-0">  );</span><br/><br/><span class="hl-1">export</span><span class="hl-0"> </span><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">doTheDivThing</span><span class="hl-0"> = </span><span class="hl-2">appendADivToTheDocumentBodySomeAtTimeWithinAGivenTimeInterval</span><span class="hl-0">;</span>
+</code></pre>
+<p>Let&#39;s call the above code <code>a-sneaky-module.js</code>.</p>
+<p>So how do we the consumers of the <code>a-sneaky-module.js</code> know when exactly the <code>&lt;div /&gt;</code> node gets added?</p>
+<pre><code class="language-js"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">doTheDivThing</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&#39;./a-sneaky-module.js&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-5">doOutThing</span><span class="hl-0"> = </span><span class="hl-6">async</span><span class="hl-0"> () </span><span class="hl-6">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-4">// ...</span><br/><br/><span class="hl-0">  </span><span class="hl-5">doTheDivThing</span><span class="hl-0">();</span><br/><span class="hl-0">  </span><span class="hl-4">// Hmmmm... so what? How do we work with that &lt;div /&gt;. Is it already in the DOM?</span><br/><span class="hl-0">};</span>
+</code></pre>
+<p><code>async-wait-until</code> to the rescue, we can easily detect when it happens (and react to it):</p>
+<pre><code class="language-js"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">doTheDivThing</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&#39;./a-sneaky-module.js&#39;</span><span class="hl-0">;</span><br/><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">waitUntil</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&#39;./async-wait-until&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-5">doOutThing</span><span class="hl-0"> = </span><span class="hl-6">async</span><span class="hl-0"> () </span><span class="hl-6">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-4">// ...</span><br/><span class="hl-0">  </span><br/><span class="hl-0">  </span><span class="hl-5">doTheDivThing</span><span class="hl-0">();</span><br/><br/><span class="hl-0">  </span><span class="hl-4">// Yup! Easy right?</span><br/><span class="hl-0">  </span><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">divNode</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-5">waitUntil</span><span class="hl-0">(</span><br/><span class="hl-0">    </span><span class="hl-4">// Here, we specify a function that will be repeatedly called from time to time</span><br/><span class="hl-0">    </span><span class="hl-4">// Let&#39;s call this kind of function a `predicate`</span><br/><span class="hl-0">    () </span><span class="hl-6">=&gt;</span><span class="hl-0"> </span><span class="hl-2">window</span><span class="hl-0">.</span><span class="hl-2">document</span><span class="hl-0">.</span><span class="hl-2">body</span><span class="hl-0">.</span><span class="hl-5">querySelector</span><span class="hl-0">(</span><span class="hl-3">&#39;div.spooky-spooky-skeleton&#39;</span><span class="hl-0">),</span><br/><span class="hl-0">    </span><span class="hl-4">// Here, we can specify a timeout in milliseconds. Once it passes, </span><br/><span class="hl-0">    </span><span class="hl-4">// we&#39;ll stop waiting and throw an exception</span><br/><span class="hl-0">    { </span><span class="hl-2">timeout:</span><span class="hl-0"> </span><span class="hl-13">10000</span><span class="hl-0"> },</span><br/><span class="hl-0">  );</span><br/><span class="hl-0">  </span><span class="hl-4">// A colour of triumph</span><br/><span class="hl-0">  </span><span class="hl-2">divNode</span><span class="hl-0">.</span><span class="hl-2">style</span><span class="hl-0">.</span><span class="hl-2">backgroundColor</span><span class="hl-0"> = </span><span class="hl-3">&#39;rgba(255, 0, 0, 0.5)&#39;</span><span class="hl-0">;</span><br/><span class="hl-0">};</span>
+</code></pre>
+<p>However, we aren&#39;t 100% sure that the <code>&lt;div /&gt;</code> will be added within 10 seconds. What will happen if 10 seconds have passed and the <code>&lt;div /&gt;</code> node still isn&#39;t there?</p>
+<p>From the above code, it&#39;s clear that our <code>&#39;predicate&#39;</code> function (or simply <code>&#39;predicate&#39;</code>) won&#39;t return the DOM node. So what <code>waitUntil</code> will do in that case is it will throw a <code>TimeoutException</code> (also exported from the library so you can handle it).</p>
+<pre><code class="language-js"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">doTheDivThing</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&#39;./a-sneaky-module.js&#39;</span><span class="hl-0">;</span><br/><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">waitUntil</span><span class="hl-0">, </span><span class="hl-2">TimeoutError</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&#39;./async-wait-until&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-5">doOurThing</span><span class="hl-0"> = </span><span class="hl-6">async</span><span class="hl-0"> () </span><span class="hl-6">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-4">// ...</span><br/><span class="hl-0">  </span><br/><span class="hl-0">  </span><span class="hl-5">doTheDivThing</span><span class="hl-0">();</span><br/><br/><span class="hl-0">  </span><span class="hl-1">try</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-5">predicate</span><span class="hl-0"> = () </span><span class="hl-6">=&gt;</span><span class="hl-0"> </span><span class="hl-2">window</span><span class="hl-0">.</span><span class="hl-2">document</span><span class="hl-0">.</span><span class="hl-2">body</span><span class="hl-0">.</span><span class="hl-5">querySelector</span><span class="hl-0">(</span><span class="hl-3">&#39;div.spooky-spooky-skeleton&#39;</span><span class="hl-0">);</span><br/><span class="hl-0">    </span><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">divNode</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-5">waitUntil</span><span class="hl-0">(</span><span class="hl-2">predicate</span><span class="hl-0">, { </span><span class="hl-2">timeout:</span><span class="hl-0"> </span><span class="hl-13">10000</span><span class="hl-0"> });</span><br/><span class="hl-0">    </span><br/><span class="hl-0">    </span><span class="hl-2">divNode</span><span class="hl-0">.</span><span class="hl-2">style</span><span class="hl-0">.</span><span class="hl-2">backgroundColor</span><span class="hl-0"> = </span><span class="hl-3">&#39;rgba(255, 0, 0, 0.5)&#39;</span><span class="hl-0">;</span><br/><span class="hl-0">  } </span><span class="hl-1">catch</span><span class="hl-0"> (</span><span class="hl-2">e</span><span class="hl-0">) {</span><br/><span class="hl-0">    </span><span class="hl-1">if</span><span class="hl-0"> (</span><span class="hl-2">e</span><span class="hl-0"> </span><span class="hl-6">instanceof</span><span class="hl-0"> </span><span class="hl-14">TimeoutError</span><span class="hl-0">) {</span><br/><span class="hl-0">      </span><span class="hl-4">// Unfortunately, 10 seconds have passed but we haven&#39;t detected the `&lt;div /&gt;`</span><br/><span class="hl-0">      </span><span class="hl-4">// If we had a UI, we could show an error there or allow the user to retry</span><br/><span class="hl-0">      </span><span class="hl-5">alert</span><span class="hl-0">(</span><span class="hl-3">&#39;No &lt;div /&gt; have been detected unfortunately&#39;</span><span class="hl-0">);</span><br/><span class="hl-0">    } </span><span class="hl-1">else</span><span class="hl-0"> {</span><br/><span class="hl-0">      </span><span class="hl-4">// Some other error, most likely thrown from the predicate function.</span><br/><span class="hl-0">      </span><span class="hl-5">alert</span><span class="hl-0">(</span><span class="hl-3">&#39;Unknown error occurred&#39;</span><span class="hl-0">);</span><br/><span class="hl-0">      </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-5">error</span><span class="hl-0">(</span><span class="hl-2">e</span><span class="hl-0">);</span><br/><span class="hl-0">    }    </span><br/><span class="hl-0">  }</span><br/><span class="hl-0">};</span>
+</code></pre>
+<p>So, summing up the above, the predicate will run again and again within the given timeout, until it first returns a non-<a href="https://developer.mozilla.org/en-US/docs/Glossary/Falsy">falsy</a> value. If this doesn&#39;t happen, a <code>TimeoutError</code> is thrown.</p>
+
+<a href="#api" id="api" style="color: inherit; text-decoration: none;">
+  <h3>API</h3>
+</a>
+<p>Let&#39;s start with the <code>waitUntil</code> function. It takes up to two parameters (<strong>deprecated</strong>: up to three), and returns a Promise that will be resolved with the first non-falsy value returned by the predicate.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>predicate</code></td>
+<td>Function</td>
+<td>✅ Yes</td>
+<td>-</td>
+<td>A function that is expected to return a non-falsy (aka a <code>&#39;truthy&#39;</code>) value, or a Promise to return such a value. Hence, <em>both sync and async functions are supported</em>.</td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td>Options object</td>
+<td>🚫 No</td>
+<td>5000 ms</td>
+<td>Options for the wait algorithm implemented by <code>waitUntil</code>, see its properties on the below table. <strong>Deprecated</strong>: timeout in milliseconds.</td>
+</tr>
+<tr>
+<td><del>intervalBetweenAttempts</del></td>
+<td>number</td>
+<td>🚫 No</td>
+<td>50 ms</td>
+<td><strong>Deprecated parameter</strong>: number of milliseconds between retry attempts. Please use options instead.</td>
+</tr>
+</tbody></table>
+<p>Above, you can see the options param. Here are the available <strong>options</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>timeout</code></td>
+<td>number</td>
+<td>🚫 No</td>
+<td>5000 ms</td>
+<td>Timeout in milliseconds.</td>
+</tr>
+<tr>
+<td><code>intervalBetweenAttempts</code></td>
+<td>number</td>
+<td>🚫 No</td>
+<td>50 ms</td>
+<td>Number of milliseconds between retry attempts.</td>
+</tr>
+</tbody></table>
+
+<a href="#recipes" id="recipes" style="color: inherit; text-decoration: none;">
+  <h3>Recipes</h3>
+</a>
+
+<a href="#waiting-for-something-forever" id="waiting-for-something-forever" style="color: inherit; text-decoration: none;">
+  <h4>Waiting for something forever</h4>
+</a>
+<p>If you aren&#39;t sure how long a process will take, you can use <code>waitUntil.Forever</code> (which is a shortcut for <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/POSITIVE_INFINITY">Number.POSITIVE_INFINITY</a>) as the timeout value:</p>
+<pre><code class="language-ts"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">waitUntil</span><span class="hl-0">, </span><span class="hl-2">WAIT_FOREVER</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&#39;async-wait-until&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-4">// ...</span><br/><br/><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">result</span><span class="hl-0"> = </span><span class="hl-5">waitUntil</span><span class="hl-0">(() </span><span class="hl-6">=&gt;</span><span class="hl-0"> </span><span class="hl-14">Date</span><span class="hl-0">.</span><span class="hl-5">now</span><span class="hl-0">() &gt;= </span><span class="hl-6">new</span><span class="hl-0"> </span><span class="hl-14">Date</span><span class="hl-0">(</span><span class="hl-3">&#39;Jan 13, 2022 11:35 am&#39;</span><span class="hl-0">), {</span><br/><span class="hl-0">  </span><span class="hl-2">timeout:</span><span class="hl-0"> </span><span class="hl-7">WAIT_FOREVER</span><span class="hl-0">, </span><span class="hl-4">// === Number.POSITIVE_INFINITY</span><br/><span class="hl-0">});</span>
+</code></pre>
+
+<a href="#customizing-the-interval-between-retries" id="customizing-the-interval-between-retries" style="color: inherit; text-decoration: none;">
+  <h4>Customizing the interval between retries</h4>
+</a>
+<p>In addition to the <code>timeout</code> option, you can customize the interval between retries:</p>
+<pre><code class="language-ts"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">waitUntil</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&#39;async-wait-until&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-4">// ...</span><br/><br/><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">result</span><span class="hl-0"> = </span><span class="hl-5">waitUntil</span><span class="hl-0">(() </span><span class="hl-6">=&gt;</span><span class="hl-0"> </span><span class="hl-14">Date</span><span class="hl-0">.</span><span class="hl-5">now</span><span class="hl-0">() &gt;= </span><span class="hl-6">new</span><span class="hl-0"> </span><span class="hl-14">Date</span><span class="hl-0">(</span><span class="hl-3">&#39;Jan 13, 2022 11:35 am&#39;</span><span class="hl-0">), {</span><br/><span class="hl-0">  </span><span class="hl-2">intervalBetweenAttempts:</span><span class="hl-0"> </span><span class="hl-13">1000</span><span class="hl-0">, </span><span class="hl-4">// Retry every second instead of 50 milliseconds</span><br/><span class="hl-0">});</span>
+</code></pre>
+
+<a href="#👨⚖️👩⚖️-license" id="👨⚖️👩⚖️-license" style="color: inherit; text-decoration: none;">
+  <h2>👨‍⚖️👩‍⚖️ License</h2>
+</a>
+<p>Library is shipped &quot;as is&quot; under the MIT License.</p>
+
+<a href="#👷♂️👷♀️-contributing" id="👷♂️👷♀️-contributing" style="color: inherit; text-decoration: none;">
+  <h2>👷‍♂️👷‍♀️ Contributing</h2>
+</a>
+<p>Contributions (issues, bug and feature requests, and PRs) are welcome! Please follow the contribution guidelines.</p>
+<details>
+<summary>Click for additional information on development dependencies and available commands</summary>
+
+
+<a href="#development-dependencies" id="development-dependencies" style="color: inherit; text-decoration: none;">
+  <h3>Development dependencies</h3>
+</a>
+<ol>
+<li>The library is written in <a href="http://typescriptlang.org">TypeScript</a> and is bundled with <a href="https://parceljs.org">Parcel</a>.</li>
+<li>Code style is powered by <a href="https://eslint.org">ESLint</a> and <a href="https://prettier.io">Prettier</a> with a custom config.</li>
+<li>We use <a href="http://jestjs.io/">jest</a> for running unit tests.</li>
+</ol>
+
+<a href="#available-commands" id="available-commands" style="color: inherit; text-decoration: none;">
+  <h3>Available commands</h3>
+</a>
+
+<a href="#test" id="test" style="color: inherit; text-decoration: none;">
+  <h4>Test:</h4>
+</a>
+<pre><code class="language-sh"><span class="hl-0">$ npm </span><span class="hl-5">test</span>
+</code></pre>
+
+<a href="#lint" id="lint" style="color: inherit; text-decoration: none;">
+  <h4>Lint:</h4>
+</a>
+<pre><code class="language-sh"><span class="hl-0">$ npm run lint</span>
+</code></pre>
+
+<a href="#reformat" id="reformat" style="color: inherit; text-decoration: none;">
+  <h4>Reformat:</h4>
+</a>
+<pre><code class="language-sh"><span class="hl-0">$ npm run format</span>
+</code></pre>
+
+<a href="#build" id="build" style="color: inherit; text-decoration: none;">
+  <h4>Build</h4>
+</a>
+<pre><code class="language-sh"><span class="hl-0">$ npm run build</span>
+</code></pre>
+
+<a href="#generate-docs" id="generate-docs" style="color: inherit; text-decoration: none;">
+  <h4>Generate docs</h4>
+</a>
+<pre><code class="language-sh"><span class="hl-0">$ npm run docs</span>
+</code></pre>
+</details>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-reference"><a href="modules.html#default" class="tsd-kind-icon">default</a></li><li class="tsd-kind-class"><a href="classes/TimeoutError.html" class="tsd-kind-icon">Timeout<wbr/>Error</a></li><li class="tsd-kind-type-alias tsd-is-private"><a href="modules.html#FalsyValue" class="tsd-kind-icon">Falsy<wbr/>Value</a></li><li class="tsd-kind-type-alias"><a href="modules.html#Options" class="tsd-kind-icon">Options</a></li><li class="tsd-kind-type-alias tsd-has-type-parameter tsd-is-private"><a href="modules.html#Predicate" class="tsd-kind-icon">Predicate</a></li><li class="tsd-kind-type-alias tsd-is-private"><a href="modules.html#PredicateReturnValue" class="tsd-kind-icon">Predicate<wbr/>Return<wbr/>Value</a></li><li class="tsd-kind-type-alias tsd-is-private"><a href="modules.html#TruthyValue" class="tsd-kind-icon">Truthy<wbr/>Value</a></li><li class="tsd-kind-variable"><a href="modules.html#DEFAULT_INTERVAL_BETWEEN_ATTEMPTS_IN_MS" class="tsd-kind-icon">DEFAULT_<wbr/>INTERVAL_<wbr/>BETWEEN_<wbr/>ATTEMPTS_<wbr/>IN_<wbr/>MS</a></li><li class="tsd-kind-variable"><a href="modules.html#DEFAULT_TIMEOUT_IN_MS" class="tsd-kind-icon">DEFAULT_<wbr/>TIMEOUT_<wbr/>IN_<wbr/>MS</a></li><li class="tsd-kind-variable"><a href="modules.html#WAIT_FOREVER" class="tsd-kind-icon">WAIT_<wbr/>FOREVER</a></li><li class="tsd-kind-function tsd-has-type-parameter"><a href="modules.html#waitUntil" class="tsd-kind-icon">wait<wbr/>Until</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
