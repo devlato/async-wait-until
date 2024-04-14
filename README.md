@@ -297,6 +297,8 @@ $ npm run build
 
 #### Generate docs
 
+The following command generates docs from the inline JSDoc/TSDoc:
+
 ```sh
 $ npm run docs
 ```
