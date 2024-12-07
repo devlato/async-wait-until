@@ -19,8 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Label when approved
-        uses: pullreminders/label-when-approved-action@1.0.5
+        uses: TobKed/label-when-approved-action@v1
+        with:
+          token: '${{ secrets.GITHUB_TOKEN }}'
         env:
           APPROVALS: 1
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-          ADD_LABEL: '${{ secrets.NEW_PR_AUTOMERGE_LABEL }}'
+          label: '${{ secrets.NEW_PR_AUTOMERGE_LABEL }}'
+          pullRequestNumber: ${{ steps.source-run-info.outputs.pullRequestNumber }}

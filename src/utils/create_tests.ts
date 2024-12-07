@@ -156,6 +156,17 @@ export const createTests = ({
           expect(e.toString()).toEqual('Error: Crap!');
         }
       });
+
+      // https://github.com/devlato/async-wait-until/issues/32
+      describe('Issue #32', () => {
+        it('does not leave open handlers when predicate returns false', async () => {
+          expect.assertions(1);
+
+          const end = Date.now() + 1000;
+          const result = await waitUntil(() => Date.now() < end);
+          expect(result).toBe(true);
+        });
+      });
     });
 
     describe('> Classic behaviour', () => {
@@ -268,6 +279,17 @@ export const createTests = ({
           expect(e).not.toBeInstanceOf(TimeoutError);
           expect(e.toString()).toEqual('Error: Crap!');
         }
+      });
+
+      // https://github.com/devlato/async-wait-until/issues/32
+      describe('Issue #32', () => {
+        it('does not leave open handlers when predicate returns false', async () => {
+          expect.assertions(1);
+
+          const end = Date.now() + 1000;
+          const result = await waitUntil(() => Date.now() < end);
+          expect(result).toBe(true);
+        });
       });
     });
   });

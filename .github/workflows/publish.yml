@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v4
       - name: Install dependencies
         run: npm ci --ignore-scripts
       - name: Lint the codebase
@@ -23,13 +23,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v4
       - name: Install dependencies
         run: npm ci --ignore-scripts
       - name: Run tests
         run: npm run test:ci
       - name: Upload coverage
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v4
         with:
           name: test_coverage
           path: coverage
@@ -38,13 +38,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v4
       - name: Install dependencies
         run: npm ci --ignore-scripts
       - name: Run tests
         run: npm run build:ci
       - name: Upload dist
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist
@@ -54,11 +54,11 @@ jobs:
     needs: build_code
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v4
       - name: Install dependencies
         run: npm ci --ignore-scripts
       - name: Download dist/ folder
-        uses: actions/download-artifact@v2.0.10
+        uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist
@@ -69,13 +69,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v4
       - name: Install dependencies
         run: npm ci --ignore-scripts
       - name: Build storybook
         run: npm run docs:ci
       - name: Upload the storybook
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v4
         with:
           name: docs
           path: docs
@@ -85,11 +85,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v4
       - name: Install dependencies
         run: npm ci --ignore-scripts
       - name: Download storybook
-        uses: actions/download-artifact@v2.0.10
+        uses: actions/download-artifact@v4
         with:
           name: docs
           path: docs
@@ -101,12 +101,11 @@ jobs:
           last_tag=$( git describe --tags --abbrev=0 )
           echo "::set-output name=LAST_TAG::${last_tag}"
       - name: Deploy Docs to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v2.5.0
+        uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: '${{ secrets.DOCS_TARGET_BRANCH }}'
           build_dir: docs
-          committer_name: '${{ secrets.AUTOCOMMITTER_NAME }}'
-          committer_email: '${{ secrets.AUTOCOMMITTER_EMAIL }}'
+          author: '${{ secrets.AUTOCOMMITTER_NAME }} <${{ secrets.AUTOCOMMITTER_EMAIL }}>'
           commit_message: 'Update docs for package v${{ steps.get-last-tag.LAST_TAG }}'
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
@@ -117,7 +116,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v4
       - name: Install dependencies
         run: npm ci --ignore-scripts
       - name: Publish

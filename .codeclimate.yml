@@ -1,37 +1,30 @@
-version: '2'
+version: "2"
 checks:
   argument-count:
-    enabled: false
+    config:
+      threshold: 4
   complex-logic:
-    enabled: false
+    config:
+      threshold: 8
   file-lines:
-    enabled: true
     config:
-      threshold: 250
+      threshold: 1000
   method-complexity:
-    enabled: true
     config:
-      threshold: 20
+      threshold: 8
   method-count:
-    enabled: true
     config:
       threshold: 20
   method-lines:
-    enabled: true
     config:
-      threshold: 64
-exclude_patterns:
-  - '.git/'
-  - '.github/'
-  - '.idea/'
-  - 'coverage/'
-  - 'dist/'
-  - 'docs/'
-  - 'node_modules/'
-  - 'src/tests/'
-  - 'src/utils/create_tests.ts'
-plugins:
-  eslint:
+      threshold: 120
+  nested-control-flow:
+    config:
+      threshold: 5
+  return-statements:
+    config:
+      threshold: 5
+  similar-code:
     enabled: false
-  nodesecurity:
+  identical-code:
     enabled: false

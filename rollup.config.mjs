@@ -1,7 +1,11 @@
 import typescript from '@rollup/plugin-typescript';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import { terser } from 'rollup-plugin-terser';
-import pckg from './package.json';
+import terser from '@rollup/plugin-terser';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
+const pckg = require('./package.json');
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 const OUTPUT_CONFIG = {
@@ -60,6 +64,7 @@ export default {
     },
   ],
   plugins: [
+    nodeResolve(),
     typescript({
       tsconfig: './tsconfig.json',
     }),
