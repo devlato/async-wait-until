@@ -21,19 +21,18 @@ jobs:
           fetch-depth: 0
           set-safe-directory: 'true'
       - name: Create a pull request
-        uses: peter-evans/create-pull-request@v7
+        uses: devops-infra/action-pull-request@v0.5.5
         with:
-          token: '${{ secrets.GH_PAT }}'
-          base: '${{ secrets.NEW_PR_DEFAULT_DESTINATION_BRANCH }}'
+          github_token: '${{ secrets.GITHUB_TOKEN }}'
+          target_branch: '${{ secrets.NEW_PR_DEFAULT_DESTINATION_BRANCH }}'
           title: '${{ env.PR_TITLE }}'
           body: '${{ env.PR_DESCRIPTION }}'
-          reviewers: '${{ secrets.NEW_PR_DEFAULT_REVIEWERS }}'
-          assignees: '${{ secrets.NEW_PR_DEFAULT_ASSIGNEES }}'
-          labels:
-            '${{ secrets.NEW_PR_DEFAULT_LABELS }}'
+          template: '.github/PULL_REQUEST_TEMPLATE.md'
+          reviewer: '${{ secrets.NEW_PR_DEFAULT_REVIEWERS }}'
+          assignee: '${{ secrets.NEW_PR_DEFAULT_ASSIGNEES }}'
+          label: '${{ secrets.NEW_PR_DEFAULT_LABELS }}'
           milestone: '${{ secrets.NEW_PR_DEFAULT_MILESTONE }}'
-          github_token: '${{ secrets.GITHUB_TOKEN }}'
-          branch: '${{ github.ref_name }}'
+          ignore_users: 'dependabot'
       - name: Generate the changelog for this pull request
         id: generate-changelog
         run: |
