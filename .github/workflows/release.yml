@@ -101,38 +101,51 @@ jobs:
           fetch-depth: 0
       - name: Generate changelog
         run: |
-          initial_commit=$( git log --reverse --format='%H' | head -n 1 )
-          printf '\n\ninitial_commit=%s\n\n' "${initial_commit[@]}"
-          
-          output=''
-          for tag in $( git tag -l | sort -V ); do
-            printf 'Processing tag=%s\n' "${tag[@]}"
-            commits=$( git log --reverse --format='- (%h) %s (%an)' "${initial_commit}".."${tag}" )
-            if [ ${#commits[@]} -eq 0 ]; then
-              commits=$( git log --reverse --format='- (%h) %s (%an)' | head -n 1  )
+          changelog=""
+
+          # Get all tags in ascending order
+          tags=($( git tag --sort=version:refname ))
+
+          # Loop through tags to generate the changelog
+          for ((i=0; i<${#tags[@]}; i++)); do
+            current_tag="${tags[$i]}"
+            previous_tag=""
+            tag_log=""
+
+            if [ -z "${current_tag}" ]; then
+              continue
             fi
-            printf 'commits=<<<COMMITS\n%s\nCOMMITS\n' "${commits[@]}"
-            section=$( printf '%s\n%s' "## v${tag}" "${commits}" )
-            initial_commit="${tag}"
-            step_output=$( printf '%s\n\n' "${section}" )
-            printf 'version_changelog=<<<CHUNK\n%s\nCHUNK\n\n' "${step_output[@]}"
-            output=$( printf '%s\n\n' "${step_output}" "${output}" )
+            
+            # Determine the previous tag if not the first tag
+            if (( i > 0 )); then
+              previous_tag="${tags[$((i-1))]}"
+            fi
+            
+            # Generate the header for the current tag
+            tag_log="### ${current_tag}\n"
+            
+            # Get the commits between the current tag and the previous tag
+            if [ -n "$previous_tag" ]; then
+              commits=$(git log --format="%s (%an) [%h]" "${previous_tag}..${current_tag}")
+            else
+              # If no previous tag, include all commits up to the first tag
+              commits=$(git log --format="%s (%an) [%h]" "${current_tag}")
+            fi
+            
+            # Add commits to the changelog, one per line
+            while IFS= read -r commit; do
+              tag_log+="- ${commit}\n"
+            done <<< "${commits}"
+
+            changelog="${tag_log}\n${changelog}"
           done
-          
-          package_version=$( cat package.json | grep "version" | grep -oE '[0-9.]+' )
-          last_tag=$( git tag -l | tail -n 1 )
-          printf 'package_version=%s\nlast_tag=%s\n' "${package_version[@]}" "${last_tag[@]}"
-          
-          if [ "${package_version}" != "${last_tag}" ]; then
-            commits=$( git log --reverse --format='- (%h) %s (%an)' "${last_tag}"..HEAD )
-            if [ ${#commits[@]} -ne 0 ]; then
-              section=$( printf '%s\n%s' "## v${package_version}" "${commits}" )
-              output=$( printf '%s\n\n' "${section}" "${output}" )
-            fi
-          fi
-          
-          printf 'Changelog=<<<CHANGELOG\n%s\nCHANGELOG\n\n' "${output[@]}"
-          printf '%s\n' "${output}" > CHANGELOG.md
+
+          changelog="# Changelog\n\n${changelog}"
+
+          echo -e "${changelog}"
+
+          # You can now use the variable $changelog elsewhere in your script
+          printf '%s' "${changelog}" > CHANGELOG.md
       - name: Upload new changelog
         uses: actions/upload-artifact@v4
         with:
@@ -146,7 +159,7 @@ jobs:
             printf 'Committing the updated changelog\n'
             git config --local user.name "github-actions[bot]"
             git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          
+
             git add CHANGELOG.md
             git commit -am "Update the project changelog"
           fi
@@ -173,3 +186,16 @@ jobs:
           tag_prefix: ''
           tag_suffix: ''
           changelog_structure: "**{{messageHeadline}}** {{author}}\n"
+  trigger_publish:
+    name: Maybe trigger publish
+    runs-on: ubuntu-latest
+    needs: [maybe_tag]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          set-safe-directory: 'true'
+      - name: Trigger workflow
+        run: gh workflow run publish.yml --ref $( git describe --tags --abbrev=0 )
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
