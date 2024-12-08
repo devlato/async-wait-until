@@ -19,6 +19,7 @@ jobs:
           ref: '${{ github.event.pull_request.head.sha }}'
           persist-credentials: false
           fetch-depth: 0
+          set-safe-directory: 'true'
       - name: Generate new changelog
         run: |
           initial_commit=$( git log --reverse --format='%H' | head -n 1 )
