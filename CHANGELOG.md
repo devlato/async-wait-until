@@ -16,6 +16,11 @@
 - (8351db1) Update the project changelog (github-actions[bot])
 - (fda117e) Update the project changelog (github-actions[bot])
 - (304ad4d) Update the project changelog (github-actions[bot])
+- (186fb33) Update the project changelog (github-actions[bot])
+
+## v2.0.16
+- (7b4721a) Update the project changelog (github-actions[bot])
+- (7c9a91d) Release 2.0.16 (#59) (github-actions[bot])
 
 ## v2.0.15
 - (d00c644) Use deploykeys (#58) (github-actions[bot])
