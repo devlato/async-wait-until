@@ -116,6 +116,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           set-safe-directory: 'true'
+          ssh-key: '${{ secrets.SSH_PRIVATE_KEY }}'
       - name: Generate changelog
         run: |
           initial_commit=$( git log --reverse --format='%H' | head -n 1 )
@@ -170,5 +171,5 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@v0.8.0
         with:
-          github_token: '${{ secrets.GITHUB_TOKEN }}'
+          ssh: true
           branch: '${{ github.ref }}'
