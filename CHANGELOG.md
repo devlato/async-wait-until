@@ -17,6 +17,8 @@
 - (eb0161b) safe-dir (Denis Tokarev)
 - (7f077d6) Update the project changelog (github-actions[bot])
 - (5e8037e) fix PR flow (Denis Tokarev)
+- (47477ac) Update the project changelog (github-actions[bot])
+- (98ecf06) More workflow updates (Denis Tokarev)
 
 ## v2.0.12
 - (9d6f73d) Fix tests (#28) (github-actions[bot])
