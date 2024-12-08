@@ -7,6 +7,8 @@
 - (83482cc) Fix #29 (#30) (github-actions[bot])
 - (4255dfa) Update README.md (#54) (Denis Tokarev)
 - (3fe32cf) Prepare 2.0.13-RC (Denis Tokarev)
+- (c414fbe) Update the project changelog (github-actions[bot])
+- (52c3272) Remove old workflows (Denis Tokarev)
 
 ## v2.0.9
 - (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
