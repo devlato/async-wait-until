@@ -15,6 +15,7 @@
 - (2476f34) Update the project changelog (github-actions[bot])
 - (8351db1) Update the project changelog (github-actions[bot])
 - (fda117e) Update the project changelog (github-actions[bot])
+- (304ad4d) Update the project changelog (github-actions[bot])
 
 ## v2.0.15
 - (d00c644) Use deploykeys (#58) (github-actions[bot])
