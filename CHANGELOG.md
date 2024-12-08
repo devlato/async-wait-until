@@ -1,4 +1,4 @@
-## v2.0.13
+## v2.0.14
 - (668b957) Create codeql-analysis.yml (#25) (Denis Tokarev)
 - (8b06c25) Update CI to publish only when integration tests has passed (#26) (github-actions[bot])
 - (af4e364) Bump version to 2.0.10 (Denis Tokarev)
@@ -6,19 +6,13 @@
 - (9d6f73d) Fix tests (#28) (github-actions[bot])
 - (83482cc) Fix #29 (#30) (github-actions[bot])
 - (4255dfa) Update README.md (#54) (Denis Tokarev)
-- (3fe32cf) Prepare 2.0.13-RC (Denis Tokarev)
-- (c414fbe) Update the project changelog (github-actions[bot])
-- (52c3272) Remove old workflows (Denis Tokarev)
-- (1e2a224) Update the project changelog (github-actions[bot])
-- (f760c9b) Checkout PR head (Denis Tokarev)
-- (7177715) Update the project changelog (github-actions[bot])
-- (af2f66f) Tag order fix (Denis Tokarev)
-- (da80e96) Update the project changelog (github-actions[bot])
-- (eb0161b) safe-dir (Denis Tokarev)
-- (7f077d6) Update the project changelog (github-actions[bot])
-- (5e8037e) fix PR flow (Denis Tokarev)
-- (47477ac) Update the project changelog (github-actions[bot])
-- (98ecf06) More workflow updates (Denis Tokarev)
+- (e5e3094) Prepare 2.0.13-RC (#55) (Denis Tokarev)
+- (a593df9) 2.0.14 (Denis Tokarev)
+- (6a672d8) Add token (Denis Tokarev)
+
+## v2.0.13
+- (4255dfa) Update README.md (#54) (Denis Tokarev)
+- (e5e3094) Prepare 2.0.13-RC (#55) (Denis Tokarev)
 
 ## v2.0.12
 - (9d6f73d) Fix tests (#28) (github-actions[bot])

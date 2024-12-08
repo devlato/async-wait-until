@@ -20,62 +20,19 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
           set-safe-directory: 'true'
-      - name: Generate new changelog
-        run: |
-          initial_commit=$( git log --reverse --format='%H' | head -n 1 )
-          printf '\n\ninitial_commit=%s\n\n' "${initial_commit[@]}"
-
-          output=''
-          for tag in $( git tag -l | sort -V ); do
-            printf 'Processing tag=%s\n' "${tag[@]}"
-            commits=$( git log --reverse --format='- (%h) %s (%an)' "${initial_commit}".."${tag}" )
-            if [ ${#commits[@]} -eq 0 ]; then
-              commits=$( git log --reverse --format='- (%h) %s (%an)' | head -n 1  )
-            fi
-            printf 'commits=<<<COMMITS\n%s\nCOMMITS\n' "${commits[@]}"
-            section=$( printf '%s\n%s' "## v${tag}" "${commits}" )
-            initial_commit="${tag}"
-            step_output=$( printf '%s\n\n' "${section}" )
-            printf 'version_changelog=<<<CHUNK\n%s\nCHUNK\n\n' "${step_output[@]}"
-            output=$( printf '%s\n\n' "${step_output}" "${output}" )
-          done
-
-          package_version=$( cat package.json | grep "version" | grep -oE '[0-9.]+' )
-          last_tag=$( git tag -l | tail -n 1 )
-          printf 'package_version=%s\nlast_tag=%s\n' "${package_version[@]}" "${last_tag[@]}"
-
-          if [ "${package_version}" != "${last_tag}" ]; then
-            commits=$( git log --reverse --format='- (%h) %s (%an)' "${last_tag}"..HEAD )
-            if [ ${#commits[@]} -ne 0 ]; then
-              section=$( printf '%s\n%s' "## v${package_version}" "${commits}" )
-              output=$( printf '%s\n\n' "${section}" "${output}" )
-            fi
-          fi
-
-          printf 'Changelog=<<<CHANGELOG\n%s\nCHANGELOG\n\n' "${output[@]}"
-          printf '%s\n' "${output}" > CHANGELOG.md
-      - name: Upload new changelog
-        uses: actions/upload-artifact@v4
-        with:
-          name: changelog
-          path: CHANGELOG.md
-      - name: Commit and push the new changelog
-        run: |
-          if [ -z $(git status -uno --porcelain) ]; then
-            printf 'Changelogs are identical, nothing to commit\n'
-          else
-            printf 'Committing the updated changelog\n'
-            git config --local user.name "github-actions[bot]"
-            git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-            git add CHANGELOG.md
-            git commit -am "Update the project changelog"
-          fi
-      - name: Push changes
-        uses: ad-m/github-push-action@v0.8.0
+      - name: Create a pull request
+        uses: devops-infra/action-pull-request@v0.5.5
         with:
           github_token: '${{ secrets.GITHUB_TOKEN }}'
-          branch: '${{ github.ref }}'
+          target_branch: '${{ secrets.NEW_PR_DEFAULT_DESTINATION_BRANCH }}'
+          title: '${{ env.PR_TITLE }}'
+          body: '${{ env.PR_DESCRIPTION }}'
+          template: '.github/PULL_REQUEST_TEMPLATE/default.md'
+          reviewer: '${{ secrets.NEW_PR_DEFAULT_REVIEWERS }}'
+          assignee: '${{ secrets.NEW_PR_DEFAULT_ASSIGNEES }}'
+          label: '${{ secrets.NEW_PR_DEFAULT_LABELS }}'
+          milestone: '${{ secrets.NEW_PR_DEFAULT_MILESTONE }}'
+          ignore_users: 'dependabot'
       - name: Generate the changelog for this pull request
         id: generate-changelog
         run: |
@@ -93,21 +50,9 @@ jobs:
           echo 'EOF' >> ${GITHUB_ENV}
         env:
           MAIN_BRANCH: '${{ secrets.NEW_PR_DEFAULT_DESTINATION_BRANCH }}'
-      - name: Create a pull request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: '${{ secrets.PAT }}'
-          base: '${{ secrets.NEW_PR_DEFAULT_DESTINATION_BRANCH }}'
-          title: '${{ env.PR_TITLE }}'
-          body: '${{ env.PR_DESCRIPTION }}'
-          reviewers: '${{ secrets.NEW_PR_DEFAULT_REVIEWERS }}'
-          assignees: '${{ secrets.NEW_PR_DEFAULT_ASSIGNEES }}'
-          labels:
-            '${{ secrets.NEW_PR_DEFAULT_LABELS }}'
-          milestone: '${{ secrets.NEW_PR_DEFAULT_MILESTONE }}'
-          github_token: '${{ secrets.GITHUB_TOKEN }}'
       - name: Update pull request
         uses: kt3k/update-pr-description@v1.0.4
+        if: always()
         with:
           pr_title: '${{ env.PR_TITLE }}'
           pr_body: '${{ env.PR_DESCRIPTION }}'
