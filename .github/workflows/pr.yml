@@ -94,16 +94,17 @@ jobs:
         env:
           MAIN_BRANCH: '${{ secrets.NEW_PR_DEFAULT_DESTINATION_BRANCH }}'
       - name: Create a pull request
-        uses: repo-sync/pull-request@v2.6.1
+        uses: peter-evans/create-pull-request@v7
         with:
-          source_branch: ''
-          destination_branch: '${{ secrets.NEW_PR_DEFAULT_DESTINATION_BRANCH }}'
-          pr_title: '${{ env.PR_TITLE }}'
-          pr_body: '${{ env.PR_DESCRIPTION }}'
-          pr_reviewer: '${{ secrets.NEW_PR_DEFAULT_REVIEWERS }}'
-          pr_assignee: '${{ secrets.NEW_PR_DEFAULT_ASSIGNEES }}'
-          pr_label: '${{ secrets.NEW_PR_DEFAULT_LABELS }}'
-          pr_milestone: '${{ secrets.NEW_PR_DEFAULT_MILESTONE }}'
+          token: '${{ secrets.PAT }}'
+          base: '${{ secrets.NEW_PR_DEFAULT_DESTINATION_BRANCH }}'
+          title: '${{ env.PR_TITLE }}'
+          body: '${{ env.PR_DESCRIPTION }}'
+          reviewers: '${{ secrets.NEW_PR_DEFAULT_REVIEWERS }}'
+          assignees: '${{ secrets.NEW_PR_DEFAULT_ASSIGNEES }}'
+          labels:
+            '${{ secrets.NEW_PR_DEFAULT_LABELS }}'
+          milestone: '${{ secrets.NEW_PR_DEFAULT_MILESTONE }}'
           github_token: '${{ secrets.GITHUB_TOKEN }}'
       - name: Update pull request
         uses: kt3k/update-pr-description@v1.0.4
