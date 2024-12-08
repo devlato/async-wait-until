@@ -140,6 +140,7 @@
 - (0fd1d09) Update the project changelog (github-actions[bot])
 - (ef20b13) Update the project changelog (github-actions[bot])
 - (dee49ef) Update the project changelog (github-actions[bot])
+- (c5efb94) Update the project changelog (github-actions[bot])
 
 ## v2.0.16
 - (7b4721a) Update the project changelog (github-actions[bot])
