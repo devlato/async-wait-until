@@ -9,6 +9,8 @@
 - (3fe32cf) Prepare 2.0.13-RC (Denis Tokarev)
 - (c414fbe) Update the project changelog (github-actions[bot])
 - (52c3272) Remove old workflows (Denis Tokarev)
+- (1e2a224) Update the project changelog (github-actions[bot])
+- (f760c9b) Checkout PR head (Denis Tokarev)
 
 ## v2.0.9
 - (a999686) Upgrade all deps and prepare v2.0.9 (Denis Tokarev)
