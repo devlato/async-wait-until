@@ -13,6 +13,8 @@
 - (f760c9b) Checkout PR head (Denis Tokarev)
 - (7177715) Update the project changelog (github-actions[bot])
 - (af2f66f) Tag order fix (Denis Tokarev)
+- (da80e96) Update the project changelog (github-actions[bot])
+- (eb0161b) safe-dir (Denis Tokarev)
 
 ## v2.0.12
 - (9d6f73d) Fix tests (#28) (github-actions[bot])
