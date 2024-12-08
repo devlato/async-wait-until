@@ -27,7 +27,7 @@ jobs:
           target_branch: '${{ secrets.NEW_PR_DEFAULT_DESTINATION_BRANCH }}'
           title: '${{ env.PR_TITLE }}'
           body: '${{ env.PR_DESCRIPTION }}'
-          template: '.github/PULL_REQUEST_TEMPLATE.md'
+          template: '.github/PULL_REQUEST_TEMPLATE/default.md'
           reviewer: '${{ secrets.NEW_PR_DEFAULT_REVIEWERS }}'
           assignee: '${{ secrets.NEW_PR_DEFAULT_ASSIGNEES }}'
           label: '${{ secrets.NEW_PR_DEFAULT_LABELS }}'
