@@ -15,12 +15,7 @@ export default {
   defaultCategory: pckg.name,
   categoryOrder: [pckg.name, 'Defaults', 'Exceptions', 'Common Types', 'Utilities'],
   gitRevision: pckg.version,
-  plugin: [
-    'typedoc-plugin-dt-links',
-    // 'typedoc-plugin-markdown',
-    'typedoc-plugin-mdn-links',
-    'typedoc-plugin-merge-modules',
-  ],
+  plugin: ['typedoc-plugin-dt-links', 'typedoc-plugin-mdn-links', 'typedoc-plugin-merge-modules'],
   validation: {
     invalidLink: true,
   },
