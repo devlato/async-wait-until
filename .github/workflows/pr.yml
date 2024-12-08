@@ -33,6 +33,7 @@ jobs:
             '${{ secrets.NEW_PR_DEFAULT_LABELS }}'
           milestone: '${{ secrets.NEW_PR_DEFAULT_MILESTONE }}'
           github_token: '${{ secrets.GITHUB_TOKEN }}'
+          branch: '${{ github.ref_name }}'
       - name: Generate the changelog for this pull request
         id: generate-changelog
         run: |
