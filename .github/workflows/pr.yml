@@ -96,7 +96,7 @@ jobs:
       - name: Create a pull request
         uses: peter-evans/create-pull-request@v7
         with:
-          token: '${{ secrets.PAT }}'
+          token: '${{ secrets.GH_PAT }}'
           base: '${{ secrets.NEW_PR_DEFAULT_DESTINATION_BRANCH }}'
           title: '${{ env.PR_TITLE }}'
           body: '${{ env.PR_DESCRIPTION }}'
