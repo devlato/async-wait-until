@@ -13,6 +13,7 @@
 - (7c9a91d) Release 2.0.16 (#59) (github-actions[bot])
 - (4b55adc) Update the project changelog (github-actions[bot])
 - (2476f34) Update the project changelog (github-actions[bot])
+- (8351db1) Update the project changelog (github-actions[bot])
 
 ## v2.0.15
 - (d00c644) Use deploykeys (#58) (github-actions[bot])
