@@ -60,7 +60,7 @@ jobs:
       - name: Commit and push the new changelog
         run: |
           if [ -z $(git status -uno --porcelain) ]; then
-            printf 'Changelogs are idential, nothing to commit\n'
+            printf 'Changelogs are identical, nothing to commit\n'
           else
             printf 'Committing the updated changelog\n'
             git config --local user.name "github-actions[bot]"
