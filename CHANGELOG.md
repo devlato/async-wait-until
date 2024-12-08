@@ -167,6 +167,7 @@
 - (296e634) Update the project changelog (github-actions[bot])
 - (824b16d) Update the project changelog (github-actions[bot])
 - (65c337e) Update the project changelog (github-actions[bot])
+- (f33c8eb) Update the project changelog (github-actions[bot])
 
 ## v2.0.16
 - (7b4721a) Update the project changelog (github-actions[bot])
