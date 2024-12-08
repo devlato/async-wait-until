@@ -4,8 +4,6 @@ on:
   push:
     tags:
       - '*'
-  schedule:
-    - cron: 0 11 * * *
 
 jobs:
   lint:
