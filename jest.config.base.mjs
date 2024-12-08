@@ -1,7 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const os = require('os');
+import os from 'os';
 
-module.exports = {
+export default {
   preset: 'ts-jest',
   automock: false,
   clearMocks: true,
@@ -10,7 +9,9 @@ module.exports = {
   collectCoverage: false,
   displayName: 'async-wait-until',
   maxConcurrency: os.cpus().length,
-  testURL: 'http://localhost',
+  testEnvironmentOptions: {
+    url: 'http://localhost',
+  },
   moduleDirectories: ['node_modules', 'src'],
   testPathIgnorePatterns: ['.cache', 'coverage', 'dist', 'docs', '.git', '.github', '.idea', 'node_modules'],
   testRegex: '.*\\.tests\\.ts$',

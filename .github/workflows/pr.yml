@@ -14,21 +14,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v4
         with:
+          ref: '${{ github.event.pull_request.head.sha }}'
           persist-credentials: false
           fetch-depth: 0
+          set-safe-directory: 'true'
       - name: Generate new changelog
         run: |
           initial_commit=$( git log --reverse --format='%H' | head -n 1 )
           printf '\n\ninitial_commit=%s\n\n' "${initial_commit[@]}"
 
           output=''
-          for tag in $( git tag -l ); do
+          for tag in $( git tag -l | sort -V ); do
             printf 'Processing tag=%s\n' "${tag[@]}"
-            commits=$( git log --reverse --format='* (%h) %s (%an)' "${initial_commit}".."${tag}" )
+            commits=$( git log --reverse --format='- (%h) %s (%an)' "${initial_commit}".."${tag}" )
             if [ ${#commits[@]} -eq 0 ]; then
-              commits=$( git log --reverse --format='* (%h) %s (%an)' | head -n 1  )
+              commits=$( git log --reverse --format='- (%h) %s (%an)' | head -n 1  )
             fi
             printf 'commits=<<<COMMITS\n%s\nCOMMITS\n' "${commits[@]}"
             section=$( printf '%s\n%s' "## v${tag}" "${commits}" )
@@ -43,7 +45,7 @@ jobs:
           printf 'package_version=%s\nlast_tag=%s\n' "${package_version[@]}" "${last_tag[@]}"
 
           if [ "${package_version}" != "${last_tag}" ]; then
-            commits=$( git log --reverse --format='* (%h) %s (%an)' "${last_tag}"..HEAD )
+            commits=$( git log --reverse --format='- (%h) %s (%an)' "${last_tag}"..HEAD )
             if [ ${#commits[@]} -ne 0 ]; then
               section=$( printf '%s\n%s' "## v${package_version}" "${commits}" )
               output=$( printf '%s\n\n' "${section}" "${output}" )
@@ -53,14 +55,14 @@ jobs:
           printf 'Changelog=<<<CHANGELOG\n%s\nCHANGELOG\n\n' "${output[@]}"
           printf '%s\n' "${output}" > CHANGELOG.md
       - name: Upload new changelog
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v4
         with:
           name: changelog
           path: CHANGELOG.md
       - name: Commit and push the new changelog
         run: |
           if [ -z $(git status -uno --porcelain) ]; then
-            printf 'Changelogs are idential, nothing to commit\n'
+            printf 'Changelogs are identical, nothing to commit\n'
           else
             printf 'Committing the updated changelog\n'
             git config --local user.name "github-actions[bot]"
@@ -70,7 +72,7 @@ jobs:
             git commit -am "Update the project changelog"
           fi
       - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
+        uses: ad-m/github-push-action@v0.8.0
         with:
           github_token: '${{ secrets.GITHUB_TOKEN }}'
           branch: '${{ github.ref }}'
@@ -79,7 +81,7 @@ jobs:
         run: |
           CURRENT_BRANCH="${GITHUB_SHA}"
           pr_title="$( git log --reverse --format='%s' "origin/${MAIN_BRANCH}".."${CURRENT_BRANCH}" | head -n 1 )"
-          pr_changelog="$( git log --reverse --format='* (%h) %s (%an)' "origin/${MAIN_BRANCH}".."${CURRENT_BRANCH}" )"
+          pr_changelog="$( git log --reverse --format='- (%h) %s (%an)' "origin/${MAIN_BRANCH}".."${CURRENT_BRANCH}" )"
           pr_description=$( echo "## ${pr_title}"; echo; echo; echo "### Changelog"; echo; echo "${pr_changelog}" )
 
           echo "PR_TITLE<<EOF" >> ${GITHUB_ENV}
@@ -92,16 +94,17 @@ jobs:
         env:
           MAIN_BRANCH: '${{ secrets.NEW_PR_DEFAULT_DESTINATION_BRANCH }}'
       - name: Create a pull request
-        uses: repo-sync/pull-request@v2.6.1
+        uses: peter-evans/create-pull-request@v7
         with:
-          source_branch: ''
-          destination_branch: '${{ secrets.NEW_PR_DEFAULT_DESTINATION_BRANCH }}'
-          pr_title: '${{ env.PR_TITLE }}'
-          pr_body: '${{ env.PR_DESCRIPTION }}'
-          pr_reviewer: '${{ secrets.NEW_PR_DEFAULT_REVIEWERS }}'
-          pr_assignee: '${{ secrets.NEW_PR_DEFAULT_ASSIGNEES }}'
-          pr_label: '${{ secrets.NEW_PR_DEFAULT_LABELS }}'
-          pr_milestone: '${{ secrets.NEW_PR_DEFAULT_MILESTONE }}'
+          token: '${{ secrets.PAT }}'
+          base: '${{ secrets.NEW_PR_DEFAULT_DESTINATION_BRANCH }}'
+          title: '${{ env.PR_TITLE }}'
+          body: '${{ env.PR_DESCRIPTION }}'
+          reviewers: '${{ secrets.NEW_PR_DEFAULT_REVIEWERS }}'
+          assignees: '${{ secrets.NEW_PR_DEFAULT_ASSIGNEES }}'
+          labels:
+            '${{ secrets.NEW_PR_DEFAULT_LABELS }}'
+          milestone: '${{ secrets.NEW_PR_DEFAULT_MILESTONE }}'
           github_token: '${{ secrets.GITHUB_TOKEN }}'
       - name: Update pull request
         uses: kt3k/update-pr-description@v1.0.4

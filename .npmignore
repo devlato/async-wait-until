@@ -9,19 +9,17 @@ node_modules/
 src/*
 
 # Configuration files
-.codeclimate.yml
 .editorconfig
-.eslintignore
-.eslintrc.js
+eslint.config.mjs
 .gitignore
 .npmignore
 CODEOWNERS
-jest.config.unit.js
+jest.config.unit.mjs
 package-lock.json
-prettier.config.js
-rollup.config.js
+prettier.config.mjs
+rollup.config.mjs
 tsconfig.json
-typedoc.js
+typedoc.config.mjs
 
 # Garbage
 *.DS_Store
