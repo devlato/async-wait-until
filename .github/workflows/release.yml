@@ -145,7 +145,7 @@ jobs:
           echo -e "${changelog}"
 
           # You can now use the variable $changelog elsewhere in your script
-          printf '%s' "${changelog}" > CHANGELOG.md
+          printf '%b' "${changelog}" > CHANGELOG.md
       - name: Upload new changelog
         uses: actions/upload-artifact@v4
         with:
@@ -195,6 +195,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           set-safe-directory: 'true'
+          fetch-tags: 'true'
       - name: Trigger workflow
         run: gh workflow run publish.yml --ref $( git describe --tags --abbrev=0 )
         env:
