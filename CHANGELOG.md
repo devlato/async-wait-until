@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.0.18
+- Release 2.0.18 (#61) (github-actions[bot]) [a1b08be]
+- Update the project changelog (github-actions[bot]) [a676bea]
+
 ### 2.0.17
 - Release 2.0.17 (#60) (github-actions[bot]) [3b9442b]
 - Update the project changelog (github-actions[bot]) [2a673a0]
