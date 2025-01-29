@@ -185,6 +185,7 @@ jobs:
         run: npm ci --ignore-scripts
       - name: Maybe generate tag
         uses: Klemensas/action-autotag@stable
+        id: tagging
         with:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           tag_prefix: ''
