@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.0.21
+- Add missing tagging step id (#65) (github-actions[bot]) [c6cdf39]
+- Update the project changelog (github-actions[bot]) [a368c83]
+
 ### 2.0.20
 - Fix typo in publish pipeline (#64) (github-actions[bot]) [ce7359a]
 
