@@ -1,5 +1,13 @@
 # Changelog
 
+### 2.0.19
+- Update package.json (#63) (Denis Tokarev) [e659ebb]
+- Bump undici from 6.21.0 to 6.21.1 in the npm_and_yarn group (#62) (dependabot[bot]) [cb7dcbe]
+- Only trigger the publish workflow when the release is tagged (Denis Tokarev) [95b3e9f]
+- Update the project changelog (github-actions[bot]) [9f60b68]
+- Ignore CHANGELOG.md in release.yml (Denis Tokarev) [845ab5d]
+- Update the project changelog (github-actions[bot]) [e3a7de5]
+
 ### 2.0.18
 - Release 2.0.18 (#61) (github-actions[bot]) [a1b08be]
 - Update the project changelog (github-actions[bot]) [a676bea]
