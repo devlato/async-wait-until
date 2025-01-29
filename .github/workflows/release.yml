@@ -197,11 +197,6 @@ jobs:
     needs: [maybe_tag]
     if: ${{ needs.maybe_tag.outputs.tagname != '' }}
     steps:
-      - name: Download the tag file
-        uses: actions/download-artifact@v4
-        with:
-          name: tag_lock
-          path: tag_lock
       - name: Checkout
         uses: actions/checkout@v4
         with:
