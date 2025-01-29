@@ -1,5 +1,8 @@
 # Changelog
 
+### 2.0.20
+- Fix typo in publish pipeline (#64) (github-actions[bot]) [ce7359a]
+
 ### 2.0.19
 - Update package.json (#63) (Denis Tokarev) [e659ebb]
 - Bump undici from 6.21.0 to 6.21.1 in the npm_and_yarn group (#62) (dependabot[bot]) [cb7dcbe]
