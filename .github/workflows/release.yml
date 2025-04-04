@@ -134,30 +134,30 @@ jobs:
             current="${tags[$i]}"
             next="${tags[$((i+1))]}"
 
-  # Skip if current is empty (e.g., i == len)
-  if [ -z "$current" ]; then
-    continue
-  fi
-
-  if [ -n "$next" ]; then
-    commits=$(git --no-pager log --format="%s (%an) [%h]" "${next}..${current}")
-  else
-    # last tag (oldest), no previous one
-    commits=$(git --no-pager log --format="%s (%an) [%h]" "${current}")
-  fi
-
-  if [ -n "$commits" ]; then
-    tag_log="### ${current}\n"
-    while IFS= read -r commit; do
-      tag_log+="- ${commit}\n"
-    done <<< "$commits"
-    changelog="${changelog}\n${tag_log}"
-  fi
-done
-
-changelog="# Changelog\n${changelog}"
-echo -e "$changelog"
-printf '%b' "$changelog" > CHANGELOG.md
+            # Skip if current is empty (e.g., i == len)
+            if [ -z "$current" ]; then
+              continue
+            fi
+          
+            if [ -n "$next" ]; then
+              commits=$(git --no-pager log --format="%s (%an) [%h]" "${next}..${current}")
+            else
+              # last tag (oldest), no previous one
+              commits=$(git --no-pager log --format="%s (%an) [%h]" "${current}")
+            fi
+          
+            if [ -n "$commits" ]; then
+              tag_log="### ${current}\n"
+              while IFS= read -r commit; do
+                tag_log+="- ${commit}\n"
+              done <<< "$commits"
+              changelog="${changelog}\n${tag_log}"
+            fi
+          done
+          
+          changelog="# Changelog\n${changelog}"
+          echo -e "$changelog"
+          printf '%b' "$changelog" > CHANGELOG.md
       - name: Upload new changelog
         uses: actions/upload-artifact@v4
         with:
