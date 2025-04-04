@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.0.24
+- Bump version to 2.0.24 and add standard files (#68) (github-actions[bot]) [cb2c5aa]
+- Update the project changelog (github-actions[bot]) [8a63b3b]
+
 ### 2.0.23
 - Auto-release to GH (#67) (github-actions[bot]) [67ac746]
 - Update the project changelog (github-actions[bot]) [263ad5d]
