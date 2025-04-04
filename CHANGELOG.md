@@ -1,4 +1,13 @@
 # Changelog
+### 2.0.27
+- Another attempt at including all tags in the changelog (#71) (github-actions[bot]) [9744550]
+- Fix bug in changelog generation (github-actions[bot]) [3e9edb6]
+- Update the project changelog (github-actions[bot]) [643b101]
+
+
+### 2.0.25
+- Update release.yml (#69) (github-actions[bot]) [7b28273]
+- Update the project changelog (github-actions[bot]) [65317e5]
 
 ### 2.0.24
 - Bump version to 2.0.24 and add standard files (#68) (github-actions[bot]) [cb2c5aa]
@@ -337,4 +346,3 @@
 
 ### 1.0.0
 - [+] Implement waitUntil 1.0, provide 100% coverage with tests (devlato) [d6b7e7a]
-
