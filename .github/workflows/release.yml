@@ -106,7 +106,7 @@ jobs:
       - name: Generate changelog
         run: |
           changelog=""
-          
+
           # Get tags newest to oldest
           tags=($(git tag --sort=-version:refname))
           
@@ -117,8 +117,10 @@ jobs:
           else
             untagged_commits=$(git --no-pager log --format="%s (%an) [%h]")
           fi
-
-          future_tag="$( awk -F'"' '/"version": ".+"/{ print $4; exit; }' package.json )"
+          
+          # Get future version from package.json
+          future_tag="$(awk -F'"' '/"version": ".+"/{ print $4; exit; }' package.json)"
+          
           if [ -n "$untagged_commits" ]; then
             tag_log="### ${future_tag}\n"
             while IFS= read -r commit; do
@@ -127,32 +129,35 @@ jobs:
             changelog="${tag_log}\n${changelog}"
           fi
           
-          # Loop over all tags, newest to oldest
+          # Loop from i=0 to i <= tags.length (YES, intentionally +1)
           for ((i=0; i<=${#tags[@]}; i++)); do
             current="${tags[$i]}"
-            next=""
-          
-            if (( i <= ${#tags[@]} - 1 )); then
-              next="${tags[$((i+1))]}"
-              commits=$(git --no-pager log --format="%s (%an) [%h]" "${next}..${current}")
-            else
-              echo "TAG (current) = (${current})"
-              commits=$(git --no-pager log --format="%s (%an) [%h]" "${current}")
-            fi
-          
-            if [ -n "$commits" ]; then
-              tag_log="### ${current}\n"
-              while IFS= read -r commit; do
-                tag_log+="- ${commit}\n"
-              done <<< "$commits"
-              changelog="${changelog}\n${tag_log}"
-            fi
-          done
-          
-          changelog="# Changelog\n${changelog}"
-          
-          echo -e "$changelog"
-          printf '%b' "$changelog" > CHANGELOG.md
+            next="${tags[$((i+1))]}"
+
+  # Skip if current is empty (e.g., i == len)
+  if [ -z "$current" ]; then
+    continue
+  fi
+
+  if [ -n "$next" ]; then
+    commits=$(git --no-pager log --format="%s (%an) [%h]" "${next}..${current}")
+  else
+    # last tag (oldest), no previous one
+    commits=$(git --no-pager log --format="%s (%an) [%h]" "${current}")
+  fi
+
+  if [ -n "$commits" ]; then
+    tag_log="### ${current}\n"
+    while IFS= read -r commit; do
+      tag_log+="- ${commit}\n"
+    done <<< "$commits"
+    changelog="${changelog}\n${tag_log}"
+  fi
+done
+
+changelog="# Changelog\n${changelog}"
+echo -e "$changelog"
+printf '%b' "$changelog" > CHANGELOG.md
       - name: Upload new changelog
         uses: actions/upload-artifact@v4
         with:
