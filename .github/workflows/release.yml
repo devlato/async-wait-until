@@ -106,7 +106,7 @@ jobs:
       - name: Generate changelog
         run: |
           changelog=""
-          
+
           # Get tags newest to oldest
           tags=($(git tag --sort=-version:refname))
           
@@ -117,8 +117,10 @@ jobs:
           else
             untagged_commits=$(git --no-pager log --format="%s (%an) [%h]")
           fi
-
-          future_tag="$( awk -F'"' '/"version": ".+"/{ print $4; exit; }' package.json )"
+          
+          # Get future version from package.json
+          future_tag="$(awk -F'"' '/"version": ".+"/{ print $4; exit; }' package.json)"
+          
           if [ -n "$untagged_commits" ]; then
             tag_log="### ${future_tag}\n"
             while IFS= read -r commit; do
@@ -127,16 +129,20 @@ jobs:
             changelog="${tag_log}\n${changelog}"
           fi
           
-          # Loop over all tags, newest to oldest
+          # Loop from i=0 to i <= tags.length (YES, intentionally +1)
           for ((i=0; i<=${#tags[@]}; i++)); do
             current="${tags[$i]}"
-            next=""
+            next="${tags[$((i+1))]}"
+
+            # Skip if current is empty (e.g., i == len)
+            if [ -z "$current" ]; then
+              continue
+            fi
           
-            if (( i <= ${#tags[@]} - 1 )); then
-              next="${tags[$((i+1))]}"
+            if [ -n "$next" ]; then
               commits=$(git --no-pager log --format="%s (%an) [%h]" "${next}..${current}")
             else
-              echo "TAG (current) = (${current})"
+              # last tag (oldest), no previous one
               commits=$(git --no-pager log --format="%s (%an) [%h]" "${current}")
             fi
           
@@ -150,7 +156,6 @@ jobs:
           done
           
           changelog="# Changelog\n${changelog}"
-          
           echo -e "$changelog"
           printf '%b' "$changelog" > CHANGELOG.md
       - name: Upload new changelog
