@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.0.23
+- Auto-release to GH (#67) (github-actions[bot]) [67ac746]
+- Update the project changelog (github-actions[bot]) [263ad5d]
+
 ### 2.0.22
 - Remove the tag file download (#66) (github-actions[bot]) [eb0baa0]
 - Update the project changelog (github-actions[bot]) [76843aa]
