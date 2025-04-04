@@ -1,6 +1,6 @@
 {
   "name": "async-wait-until",
-  "version": "2.0.25",
+  "version": "2.0.26",
   "description": "Waits until the given predicate function returns a truthy value, then resolves",
   "main": "./dist/index.js",
   "module": "./dist/index.esm.js",
