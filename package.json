@@ -67,7 +67,8 @@
     "docs",
     "LICENSE",
     "dist/*.js",
-    "dist/*.d.ts"
+    "dist/*.d.ts",
+    "dist/*.map"
   ],
   "funding": {
     "type": "individual",
