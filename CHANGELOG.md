@@ -1,8 +1,12 @@
 # Changelog
+### 2.0.30
+- Update README & release 2.0.30 (#76) (github-actions[bot]) [27d589a]
+- Update the project changelog (github-actions[bot]) [e371e4b]
+
+
 ### 2.0.29
 - Fix typo & release 2.0.29 (#75) (github-actions[bot]) [94e38db]
 - Update the project changelog (github-actions[bot]) [a5c7a99]
-
 
 ### 2.0.28
 - Release 2.0.28 (#74) (github-actions[bot]) [b90b068]
