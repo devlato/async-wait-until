@@ -1,9 +1,13 @@
 # Changelog
 ### 2.0.27
+- Fix #72: include source maps in npm releases (#73) (github-actions[bot]) [a70735c]
+- Update the project changelog (github-actions[bot]) [cb3724b]
+
+
+### 2.0.27
 - Another attempt at including all tags in the changelog (#71) (github-actions[bot]) [9744550]
 - Fix bug in changelog generation (github-actions[bot]) [3e9edb6]
 - Update the project changelog (github-actions[bot]) [643b101]
-
 
 ### 2.0.25
 - Update release.yml (#69) (github-actions[bot]) [7b28273]
