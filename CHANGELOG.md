@@ -1,5 +1,7 @@
 # Changelog
-### 2.0.27
+### 2.0.28
+- Release 2.0.28 (#74) (github-actions[bot]) [b90b068]
+- Update the project changelog (github-actions[bot]) [bc72317]
 - Fix #72: include source maps in npm releases (#73) (github-actions[bot]) [a70735c]
 - Update the project changelog (github-actions[bot]) [cb3724b]
 
