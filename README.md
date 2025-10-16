@@ -5,7 +5,7 @@ A lightweight, zero-dependency library for waiting asynchronously until a specif
 ![npm version](https://img.shields.io/npm/v/async-wait-until)
 [![npm downloads](https://img.shields.io/npm/dw/async-wait-until)](https://npmjs.org/package/async-wait-until)
 ![MIT License](https://img.shields.io/npm/l/async-wait-until)
-[![Maintainability](https://api.codeclimate.com/v1/badges/2a967399786c0d306247/maintainability)](https://codeclimate.com/github/devlato/async-wait-until/maintainability)
+[![Maintainability](https://qlty.sh/gh/devlato/projects/async-wait-until/maintainability.svg)](https://qlty.sh/gh/devlato/projects/async-wait-until)
 
 ## ✨ Features
 
