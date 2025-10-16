@@ -1,8 +1,12 @@
 # Changelog
+### 2.0.31
+- Update maintainability badge link in README.md (#78) (Denis Tokarev) [0b4470d]
+- Update the project changelog (github-actions[bot]) [3c0dcaa]
+
+
 ### 2.0.30
 - Update README & release 2.0.30 (#76) (github-actions[bot]) [27d589a]
 - Update the project changelog (github-actions[bot]) [e371e4b]
-
 
 ### 2.0.29
 - Fix typo & release 2.0.29 (#75) (github-actions[bot]) [94e38db]
